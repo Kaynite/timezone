@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 // Authentication Routes
 Auth::routes();
 
+// Admin Routes Group
+Route::group(['middleware' => 'auth'], function () {
+    
+    Route::view('', 'adminlte.page')->name('admin.home');
 
-
-Route::get('', function() {
-    return view('adminlte.page');
-})->name('admin.home');
-
+});
