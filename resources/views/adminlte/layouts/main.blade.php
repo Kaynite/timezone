@@ -41,6 +41,7 @@
     <script src="{{ asset('adminlte/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
     @yield('scripts')
+    @stack('vScripts')
 </body>
 
 </html>

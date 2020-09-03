@@ -78,7 +78,7 @@
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                <a href="#" class="dropdown-item dropdown-footer">{{ __('admin.nav.all messages') }}</a>
             </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -105,7 +105,7 @@
                     <span class="float-right text-muted text-sm">2 days</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <a href="#" class="dropdown-item dropdown-footer">{{ __('admin.nav.all notifications') }}</a>
             </div>
         </li>
 
@@ -126,8 +126,8 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <a href="#" class="btn btn-default btn-flat">{{ __('admin.nav.profile') }}</a>
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat float-right">{{ __('admin.nav.logout') }}</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat float-right">{{ __('admin.nav.logout') }}</a>
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
               </li>

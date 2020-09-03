@@ -54,5 +54,7 @@ class AdminLoginController extends Controller
     {
         return Auth::guard('admin');
     }
+
+    
     
 }
