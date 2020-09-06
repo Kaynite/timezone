@@ -22,7 +22,7 @@
     </form>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto" id="navbar-controls">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -109,7 +109,20 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown user-menu mr-3">
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+              <i class="fa fa-globe-europe"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-0" style="left: inherit; right: 0px;">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                  <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                      {{ $properties['native'] }}
+                  </a>
+                @endforeach
+            </div>
+          </li>
+
+        <li class="nav-item dropdown user-menu">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-user"></i>
             </a>

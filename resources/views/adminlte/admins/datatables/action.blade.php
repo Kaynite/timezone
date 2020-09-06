@@ -1,0 +1,2 @@
+<a href="{{ route('admins.edit', $id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+<a href="{{ route('admins.destroy', $id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

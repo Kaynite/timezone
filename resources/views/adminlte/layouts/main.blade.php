@@ -9,15 +9,21 @@
     
     <link rel="stylesheet" href="{{ asset('adminlte/css/fontawesome.min.css') }}">
     @yield('styles')
-    <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
 
-    <title>AdminLTE | @yield('title')</title>
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+    <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.ar.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/css/bootstrap-rtl.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/css/custom.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
+    @endif
+
+
+    <title>{{ config('app.name') }} | @yield('title')</title>
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
-        
         @include('adminlte.parts.navbar')
         @include('adminlte.parts.sidebar')
 
@@ -30,6 +36,15 @@
             
             <div class="content">
                 <div class="container-fluid">
+                    @if (session('success'))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success">
+                                    {{ __(session('success')) }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>

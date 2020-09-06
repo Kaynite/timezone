@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AdminDatatable;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -14,7 +16,7 @@ class AdminController extends Controller
      */
     public function index(AdminDatatable $datatable)
     {
-        return $datatable->render('adminlte.datatables.admin');
+        return $datatable->render('adminlte.admins.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('adminlte.admins.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username' => 'required|max:255',
+            'email'    => 'required|email|unique:admins|max:255',
+            'password' => 'required|min:6',
+        ], [
+            'username.rquired' => 'st'
+        ], [
+            'username' => __('admin.admins.form.username'),
+            'email'    => __('admin.admins.form.email'),
+            'password' => __('admin.admins.form.password'),
+        ]);
+
+        $request['password'] = Hash::make($request->password);
+        Admin::create($request->all());
+
+        return redirect()->route('admins.index')->with('success', 'admin.admins.form.success add');
     }
 
     /**
