@@ -47,8 +47,35 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'menu-open' : null }}">
+                    <a href="#" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            {{ __('admin.sidebar.users') }}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>{{ __('admin.sidebar.users') }}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('userstypes.index') }}" class="nav-link {{ Route::currentRouteNamed('userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>{{ __('admin.sidebar.users types') }}</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <li class="nav-item">
-                    <a href="{{ route('admins.index') }}" class="nav-link {{ Route::currentRouteNamed('admins.index', 'admins.create') ? 'active' : null }}">
+                    <a href="{{ route('admins.index') }}" class="nav-link {{ Route::currentRouteNamed('admins.index', 'admins.create', 'admins.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>{{ __('admin.sidebar.admins') }}</p>
                     </a>

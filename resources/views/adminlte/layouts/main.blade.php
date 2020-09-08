@@ -45,6 +45,16 @@
                             </div>
                         </div>
                     @endif
+
+                    @error('message')
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            </div>
+                        </div>
+                    @enderror
                     @yield('content')
                 </div>
             </div>

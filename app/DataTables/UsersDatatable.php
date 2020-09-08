@@ -2,14 +2,16 @@
 
 namespace App\DataTables;
 
-use App\Models\Admin;
+use App\User;
+
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class AdminDatatable extends DataTable
+class UsersDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,13 +23,14 @@ class AdminDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'adminlte.admins.datatables.action')
-            ->addColumn('checkbox', 'adminlte.admins.datatables.checkbox');
+            ->addColumn('action', 'adminlte.users.datatables.action')
+            ->addColumn('checkbox', 'adminlte.users.datatables.checkbox')
+            ->rawColumns(['action', 'checkbox']);
     }
 
-    public function query(Admin $model)
+    public function query(User $model)
     {
-        return $model->newQuery();
+        return $model->with(['type' => function($q) { $q->locale(); }])->newQuery();
     }
 
     /**
@@ -38,17 +41,17 @@ class AdminDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('admindatatable-table')
+            ->setTableId('usersdatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
             ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All Records']])
-            ->orderBy(1)
+            ->orderBy(1, 'asc')
             ->language(self::lang()) // From Static Function lang()
             ->buttons(
                 Button::make('create')
                     ->className('btn btn-primary text-white mx-1')
-                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create admin')),
+                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create user')),
                 Button::make('print')
                     ->className('btn btn-success text-white mx-1')
                     ->text('<i class="fa fa-print"></i> '. __('dataTables.buttons.print')),
@@ -80,9 +83,11 @@ class AdminDatatable extends DataTable
             Column::make('id')
                 ->title(__('admin.admins.table.id')),
             Column::make('username')
-                ->title(__('admin.admins.table.username')),
+                ->title(__('common.username')),
             Column::make('email')
-                ->title(__('admin.admins.table.email')),
+                ->title(__('common.email')),
+            Column::make('type.name')
+                ->title(__('admin.users.table.type')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)

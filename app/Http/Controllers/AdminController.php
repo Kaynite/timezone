@@ -41,9 +41,7 @@ class AdminController extends Controller
             'username' => 'required|max:255',
             'email'    => 'required|email|unique:admins|max:255',
             'password' => 'required|min:6',
-        ], [
-            'username.rquired' => 'st'
-        ], [
+        ], [], [
             'username' => __('admin.admins.form.username'),
             'email'    => __('admin.admins.form.email'),
             'password' => __('admin.admins.form.password'),
@@ -74,7 +72,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+
+        return view('adminlte.admins.edit')->with('admin', $admin);
     }
 
     /**
@@ -86,7 +86,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        $request->validate([
+            'username' => 'required|max:255',
+            'email'    => "required|email|max:255|unique:admins,email,{$id}",
+        ]);
+
+        $admin->update($request->all());
+        return redirect()->route('admins.index')
+            ->with('success', __('admin.admins.form.success update'));
     }
 
     /**
@@ -97,6 +105,29 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        if (auth('admin')->id() == $id) {
+            return back()->withErrors(['message' => 'You can\'t delete yourself as an admin!']);
+        }
+
+        $admin->delete();
+
+        return redirect()->route('admins.index')
+            ->with('success', __('admin.admins.form.success delete'));
+    }
+
+    public function multipleDelete(Request $request)
+    {
+        if(!$request->has('admins')) {
+            return back()->withErrors(['message' => __('admin.admins.form.no selection')]);
+        }
+
+        if(in_array(auth('admin')->id(), $request->admins)) {
+            return back()->withErrors(['message' => __('admin.admins.form.admin no delete')]);
+        }
+
+        Admin::destroy($request->admins);
+        return redirect()->route('admins.index')
+                    ->with('success', __('admin.admins.form.success multiple delete'));
     }
 }

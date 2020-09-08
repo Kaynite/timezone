@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <form id="multipleDeleteForm" class="w-100" action="{{ route('admins.multipleDelete') }}" method="POST">
+                        <form id="multipleDeleteForm" class="w-100" action="{{ route('users.multipleDelete') }}" method="POST">
                             @csrf
                             {{ $dataTable->table(['class' => 'table table-striped table-bordered table-hover dataTable table-sm']) }}
                         </form>
@@ -40,7 +40,9 @@
     </div>
 @endsection
 
-@section('title', 'Admins')
+@section('title')
+{{ __('admin.users.index title') }}
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('adminlte/css/dataTables.bootstrap4.min.css') }}">

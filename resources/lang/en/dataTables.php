@@ -27,10 +27,11 @@ return [
     ],
 
     'buttons'         => [
-        'create'     => 'Add New Admin',
-        'print'      => 'Print',
-        'excel'      => 'Export as Excel',
-        'reset'      => 'Reset',
-        'delete all' => 'Delete Selected',
+        'create admin' => 'Add New Admin',
+        'create user'  => 'Add New User',
+        'print'        => 'Print',
+        'excel'        => 'Export as Excel',
+        'reset'        => 'Reset',
+        'delete all'   => 'Delete Selected',
     ],
 ];

@@ -1,5 +1,5 @@
-<a href="{{ route('admins.edit', $id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-@if (auth('admin')->id() !== $id) {{-- Will Remove The Delete Button for the Current Admin User --}}
+<a href="{{ route('users.edit', $id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+
 <button type="button" class="btn btn-sm btn-danger" data-target="#adminModal{{$id}}" data-toggle="modal">
     <i class="fa fa-trash" aria-hidden="true"></i>
 </button>
@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin.admins.modal.close') }}</button>
-                <form action="{{ route('admins.destroy', $id) }}" method="post">
+                <form action="{{ route('users.destroy', $id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">{{ __('admin.admins.modal.delete') }}</button>
@@ -26,4 +26,3 @@
         </div>
     </div>
 </div>
-@endif

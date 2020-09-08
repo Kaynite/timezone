@@ -1,1 +1,1 @@
-<input type="checkbox" name="table-row[]" class="table-row-checkbox" value="{{ $id }}">
+<input type="checkbox" name="admins[]" class="table-row-checkbox" value="{{ $id }}">
