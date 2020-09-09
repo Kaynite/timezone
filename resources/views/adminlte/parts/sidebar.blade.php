@@ -80,6 +80,14 @@
                         <p>{{ __('admin.sidebar.admins') }}</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings') }}" class="nav-link {{ Route::currentRouteNamed('admin.settings') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        
+                        <p>{{ __('admin.settings.title') }}</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

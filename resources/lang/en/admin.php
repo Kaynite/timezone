@@ -124,4 +124,18 @@ return [
         ],
     ],
 
+    'settings'   => [
+        'title'       => 'Settings',
+        'name_ar'     => 'Site name in Arabic',
+        'name_en'     => 'Site name in English',
+        'description' => 'Site Description',
+        'keywords'    => 'Site Keywords',
+        'logo'        => 'Site logo',
+        'icon'        => 'Site icon',
+        'status'      => 'Site status',
+        'open'        => 'Open',
+        'closed'      => 'Closed for maintenance',
+        'message'     => 'Maintenance message',
+    ],
+
 ];

@@ -31,6 +31,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::post('users/multipledelete', 'UsersController@multipleDelete')->name('users.multipleDelete');
 
             Route::resource('userstypes', 'UsersTypesController');
+            
+            // Settings Routes
+            Route::get('settings', 'SettingsController@settings')->name('admin.settings');
+            Route::post('settings', 'SettingsController@update');
         });
     });
 
