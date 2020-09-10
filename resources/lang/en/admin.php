@@ -15,6 +15,7 @@ return [
         'admins'      => 'Admins',
         'users'       => 'Users',
         'users types' => 'Users Types',
+        'countries' => 'Countries'
     ],
 
     'admins'     => [
@@ -121,6 +122,46 @@ return [
             'id'     => '#',
             'action' => 'Actions',
             'type'   => 'User Type',
+        ],
+    ],
+
+    'countries'  => [
+
+        'index title'  => 'Countries',
+        'create title' => 'Add new country',
+        'edit title'   => 'Edit Country',
+
+        'form'         => [
+            'name_ar'                 => 'Country name in Arabic',
+            'name_en'                 => 'Country name in English',
+            'code'                    => 'Country Code (eg. USA, EG)',
+            'mob'                     => 'Phone code',
+            'logo'                    => 'Country\'s Flag',
+            'name_ar placeholder'     => 'Enter Country name in Arabic',
+            'name_en placeholder'     => 'Enter Country name in English',
+            'code placeholder'        => 'Enter Country Code',
+            'mob placeholder'         => 'Enter Phone code',
+
+            'success add'             => 'Country was added successfully!',
+            'success update'          => 'Country information was updated successfully!',
+            'success delete'          => 'Country was deleted successfully!',
+            'success multiple delete' => 'Selected Countries were deleted successfully!',
+            'no selection'            => 'You didn\'t select any country!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected countries ?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete admin',
+        ],
+
+        'table'        => [
+            'id'       => '#',
+            'username' => 'Username',
+            'email'    => 'Email Address',
+            'action'   => 'Actions',
         ],
     ],
 

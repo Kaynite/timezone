@@ -93,7 +93,7 @@ class AdminDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Admin_' . date('YmdHis');
+        return 'Admins_' . date('YmdHis');
     }
 
 

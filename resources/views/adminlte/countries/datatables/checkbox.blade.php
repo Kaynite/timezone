@@ -1,0 +1,1 @@
+<input type="checkbox" name="countries[]" class="table-row-checkbox" value="{{ $id }}">

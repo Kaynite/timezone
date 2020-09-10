@@ -38,6 +38,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -45,6 +46,13 @@
                             Simple Link
                             <span class="right badge badge-danger">New</span>
                         </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('countries.index') }}" class="nav-link {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-flag"></i>
+                        <p>{{ __('admin.sidebar.countries') }}</p>
                     </a>
                 </li>
 
