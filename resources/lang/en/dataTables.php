@@ -27,12 +27,14 @@ return [
     ],
 
     'buttons'         => [
-        'create admin' => 'Add New Admin',
-        'create user'  => 'Add New User',
-        'create country'  => 'Add New User',
-        'print'        => 'Print',
-        'excel'        => 'Export as Excel',
-        'reset'        => 'Reset',
-        'delete all'   => 'Delete Selected',
+        'create admin'   => 'Add New Admin',
+        'create user'    => 'Add New User',
+        'create country' => 'Add New Country',
+        'create city'    => 'Add New City',
+        'create state'   => 'Add New State',
+        'print'          => 'Print',
+        'excel'          => 'Export as Excel',
+        'reset'          => 'Reset',
+        'delete all'     => 'Delete Selected',
     ],
 ];

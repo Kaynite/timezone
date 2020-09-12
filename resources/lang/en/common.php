@@ -15,4 +15,7 @@ return [
     'actions'  => 'Actions',
     'hashid'   => '#',
     'id'       => 'ID',
+    'country'  => 'Country',
+    'city'     => 'City',
+    'name'     => 'Name',
 ];

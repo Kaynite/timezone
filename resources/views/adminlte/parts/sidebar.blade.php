@@ -49,12 +49,41 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('countries.index') }}" class="nav-link {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-flag"></i>
-                        <p>{{ __('admin.sidebar.countries') }}</p>
+                <li class="nav-item {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit', 'cities.index', 'cities.create', 'cities.edit') ? 'menu-open' : null }}">
+                    <a href="#" class="nav-link {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit', 'cities.index', 'cities.create', 'cities.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-globe-europe"></i>
+                        <p>
+                            {{ __('admin.sidebar.countries') }}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('countries.index') }}" class="nav-link {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-flag"></i>
+                                <p>{{ __('admin.sidebar.countries') }}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('cities.index') }}" class="nav-link {{ Route::currentRouteNamed('cities.index', 'cities.create', 'cities.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-city"></i>
+                                <p>{{ __('admin.sidebar.cities') }}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('states.index') }}" class="nav-link {{ Route::currentRouteNamed('states.index', 'states.create', 'states.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-city"></i>
+                                <p>{{ __('admin.sidebar.states') }}</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+
+                
+
 
                 <li class="nav-item {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'menu-open' : null }}">
                     <a href="#" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">

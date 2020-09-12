@@ -1,0 +1,1 @@
+<input type="checkbox" name="states[]" class="table-row-checkbox" value="{{ $id }}">

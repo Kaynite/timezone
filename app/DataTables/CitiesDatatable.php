@@ -2,12 +2,13 @@
 
 namespace App\DataTables;
 
-use App\User;
+use App\Models\City;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDatatable extends DataTable
+class CitiesDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,14 +20,14 @@ class UsersDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'adminlte.users.datatables.action')
-            ->addColumn('checkbox', 'adminlte.users.datatables.checkbox')
+            ->addColumn('action', 'adminlte.cities.datatables.action')
+            ->addColumn('checkbox', 'adminlte.cities.datatables.checkbox')
             ->rawColumns(['action', 'checkbox']);
     }
 
-    public function query(User $model)
+    public function query(City $model)
     {
-        return $model->with(['type' => function ($q) {$q->locale();}])->newQuery();
+        return $model->locale()->with(['country' => function($q) { $q->locale(); }])->newQuery();
     }
 
     /**
@@ -37,7 +38,7 @@ class UsersDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('usersdatatable-table')
+            ->setTableId('citiesdatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
@@ -47,7 +48,7 @@ class UsersDatatable extends DataTable
             ->buttons(
                 Button::make('create')
                     ->className('btn btn-primary text-white mx-1')
-                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create user')),
+                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create city')),
                 Button::make('print')
                     ->className('btn btn-success text-white mx-1')
                     ->text('<i class="fa fa-print"></i> ' . __('dataTables.buttons.print')),
@@ -77,13 +78,12 @@ class UsersDatatable extends DataTable
                 ->width(25)
                 ->addClass('text-center'),
             Column::make('id')
+                ->width(50)
                 ->title(__('admin.admins.table.id')),
-            Column::make('username')
-                ->title(__('common.username')),
-            Column::make('email')
-                ->title(__('common.email')),
-            Column::make('type.name')
-                ->title(__('admin.users.table.type')),
+            Column::make('name')
+                ->title(__('common.name')),
+            Column::make('country.name')
+                ->title(__('common.country')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)
@@ -94,7 +94,7 @@ class UsersDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Countries_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 
     protected static function lang()

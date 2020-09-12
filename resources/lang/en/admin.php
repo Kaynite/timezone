@@ -15,7 +15,9 @@ return [
         'admins'      => 'Admins',
         'users'       => 'Users',
         'users types' => 'Users Types',
-        'countries' => 'Countries'
+        'countries'   => 'Countries',
+        'cities'      => 'Cities',
+        'states'      => 'States',
     ],
 
     'admins'     => [
@@ -154,7 +156,80 @@ return [
             'close'          => 'Close',
             'body'           => 'Are you sure you want to delete selected countries ?',
             'body with name' => 'Are you sure you want to delete :name ?',
-            'title'          => 'Delete admin',
+            'title'          => 'Delete country',
+        ],
+
+        'table'        => [
+            'id'       => '#',
+            'username' => 'Username',
+            'email'    => 'Email Address',
+            'action'   => 'Actions',
+        ],
+    ],
+
+    'cities'     => [
+        'index title'  => 'Cities',
+        'create title' => 'Add new city',
+        'edit title'   => 'Edit city',
+
+        'form'         => [
+            'name_ar'                 => 'City name in Arabic',
+            'name_en'                 => 'City name in English',
+            'country'                 => 'Country',
+
+            'name_ar placeholder'     => 'Enter city name in Arabic',
+            'name_en placeholder'     => 'Enter city name in English',
+            'country placeholder'     => 'Select country',
+
+            'success add'             => 'City was added successfully!',
+            'success update'          => 'City information was updated successfully!',
+            'success delete'          => 'City was deleted successfully!',
+            'success multiple delete' => 'Selected cities were deleted successfully!',
+            'no selection'            => 'You didn\'t select any city!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected cities ?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete city',
+        ],
+
+        'table'        => [
+            'id'       => '#',
+            'username' => 'Username',
+            'email'    => 'Email Address',
+            'action'   => 'Actions',
+        ],
+    ],
+
+    'states'     => [
+        'index title'  => 'States',
+        'create title' => 'Add new state',
+        'edit title'   => 'Edit state',
+
+        'form'         => [
+            'name_ar'                 => 'State name in Arabic',
+            'name_en'                 => 'State name in English',
+            
+            'name_ar placeholder'     => 'Enter state name in Arabic',
+            'name_en placeholder'     => 'Enter state name in English',
+            'country placeholder'     => 'Select country',
+
+            'success add'             => 'State was added successfully!',
+            'success update'          => 'State information was updated successfully!',
+            'success delete'          => 'State was deleted successfully!',
+            'success multiple delete' => 'Selected states were deleted successfully!',
+            'no selection'            => 'You didn\'t select any state!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected states ?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete state',
         ],
 
         'table'        => [

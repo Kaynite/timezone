@@ -33,6 +33,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('countries', 'CountriesController');
             Route::post('countries/multipledelete', 'CountriesController@multipleDelete')->name('countries.multipleDelete');
 
+            Route::resource('cities', 'CitiesController');
+            Route::post('cities/multipledelete', 'CitiesController@multipleDelete')->name('cities.multipleDelete');
+
+            Route::resource('states', 'StatesController');
+            Route::post('states/multipledelete', 'StatesController@multipleDelete')->name('cities.multipleDelete');
+
             Route::resource('userstypes', 'UsersTypesController');
             
             // Settings Routes

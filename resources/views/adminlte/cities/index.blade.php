@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <form id="multipleDeleteForm" class="w-100" action="{{ route('countries.multipleDelete') }}" method="POST">
+                        <form id="multipleDeleteForm" class="w-100" action="{{ route('cities.multipleDelete') }}" method="POST">
                             @csrf
                             {{ $dataTable->table(['class' => 'table table-striped table-bordered table-hover dataTable table-sm']) }}
                         </form>
@@ -23,13 +23,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalTitle">{{ __('admin.countries.modal.title') }}</h5>
+                    <h5 class="modal-title" id="exampleModalTitle">{{ __('admin.cities.modal.title') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ __('admin.countries.modal.body') }}
+                    {{ __('admin.cities.modal.body') }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin.admins.modal.close') }}</button>
@@ -41,7 +41,7 @@
 @endsection
 
 @section('title')
-{{ __('admin.countries.index title') }}
+{{ __('admin.cities.index title') }}
 @endsection
 
 @section('styles')

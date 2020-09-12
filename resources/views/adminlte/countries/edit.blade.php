@@ -77,7 +77,7 @@
 @endsection
 
 @section('title')
-{{ __('admin.countries.create title') }}
+{{ __('admin.countries.edit title') }}
 @endsection
 
 @section('styles')
