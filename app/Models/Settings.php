@@ -10,7 +10,8 @@ class Settings extends Model
     protected $fillable = [
         'name_ar',
         'name_en',
-        'description',
+        'description_ar',
+        'description_en',
         'keywords',
         'email',
         'logo',

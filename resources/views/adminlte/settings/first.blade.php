@@ -13,76 +13,61 @@
                         @csrf
                         <div class="form-group">
                             <label for="name_ar">{{ __('admin.settings.name_ar') }}</label>
-                            <input type="text" name="name_ar" id="name_ar" class="form-control" placeholder="" value="{{ $settings->name_ar }}">
+                            <input type="text" name="name_ar" id="name_ar" class="form-control" placeholder="">
                         </div>
     
                         <div class="form-group">
                             <label for="name_en">{{ __('admin.settings.name_en') }}</label>
-                            <input type="text" name="name_en" id="name_en" class="form-control" placeholder="" value="{{ $settings->name_en }}">
+                            <input type="text" name="name_en" id="name_en" class="form-control" placeholder="">
                         </div>
     
                         <div class="form-group">
                             <label for="description_ar">{{ __('admin.settings.description_ar') }}</label>
-                            <textarea class="form-control" name="description_ar" id="description_ar" rows="3">{{ $settings->description_ar }}</textarea>
+                            <textarea class="form-control" name="description_ar" id="description_ar" rows="3"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="description_en">{{ __('admin.settings.description_en') }}</label>
-                            <textarea class="form-control" name="description_en" id="description_en" rows="3">{{ $settings->description_en }}</textarea>
+                            <textarea class="form-control" name="description_en" id="description_en" rows="3"></textarea>
                         </div>
     
                         <div class="form-group">
                             <label for="keywords">{{ __('admin.settings.keywords') }}</label>
-                            <textarea class="form-control" name="keywords" id="keywords" rows="3">{{ $settings->keywords }}</textarea>
+                            <textarea class="form-control" name="keywords" id="keywords" rows="3"></textarea>
                         </div>
     
                         <div class="form-group">
                             <label for="email">{{ __('common.email') }}</label>
-                            <input type="text" name="email" id="email" class="form-control" placeholder="" value="{{ $settings->email }}">
+                            <input type="text" name="email" id="email" class="form-control" placeholder="">
                         </div>
-    
     
                         <div class="form-group">
                             <label for="site-logo">{{ __('admin.settings.logo') }}</label> 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{{ Storage::url($settings->logo) }}" alt="Logo" style="max-width: 100%">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="site-logo" name="logo">
-                                        <label class="custom-file-label" for="site-logo">Choose file</label>
-                                    </div>
-                                </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="site-logo" name="logo">
+                                <label class="custom-file-label" for="site-logo">Choose file</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="site-icon">{{ __('admin.settings.icon') }}</label> 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{{ Storage::url($settings->icon) }}" alt="icon" style="max-width: 100%">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="site-icon" name="icon">
-                                        <label class="custom-file-label" for="site-icon">Choose file</label>
-                                    </div>
-                                </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="site-icon" name="icon">
+                                <label class="custom-file-label" for="site-icon">Choose file</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="status">{{ __('admin.settings.status') }}</label>
                             <select class="form-control" name="status" id="status">
-                                <option value="1" {{ $settings->status ? "selected" : NULL }}>{{ __('admin.settings.open') }}</option>
-                                <option value="0" {{ !$settings->status ? "selected" : NULL }}>{{ __('admin.settings.closed') }}</option>
+                                <option value="1">{{ __('admin.settings.open') }}</option>
+                                <option value="0">{{ __('admin.settings.closed') }}</option>
                             </select>
                         </div>
     
                         <div class="form-group">
                             <label for="message">{{ __('admin.settings.message') }}</label>
-                            <textarea class="form-control" name="message" id="message" rows="3">{{ $settings->message }}</textarea>
+                            <textarea class="form-control" name="message" id="message" rows="3"></textarea>
                         </div>
                         
                     </div>

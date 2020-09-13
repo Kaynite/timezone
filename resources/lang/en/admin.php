@@ -12,6 +12,7 @@ return [
     ],
 
     'sidebar'    => [
+        'categories'  => 'Categories',
         'admins'      => 'Admins',
         'users'       => 'Users',
         'users types' => 'Users Types',
@@ -212,7 +213,7 @@ return [
         'form'         => [
             'name_ar'                 => 'State name in Arabic',
             'name_en'                 => 'State name in English',
-            
+
             'name_ar placeholder'     => 'Enter state name in Arabic',
             'name_en placeholder'     => 'Enter state name in English',
             'country placeholder'     => 'Select country',
@@ -241,17 +242,18 @@ return [
     ],
 
     'settings'   => [
-        'title'       => 'Settings',
-        'name_ar'     => 'Site name in Arabic',
-        'name_en'     => 'Site name in English',
-        'description' => 'Site Description',
-        'keywords'    => 'Site Keywords',
-        'logo'        => 'Site logo',
-        'icon'        => 'Site icon',
-        'status'      => 'Site status',
-        'open'        => 'Open',
-        'closed'      => 'Closed for maintenance',
-        'message'     => 'Maintenance message',
+        'title'          => 'Settings',
+        'name_ar'        => 'Site name in Arabic',
+        'name_en'        => 'Site name in English',
+        'description_ar' => 'Site description in Arabic',
+        'description_en' => 'Site description in English',
+        'keywords'       => 'Site Keywords',
+        'logo'           => 'Site logo',
+        'icon'           => 'Site icon',
+        'status'         => 'Site status',
+        'open'           => 'Open',
+        'closed'         => 'Closed for maintenance',
+        'message'        => 'Maintenance message',
     ],
 
 ];

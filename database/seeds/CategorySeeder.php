@@ -1,9 +1,8 @@
 <?php
 
-use UserFactory;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(UserFactory::class, 1)->create();
+        //
     }
 }
