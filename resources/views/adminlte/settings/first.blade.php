@@ -1,6 +1,7 @@
 @extends('adminlte.layouts.main')
 
 @section('content')
+    <!-- TODO: Make the first time settings as steps -->
     <div class="row">
         <div class="col-lg-12">
             <div class="card">

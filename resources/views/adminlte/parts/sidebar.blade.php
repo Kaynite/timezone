@@ -23,6 +23,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('trademarks.index') }}" class="nav-link {{ Route::currentRouteNamed('trademarks.index', 'trademarks.create', 'trademarks.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-trademark"></i>
+                        <p>{{ __('admin.sidebar.trademarks') }}</p>
+                    </a>
+                </li>
+
                 <li class="nav-item {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit', 'cities.index', 'cities.create', 'cities.edit') ? 'menu-open' : null }}">
                     <a href="#" class="nav-link {{ Route::currentRouteNamed('countries.index', 'countries.create', 'countries.edit', 'cities.index', 'cities.create', 'cities.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-globe-europe"></i>
@@ -57,7 +64,7 @@
 
                 <li class="nav-item {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'menu-open' : null }}">
                     <a href="#" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             {{ __('admin.sidebar.users') }}
                             <i class="right fas fa-angle-left"></i>
@@ -73,7 +80,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('userstypes.index') }}" class="nav-link {{ Route::currentRouteNamed('userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
-                                <i class="nav-icon fas fa-users"></i>
+                                <i class="nav-icon fas fa-user-shield"></i>
                                 <p>{{ __('admin.sidebar.users types') }}</p>
                             </a>
                         </li>
@@ -83,7 +90,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admins.index') }}" class="nav-link {{ Route::currentRouteNamed('admins.index', 'admins.create', 'admins.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-users-cog"></i>
                         <p>{{ __('admin.sidebar.admins') }}</p>
                     </a>
                 </li>

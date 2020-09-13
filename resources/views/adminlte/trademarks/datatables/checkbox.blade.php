@@ -1,0 +1,1 @@
+<input type="checkbox" name="trademarks[]" class="table-row-checkbox" value="{{ $id }}">

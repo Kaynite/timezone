@@ -19,6 +19,7 @@ return [
         'countries'   => 'Countries',
         'cities'      => 'Cities',
         'states'      => 'States',
+        'trademarks'  => 'Trademarks',
     ],
 
     'admins'     => [
@@ -238,6 +239,35 @@ return [
             'username' => 'Username',
             'email'    => 'Email Address',
             'action'   => 'Actions',
+        ],
+    ],
+
+    'trademarks' => [
+        'index title'  => 'Trademarks',
+        'create title' => 'Add new trademark',
+        'edit title'   => 'Edit trademark',
+
+        'form'         => [
+            'name_ar'                 => 'Trademark name in Arabic',
+            'name_en'                 => 'Trademark name in English',
+            'image'                   => 'Trademark image',
+
+            'name_ar placeholder'     => 'Enter trademark name in Arabic',
+            'name_en placeholder'     => 'Enter trademark name in English',
+
+            'success add'             => 'Trademark was added successfully!',
+            'success update'          => 'Trademark information was updated successfully!',
+            'success delete'          => 'Trademark was deleted successfully!',
+            'success multiple delete' => 'Selected trademarks were deleted successfully!',
+            'no selection'            => 'You didn\'t select any trademark!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected trademarks ?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete trademark',
         ],
     ],
 
