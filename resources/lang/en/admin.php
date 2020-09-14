@@ -271,6 +271,44 @@ return [
         ],
     ],
 
+    'categories' => [
+        'index title'  => 'Categories',
+        'create title' => 'Add new category',
+        'edit title'   => 'Edit category',
+        'delete'       => 'Delete category',
+
+        'form'         => [
+            'name_ar'                    => 'Category name in Arabic',
+            'name_en'                    => 'Category name in English',
+            'description_ar'             => 'Category description in Arabic',
+            'description_en'             => 'Category description in English',
+            'keywords'                   => 'Keywords',
+            'icon'                       => 'Category icon',
+            'image'                      => 'Category image',
+            'parent category'            => 'Parent Category',
+
+            'name_ar placeholder'        => 'Enter category name in Arabic',
+            'name_en placeholder'        => 'Enter category name in English',
+            'description_ar placeholder' => 'Enter category description in Arabic',
+            'description_en placeholder' => 'Enter category description in English',
+            'keywords placeholder'       => 'Enter keywords (separate between them using comma(", "))',
+            'icon placeholder'           => 'Enter category icon (Fontawesome icon like "fa fa-flag")',
+
+            'success add'                => 'Category was added successfully!',
+            'success update'             => 'Category information was updated successfully!',
+            'success delete'             => 'Category was deleted successfully!',
+            'success multiple delete'    => 'Selected categories were deleted successfully!',
+            'same parent child'          => 'The category can\'t be his own parent!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected category ?',
+            'title'          => 'Delete category',
+        ],
+    ],
+
     'settings'   => [
         'title'          => 'Settings',
         'name_ar'        => 'Site name in Arabic',

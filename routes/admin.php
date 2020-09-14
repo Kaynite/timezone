@@ -41,6 +41,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
             Route::resource('categories', 'CategoriesController');
             Route::post('categories/multipledelete', 'CategoriesController@multipleDelete')->name('categories.multipleDelete');
+            Route::get('test-categories', 'CategoriesController@test')->name('treeJson');
 
             Route::resource('trademarks', 'TrademarksController');
             Route::post('trademarks/multipledelete', 'TrademarksController@multipleDelete')->name('trademarks.multipleDelete');
