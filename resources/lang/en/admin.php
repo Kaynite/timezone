@@ -2,7 +2,7 @@
 
 return [
 
-    'nav'        => [
+    'nav'           => [
         'home'              => 'Home',
         'all notifications' => 'See All Notifications',
         'all messages'      => 'See All Messages',
@@ -11,18 +11,19 @@ return [
         'logout'            => 'Logout',
     ],
 
-    'sidebar'    => [
-        'categories'  => 'Categories',
-        'admins'      => 'Admins',
-        'users'       => 'Users',
-        'users types' => 'Users Types',
-        'countries'   => 'Countries',
-        'cities'      => 'Cities',
-        'states'      => 'States',
-        'trademarks'  => 'Trademarks',
+    'sidebar'       => [
+        'categories'    => 'Categories',
+        'admins'        => 'Admins',
+        'users'         => 'Users',
+        'users types'   => 'Users Types',
+        'countries'     => 'Countries',
+        'cities'        => 'Cities',
+        'states'        => 'States',
+        'trademarks'    => 'Trademarks',
+        'manufacturers' => 'Manufacturers',
     ],
 
-    'admins'     => [
+    'admins'        => [
 
         'index'  => [
             'title' => 'Admins',
@@ -65,7 +66,7 @@ return [
         ],
     ],
 
-    'users'      => [
+    'users'         => [
 
         'index title'  => 'Users',
         'create title' => 'Add New User',
@@ -97,7 +98,7 @@ return [
         ],
     ],
 
-    'userstypes' => [
+    'userstypes'    => [
 
         'index title'  => 'Users Types',
         'create title' => 'Add New Users Type',
@@ -129,7 +130,7 @@ return [
         ],
     ],
 
-    'countries'  => [
+    'countries'     => [
 
         'index title'  => 'Countries',
         'create title' => 'Add new country',
@@ -169,7 +170,7 @@ return [
         ],
     ],
 
-    'cities'     => [
+    'cities'        => [
         'index title'  => 'Cities',
         'create title' => 'Add new city',
         'edit title'   => 'Edit city',
@@ -206,7 +207,7 @@ return [
         ],
     ],
 
-    'states'     => [
+    'states'        => [
         'index title'  => 'States',
         'create title' => 'Add new state',
         'edit title'   => 'Edit state',
@@ -242,7 +243,7 @@ return [
         ],
     ],
 
-    'trademarks' => [
+    'trademarks'    => [
         'index title'  => 'Trademarks',
         'create title' => 'Add new trademark',
         'edit title'   => 'Edit trademark',
@@ -259,7 +260,7 @@ return [
             'success update'          => 'Trademark information was updated successfully!',
             'success delete'          => 'Trademark was deleted successfully!',
             'success multiple delete' => 'Selected trademarks were deleted successfully!',
-            'no selection'            => 'You didn\'t select any trademark!',
+            'no selection'            => 'You didn\'t select any trademarks!',
         ],
 
         'modal'        => [
@@ -271,7 +272,7 @@ return [
         ],
     ],
 
-    'categories' => [
+    'categories'    => [
         'index title'  => 'Categories',
         'create title' => 'Add new category',
         'edit title'   => 'Edit category',
@@ -302,14 +303,58 @@ return [
         ],
 
         'modal'        => [
-            'delete'         => 'Delete',
-            'close'          => 'Close',
-            'body'           => 'Are you sure you want to delete selected category ?',
-            'title'          => 'Delete category',
+            'delete' => 'Delete',
+            'close'  => 'Close',
+            'body'   => 'Are you sure you want to delete selected category ?',
+            'title'  => 'Delete category',
         ],
     ],
 
-    'settings'   => [
+    'manufacturers' => [
+        'index title'  => 'Manufacturers',
+        'create title' => 'Add new manufacturer',
+        'edit title'   => 'Edit manufacturer',
+        'delete'       => 'Delete manufacturer',
+
+        'form'         => [
+            'name_ar'                 => 'Manufacturer name in Arabic',
+            'name_en'                 => 'Manufacturer name in English',
+            'website'                 => 'Manufacturer website',
+            'email'                   => 'Manufacturer email address',
+            'phone'                   => 'Manufacturer phone number',
+            'facebook'                => 'Manufacturer facebook',
+            'twitter'                 => 'Manufacturer twitter',
+            'lat'                     => 'Latitude',
+            'lng'                     => 'Longitude',
+            'logo'                   => 'Manufacturer logo',
+
+            'name_ar placeholder'     => 'Enter manufacturer name in Arabic',
+            'name_en placeholder'     => 'Enter manufacturer name in English',
+            'website placeholder'                 => 'Enter manufacturer website (https://www.example.com)',
+            'email placeholder'                   => 'Enter manufacturer email address (example@asdf.com)',
+            'phone placeholder'                   => 'Enter manufacturer phone number (01234567890)',
+            'facebook placeholder'                => 'Enter manufacturer facebook (https://www.facebook.com/example)',
+            'twitter placeholder'                 => 'Enter manufacturer twitter (https://www.twitter.com/example)',
+            'lat placeholder'                     => 'Enter latitude',
+            'lng placeholder'                     => 'Enter longitude',
+
+            'success add'             => 'Manufacturer was added successfully!',
+            'success update'          => 'Manufacturer information was updated successfully!',
+            'success delete'          => 'Manufacturer was deleted successfully!',
+            'success multiple delete' => 'Selected manufacturers were deleted successfully!',
+            'no selection'            => 'You didn\'t select any manufacturers!',
+        ],
+
+        'modal'        => [
+            'delete' => 'Delete',
+            'close'  => 'Close',
+            'body'   => 'Are you sure you want to delete selected manufacturer ?',
+            'body with name'   => 'Are you sure you want to delete :name ?',
+            'title'  => 'Delete manufacturer',
+        ],
+    ],
+
+    'settings'      => [
         'title'          => 'Settings',
         'name_ar'        => 'Site name in Arabic',
         'name_en'        => 'Site name in English',

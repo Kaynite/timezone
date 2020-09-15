@@ -46,8 +46,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('trademarks', 'TrademarksController');
             Route::post('trademarks/multipledelete', 'TrademarksController@multipleDelete')->name('trademarks.multipleDelete');
 
+            Route::resource('manufacturers', 'ManufacturersController');
+            Route::post('manufacturers/multipledelete', 'ManufacturersController@multipleDelete')->name('manufacturers.multipleDelete');
+
             Route::resource('userstypes', 'UsersTypesController');
-            
+
             // Settings Routes
             Route::get('settings', 'SettingsController@settings')->name('admin.settings');
             Route::post('settings', 'SettingsController@update');

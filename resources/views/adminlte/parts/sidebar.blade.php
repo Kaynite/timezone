@@ -17,6 +17,13 @@
        with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
+                    <a href="{{ route('manufacturers.index') }}" class="nav-link {{ Route::currentRouteNamed('manufacturers.index', 'manufacturers.create', 'manufacturers.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-industry"></i>
+                        <p>{{ __('admin.sidebar.manufacturers') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>{{ __('admin.sidebar.categories') }}</p>
