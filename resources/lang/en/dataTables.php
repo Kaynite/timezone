@@ -34,6 +34,8 @@ return [
         'create state'        => 'Add New State',
         'create trademark'    => 'Add New Trademark',
         'create manufacturer' => 'Add New Manufacturer',
+        'create shipping'     => 'Add New Shipping Company',
+        'create shipping'     => 'Add New Mall',
         'print'               => 'Print',
         'excel'               => 'Export as Excel',
         'reset'               => 'Reset',

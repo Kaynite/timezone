@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="site-icon">{{ __('admin.settings.icon') }}</label> 
+                            <label for="site-icon">{{ __('admin.countries.form.logo') }}</label> 
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="site-icon" name="logo">
                                 <label class="custom-file-label" for="site-icon">Choose file</label>

@@ -24,6 +24,20 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('shipping.index') }}" class="nav-link {{ Route::currentRouteNamed('shipping.index', 'shipping.create', 'shipping.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>{{ __('admin.sidebar.shipping') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('malls.index') }}" class="nav-link {{ Route::currentRouteNamed('malls.index', 'malls.create', 'malls.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>{{ __('admin.sidebar.malls') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>{{ __('admin.sidebar.categories') }}</p>

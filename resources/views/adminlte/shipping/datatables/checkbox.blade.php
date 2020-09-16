@@ -1,0 +1,1 @@
+<input type="checkbox" name="shippings[]" class="table-row-checkbox" value="{{ $id }}">

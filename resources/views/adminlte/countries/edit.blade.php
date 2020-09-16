@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="site-icon">{{ __('admin.settings.icon') }}</label>
+                            <label for="site-icon">{{ __('admin.countries.form.logo') }}</label>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <img src="{{ Storage::url($country->logo) }}" alt="Country flag" style="max-width: 100%">
