@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CountriesController extends Controller
 {
+    // TODO: Add Currencies
     /**
      * Display a listing of the resource.
      *
