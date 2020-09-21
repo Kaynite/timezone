@@ -28,7 +28,7 @@ class MallsDatatable extends DataTable
 
     public function query(Mall $model)
     {
-        return $model->newQuery();
+        return $model->with(['country' => function($q) { $q->locale(); }])->locale()->newQuery();
     }
 
     /**
@@ -81,10 +81,10 @@ class MallsDatatable extends DataTable
             Column::make('id')
                 ->width(50)
                 ->title(__('admin.admins.table.id')),
-            Column::make('name')
+            Column::make('name', 'name_'.siteLang())
                 ->title(__('common.title')),
-            Column::make('user.username')
-                ->title(__('common.username')),
+            Column::make('country.name', 'name_' . siteLang())
+                ->title(__('common.country')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)
@@ -95,7 +95,7 @@ class MallsDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Malls_' . date('YmdHis');
     }
 
 

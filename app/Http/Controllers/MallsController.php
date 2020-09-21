@@ -40,14 +40,15 @@ class MallsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar'    => 'required|max:255',
-            'name_en'    => 'required|max:255',
-            'website'    => 'url|max:255',
-            'email'      => 'email|max:255',
-            'phone'      => 'string|max:255',
-            'facebook'   => 'url|max:255',
-            'twitter'    => 'url|max:255',
+            'name_ar'    => 'required|max:225',
+            'name_en'    => 'required|max:225',
+            'website'    => 'url|max:225',
+            'email'      => 'email|max:225',
+            'phone'      => 'string|max:225',
+            'facebook'   => 'url|max:225',
+            'twitter'    => 'url|max:225',
             'country_id' => 'integer|nullable',
+            'address'    => 'string:max:225',
             'logo'       => 'image',
         ], [], [
             'name_ar'    => __('admin.malls.form.name_ar'),
@@ -58,6 +59,7 @@ class MallsController extends Controller
             'facebook'   => __('admin.malls.form.facebook'),
             'twitter'    => __('admin.malls.form.twitter'),
             'country_id' => __('admin.malls.form.country_id'),
+            'address'    => __('admin.malls.form.address'),
             'logo'       => __('admin.malls.form.logo'),
         ]);
 
@@ -76,6 +78,7 @@ class MallsController extends Controller
             'facebook'   => $request->facebook,
             'twitter'    => $request->twitter,
             'country_id' => $request->country_id,
+            'address'    => $request->address,
             'logo'       => $path ?? null,
         ]);
         return redirect()->route('malls.index')->with('success', 'admin.malls.form.success add');
@@ -105,13 +108,13 @@ class MallsController extends Controller
     public function update(Request $request, Mall $mall)
     {
         $request->validate([
-            'name_ar'    => 'required|max:255',
-            'name_en'    => 'required|max:255',
-            'website'    => 'url|max:255',
-            'email'      => 'email|max:255',
-            'phone'      => 'string|max:255',
-            'facebook'   => 'url|max:255',
-            'twitter'    => 'url|max:255',
+            'name_ar'    => 'required|max:225',
+            'name_en'    => 'required|max:225',
+            'website'    => 'url|max:225',
+            'email'      => 'email|max:225',
+            'phone'      => 'string|max:225',
+            'facebook'   => 'url|max:225',
+            'twitter'    => 'url|max:225',
             'country_id' => 'integer|nullable',
             'logo'       => 'image',
         ], [], [
@@ -142,6 +145,7 @@ class MallsController extends Controller
             'facebook'   => $request->facebook,
             'twitter'    => $request->twitter,
             'country_id' => $request->country_id,
+            'address'    => $request->address,
             'logo'       => $path ?? $mall->logo,
         ]);
 

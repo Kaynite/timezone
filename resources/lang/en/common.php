@@ -19,4 +19,8 @@ return [
     'city'        => 'City',
     'name'        => 'Name',
     'choose file' => 'Choose file',
+    'color'       => 'Color',
+    'public'      => 'Public',
+    'private'     => 'Private',
+    'category'    => 'Category',
 ];

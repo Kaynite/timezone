@@ -38,6 +38,20 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('colors.index') }}" class="nav-link {{ Route::currentRouteNamed('colors.index', 'colors.create', 'colors.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-palette"></i>
+                        <p>{{ __('admin.sidebar.colors') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('sizes.index') }}" class="nav-link {{ Route::currentRouteNamed('sizes.index', 'sizes.create', 'sizes.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-ruler"></i>
+                        <p>{{ __('admin.sidebar.sizes') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>{{ __('admin.sidebar.categories') }}</p>

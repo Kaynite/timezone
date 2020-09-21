@@ -95,7 +95,7 @@ class CountriesDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Countries_' . date('YmdHis');
     }
 
 

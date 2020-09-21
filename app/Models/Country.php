@@ -19,6 +19,6 @@ class Country extends Model
 
     public function scopeLocale($q)
     {
-        return $q->select('id', 'name_' . LaravelLocalization::getCurrentLocale() . ' as name', 'mob', 'code', 'logo', 'created_at', 'updated_at');
+        return $q->select('id', 'name_' . siteLang() . ' as name', 'mob', 'code', 'logo', 'created_at', 'updated_at');
     }
 }

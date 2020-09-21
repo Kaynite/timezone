@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\TrademarlsDatatable;
+use App\DataTables\TrademarksDatatable;
 use App\Models\Trademark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +14,7 @@ class TrademarksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(TrademarlsDatatable $datatable)
+    public function index(TrademarksDatatable $datatable)
     {
         return $datatable->render('adminlte.trademarks.index');
     }

@@ -1,0 +1,1 @@
+<input type="checkbox" name="sizes[]" class="table-row-checkbox" value="{{ $id }}">

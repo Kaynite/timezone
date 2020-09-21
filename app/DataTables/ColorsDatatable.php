@@ -2,16 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Manufacturer;
-use App\User;
-
+use App\Models\Color;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ManufacturersDatatable extends DataTable
+class ColorsDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,12 +21,12 @@ class ManufacturersDatatable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'adminlte.manufacturers.datatables.action')
-            ->addColumn('checkbox', 'adminlte.manufacturers.datatables.checkbox')
+            ->addColumn('action', 'adminlte.colors.datatables.action')
+            ->addColumn('checkbox', 'adminlte.colors.datatables.checkbox')
             ->rawColumns(['action', 'checkbox']);
     }
 
-    public function query(Manufacturer $model)
+    public function query(Color $model)
     {
         return $model->locale()->newQuery();
     }
@@ -41,7 +39,7 @@ class ManufacturersDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('manufacturersdatatable-table')
+            ->setTableId('colorsdatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
@@ -51,7 +49,7 @@ class ManufacturersDatatable extends DataTable
             ->buttons(
                 Button::make('create')
                     ->className('btn btn-primary text-white mx-1')
-                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create manufacturer')),
+                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create color')),
                 Button::make('print')
                     ->className('btn btn-success text-white mx-1')
                     ->text('<i class="fa fa-print"></i> '. __('dataTables.buttons.print')),
@@ -83,8 +81,10 @@ class ManufacturersDatatable extends DataTable
             Column::make('id')
                 ->width(50)
                 ->title(__('admin.admins.table.id')),
-            Column::make('name')
+            Column::make('name', 'name_'.siteLang())
                 ->title(__('common.title')),
+            Column::make('color')
+                ->title(__('common.color')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)
@@ -95,7 +95,7 @@ class ManufacturersDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Manufacturers_' . date('YmdHis');
+        return 'Colors_' . date('YmdHis');
     }
 
 

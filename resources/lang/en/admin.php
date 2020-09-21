@@ -23,6 +23,8 @@ return [
         'manufacturers' => 'Manufacturers',
         'shipping'      => 'Shipping',
         'malls'         => 'Malls',
+        'colors'        => 'Colors',
+        'sizes'         => 'Sizes',
     ],
 
     'admins'        => [
@@ -415,6 +417,7 @@ return [
             'twitter'                 => 'Mall twitter',
             'logo'                    => 'Mall logo',
             'country_id'              => 'Country',
+            'address'                 => 'Address',
 
             'name_ar placeholder'     => 'Enter mall name in Arabic',
             'name_en placeholder'     => 'Enter mall name in English',
@@ -437,6 +440,67 @@ return [
             'body'           => 'Are you sure you want to delete selected mall?',
             'body with name' => 'Are you sure you want to delete :name ?',
             'title'          => 'Delete mall',
+        ],
+    ],
+
+    'colors'        => [
+        'index title'  => 'Colors',
+        'create title' => 'Add new color',
+        'edit title'   => 'Edit color',
+        'delete'       => 'Delete color',
+
+        'form'         => [
+            'name_ar'                 => 'Color name in Arabic',
+            'name_en'                 => 'Color name in English',
+            'color'                   => 'Color',
+
+            'name_ar placeholder'     => 'Enter color name in Arabic',
+            'name_en placeholder'     => 'Enter color name in English',
+
+            'success add'             => 'Color was added successfully!',
+            'success update'          => 'Color information was updated successfully!',
+            'success delete'          => 'Color was deleted successfully!',
+            'success multiple delete' => 'Selected colors were deleted successfully!',
+            'no selection'            => 'You didn\'t select any colors!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected color?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete color',
+        ],
+    ],
+
+    'sizes'         => [
+        'index title'  => 'Sizes',
+        'create title' => 'Add new size',
+        'edit title'   => 'Edit size',
+        'delete'       => 'Delete size',
+
+        'form'         => [
+            'name_ar'                 => 'Size name in Arabic',
+            'name_en'                 => 'Size name in English',
+            'category_id'             => 'Category',
+            'status'                  => 'Status',
+
+            'name_ar placeholder'     => 'Enter size name in Arabic',
+            'name_en placeholder'     => 'Enter size name in English',
+
+            'success add'             => 'Size was added successfully!',
+            'success update'          => 'Size information was updated successfully!',
+            'success delete'          => 'Size was deleted successfully!',
+            'success multiple delete' => 'Selected sizes were deleted successfully!',
+            'no selection'            => 'You didn\'t select any sizes!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected size?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete size',
         ],
     ],
 

@@ -11,6 +11,6 @@ class Trademark extends Model
 
     public function scopeLocale($q)
     {
-        return $q->select('trademarks.*', 'name_' . LaravelLocalization::getCurrentlocale() . ' as name');
+        return $q->select('trademarks.*', 'name_' . siteLang() . ' as name');
     }
 }

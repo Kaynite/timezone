@@ -28,14 +28,24 @@
                             @enderror
                         </div>
 
+                        <!-- TODO: Put country creation link if no countries available! -->
+                        <!-- TODO: Make country required! -->
                         <div class="form-group">
-                            <label for="user_id">{{ __('admin.malls.form.country_id') }}</label>
-                            <select class="form-control" name="user_id" id="user_id">
+                            <label for="country_id">{{ __('admin.malls.form.country_id') }}</label>
+                            <select class="form-control" name="country_id" id="country_id">
                                 @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                                 @endforeach
                             </select>
-                            @error('user_id')
+                            @error('country_id')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">{{ __('admin.malls.form.address') }}</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="{{ __('admin.malls.form.address placeholder') }}" value="{{ old('address') }}">
+                            @error('address')
                             <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>

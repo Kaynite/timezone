@@ -55,6 +55,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('malls', 'MallsController');
             Route::post('malls/multipledelete', 'MallsController@multipleDelete')->name('malls.multipleDelete');
 
+            Route::resource('colors', 'ColorsController');
+            Route::post('colors/multipledelete', 'ColorsController@multipleDelete')->name('colors.multipleDelete');
+
+            Route::resource('sizes', 'SizesController');
+            Route::post('sizes/multipledelete', 'SizesController@multipleDelete')->name('sizes.multipleDelete');
+
             Route::resource('userstypes', 'UsersTypesController');
 
             // Settings Routes

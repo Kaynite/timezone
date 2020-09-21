@@ -94,7 +94,7 @@ class CitiesDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Cities_' . date('YmdHis');
     }
 
     protected static function lang()

@@ -4,7 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Shipping;
 use App\User;
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -83,7 +83,7 @@ class ShippingDatatable extends DataTable
             Column::make('id')
                 ->width(50)
                 ->title(__('admin.admins.table.id')),
-            Column::make('name')
+            Column::make('name', "name_" . siteLang())
                 ->title(__('common.title')),
             Column::make('user.username')
                 ->title(__('common.username')),
@@ -97,7 +97,7 @@ class ShippingDatatable extends DataTable
 
     protected function filename()
     {
-        return 'Users_' . date('YmdHis');
+        return 'Shipping_' . date('YmdHis');
     }
 
 

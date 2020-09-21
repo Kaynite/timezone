@@ -30,12 +30,23 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="user_id">{{ __('admin.malls.form.country_id') }}</label>
-                            <select class="form-control" name="user_id" id="user_id">
+                            <label for="country_id">{{ __('admin.malls.form.country_id') }}</label>
+                            <select class="form-control" name="country_id" id="country_id">
                                 @foreach ($countries as $country)
                                 <option value="{{ $country->id }}" {{ $country->id == $mall->country_id ? 'selected' : null }}>{{ $country->name }}</option>
                                 @endforeach
                             </select>
+                            @error('country_id')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">{{ __('admin.malls.form.address') }}</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="{{ __('admin.malls.form.address placeholder') }}" value="{{ $mall->address }}">
+                            @error('address')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -79,11 +90,23 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="logo">{{ __('admin.malls.form.logo') }}</label> 
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="logo" name="logo">
-                                <label class="custom-file-label" for="logo">{{ __('common.choose file') }}</label>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img src="{{ Storage::url($mall->logo) }}" alt="Logo" style="max-width: 100%;">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="logo">{{ __('admin.malls.form.logo') }}</label> 
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="logo" name="logo">
+                                        <label class="custom-file-label" for="logo">{{ __('common.choose file') }}</label>
+                                    </div>
+                                    @error('logo')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+
+
                         </div>
 
                     </div>

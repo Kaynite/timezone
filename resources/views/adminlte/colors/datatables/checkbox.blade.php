@@ -1,0 +1,1 @@
+<input type="checkbox" name="colors[]" class="table-row-checkbox" value="{{ $id }}">

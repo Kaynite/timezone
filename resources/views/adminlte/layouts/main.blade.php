@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('adminlte/css/fontawesome.min.css') }}">
     @yield('styles')
 
-    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+    @if(siteLang() == 'ar')
     <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.ar.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/css/bootstrap-rtl.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/css/custom.css') }}">
