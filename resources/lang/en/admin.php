@@ -25,6 +25,7 @@ return [
         'malls'         => 'Malls',
         'colors'        => 'Colors',
         'sizes'         => 'Sizes',
+        'weight'        => 'Weight',
     ],
 
     'admins'        => [
@@ -501,6 +502,35 @@ return [
             'body'           => 'Are you sure you want to delete selected size?',
             'body with name' => 'Are you sure you want to delete :name ?',
             'title'          => 'Delete size',
+        ],
+    ],
+
+    'weight'        => [
+        'index title'  => 'Weight',
+        'create title' => 'Add new weight unit',
+        'edit title'   => 'Edit weight unit',
+        'delete'       => 'Delete weight unit',
+
+        'form'         => [
+            'unit_ar'                 => 'Weight unit in Arabic',
+            'unit_en'                 => 'Weight unit in English',
+
+            'unit_ar placeholder'     => 'Enter weight unit in Arabic',
+            'unit_en placeholder'     => 'Enter weight unit in English',
+
+            'success add'             => 'Weight unit was added successfully!',
+            'success update'          => 'Weight unit information was updated successfully!',
+            'success delete'          => 'Weight unit was deleted successfully!',
+            'success multiple delete' => 'Selected weight units were deleted successfully!',
+            'no selection'            => 'You didn\'t select any weight units!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected weight units?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete color',
         ],
     ],
 

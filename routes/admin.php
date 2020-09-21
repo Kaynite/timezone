@@ -61,6 +61,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('sizes', 'SizesController');
             Route::post('sizes/multipledelete', 'SizesController@multipleDelete')->name('sizes.multipleDelete');
 
+            Route::resource('weight', 'WeightController');
+            Route::post('weight/multipledelete', 'WeightController@multipleDelete')->name('weight.multipleDelete');
+
             Route::resource('userstypes', 'UsersTypesController');
 
             // Settings Routes

@@ -38,6 +38,7 @@ return [
         'create mall'         => 'Add New Mall',
         'create color'        => 'Add New Color',
         'create size'         => 'Add New Size',
+        'create weight'         => 'Add New Weight Unit',
         'print'               => 'Print',
         'excel'               => 'Export as Excel',
         'reset'               => 'Reset',

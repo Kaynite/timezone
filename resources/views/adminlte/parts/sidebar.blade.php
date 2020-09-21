@@ -52,6 +52,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('weight.index') }}" class="nav-link {{ Route::currentRouteNamed('weight.index', 'weight.create', 'weight.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-weight"></i>
+                        <p>{{ __('admin.sidebar.weight') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>{{ __('admin.sidebar.categories') }}</p>
