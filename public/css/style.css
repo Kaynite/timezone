@@ -1786,12 +1786,6 @@ blockquote {
 .product-thumb a img+img {
     display: none;
 }
-.product-thumb:hover a img {
-    display: none;
-}
-.product-thumb:hover a img+img {
-    display: block;
-}
 .image.product-imageblock>a {
     overflow: hidden;
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use phpDocumentor\Reflection\Types\Resource_;
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
@@ -63,6 +64,25 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
             Route::resource('weight', 'WeightController');
             Route::post('weight/multipledelete', 'WeightController@multipleDelete')->name('weight.multipleDelete');
+
+            Route::get('products/trash', 'ProductsController@trash')->name('products.trash');
+            Route::resource('products', 'ProductsController');
+            Route::post('products/multipledelete', 'ProductsController@multipleDelete')->name('products.multipleDelete');
+            Route::post('products/{id}/copy', 'ProductsController@copy')->name('products.copy');
+            Route::post('products/{id}/restore', 'ProductsController@restore')->name('products.restore');
+            Route::post('products/{id}/force-delete', 'ProductsController@forceDelete')->name('products.forceDelete');
+            Route::get('products/{id}/main-image/{image_id}', 'ProductsController@mainImage')->name('products.mainImage');
+            Route::post('products-images/destory', 'ProductsController@destoryProductImage')->name('products.destoryProductImage');
+            
+            /*
+            Route::group(['prefix' => 'products'], function () {
+                Route::get('/', 'ProductsController@approved')->name('products.index');
+                Route::get('pending', 'ProductsController@pending')->name('products.pending');
+                Route::get('rejected', 'ProductsController@rejected')->name('products.rejected');
+                Route::get('trash', 'ProductsController@trash')->name('products.trash');
+                Route::get('{id}/edit', 'ProductsController@edit')->name('products.edit');
+            });
+            */
 
             Route::resource('userstypes', 'UsersTypesController');
 

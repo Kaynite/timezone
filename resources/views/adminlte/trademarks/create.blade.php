@@ -11,7 +11,6 @@
                 <form action="{{ route('trademarks.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-
                         <div class="form-group">
                             <label for="name_ar">{{ __('admin.trademarks.form.name_ar') }}</label>
                             <input type="text" class="form-control" id="name_ar" name="name_ar" placeholder="{{ __('admin.trademarks.form.name_ar placeholder') }}" value="{{ old('name_ar') }}">
@@ -35,14 +34,11 @@
                                 <label class="custom-file-label" for="site-icon">Choose file</label>
                             </div>
                         </div>
-
                     </div>
-
 
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary">{{ __('common.submit') }}</button>
                     </div>
-
 
                 </form>
             </div>

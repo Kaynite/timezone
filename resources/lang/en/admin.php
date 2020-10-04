@@ -26,6 +26,11 @@ return [
         'colors'        => 'Colors',
         'sizes'         => 'Sizes',
         'weight'        => 'Weight',
+        'products'      => 'Products',
+        'products_approved'      => 'Approved',
+        'products_pending'      => 'Pending',
+        'products_rejected'      => 'Rejected',
+        'products_trash'      => 'Trash',
     ],
 
     'admins'        => [
@@ -523,6 +528,35 @@ return [
             'success delete'          => 'Weight unit was deleted successfully!',
             'success multiple delete' => 'Selected weight units were deleted successfully!',
             'no selection'            => 'You didn\'t select any weight units!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected weight units?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete color',
+        ],
+    ],
+
+    'products'        => [
+        'index title'  => 'Products',
+        'create title' => 'Add new product',
+        'edit title'   => 'Edit product',
+        'delete'       => 'Delete product',
+
+        'form'         => [
+            'title_ar'                 => 'Product in Arabic',
+            'title_en'                 => 'Product in English',
+
+            'title_ar placeholder'     => 'Enter product in Arabic',
+            'title_en placeholder'     => 'Enter product in English',
+
+            'success add'             => 'Product was added successfully!',
+            'success update'          => 'Product information was updated successfully!',
+            'success delete'          => 'Product was deleted successfully!',
+            'success multiple delete' => 'Selected products were deleted successfully!',
+            'no selection'            => 'You didn\'t select any products!',
         ],
 
         'modal'        => [

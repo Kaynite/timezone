@@ -35,4 +35,9 @@ class Category extends Model
         $lang = siteLang();
         return $q->select('id', "name_$lang as name", "description_$lang as description", 'keywords', 'icon', 'image', 'parent_id', 'created_at', 'updated_at');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class)->locale();
+    }
 }

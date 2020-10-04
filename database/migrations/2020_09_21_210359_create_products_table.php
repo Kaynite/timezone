@@ -17,27 +17,29 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title_ar');
             $table->string('title_en');
-            $table->string('photo');
-            $table->string('content');
+            $table->text('content');
 
             $table->foreignId('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
             $table->foreignId('trademark_id')->nullable();
-            $table->foreign('trademark_id')->references('id')->on('trademarks')->onDelete('cascade');
+            $table->foreign('trademark_id')->references('id')->on('trademarks')->onDelete('set null');
 
             $table->foreignId('manufacturer_id')->nullable();
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('cascade');
+            $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('set null');
 
             $table->foreignId('color_id')->nullable();
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+            $table->foreign('color_id')->references('id')->on('colors')->onDelete('set null');
 
-            $table->integer('weight')->default(0);
+            $table->foreignId('image_id')->nullable();
+
+            $table->integer('weight')->nullable();
             $table->foreignId('weight_id')->nullable();
-            $table->foreign('weight_id')->references('id')->on('weights')->onDelete('cascade');
+            $table->foreign('weight_id')->references('id')->on('weights')->onDelete('set null');
 
+            $table->string('size')->nullable();
             $table->foreignId('size_id')->nullable();
-            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
+            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('set null');
 
             $table->integer('stock')->default(0);
             $table->date('stock_starts_at')->nullable();
@@ -53,6 +55,8 @@ class CreateProductsTable extends Migration
             $table->text('rejection_reason')->nullable();
 
             $table->decimal('price')->default(0);
+            
+            $table->softDeletes();
 
             $table->timestamps();
         });

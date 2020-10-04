@@ -16,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::view('/', 'site.main');
+Route::get('/', 'HomeController@home')->name('home');
+
+
+Route::get('product/{id}', 'ProductsController@show')->name('product.show');
+Route::get('category/{id}', 'CategoriesController@show')->name('category.show');
