@@ -421,395 +421,167 @@
         </div>
 
         <div class="col-sm-8 col-lg-9 mtb_20">
-            {{-- Product --}}
-            <div class="row mt_10 ">
-                <div class="col-md-6">
-                    <div>
-                        <a class="thumbnails">
-                            <img data-name="product_image" src="{{ Storage::url($product->mainImage->path) }}" alt="" />
-                        </a>
-                    </div>
-
-                    <div id="product-thumbnail" class="owl-carousel">
-                        @foreach ($product->images as $image)
-                        <div class="item">
-                            <div class="image-additional">
-                                <a class="thumbnail" href="{{ Storage::url($image->path) }}" data-fancybox="group1">
-                                    <img src="{{ Storage::url($image->path) }}" alt="" />
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td class="text-center">Image</td>
+                            <td class="text-left">Product Name</td>
+                            <td class="text-left">Quantity</td>
+                            <td class="text-right">Unit Price</td>
+                            <td class="text-right">Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach(Cart::content() as $row)
+                        <tr>
+                            <td class="text-center">
+                                <a href="{{ route('product.show', $row->model->id) }}">
+                                    <img src="{{ Storage::url($row->model->mainImage->path) }}" alt="{{ $row->model->{'title_' . sitelang()} }}">
                                 </a>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-
-                </div>
-                <div class="col-md-6 prodetail caption product-thumb">
-                    <h4 data-name="product_name" class="product-name">
-                        {{-- <a href="#" title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video Recording</a> --}}
-                        {{ $product->title }}
-                    </h4>
-                    <div class="rating">
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span>
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span>
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span>
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span>
-                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span>
-                    </div>
-                    <span class="price mb_20"><span class="amount">{{ $product->price }}</span><span class="currencySymbol"> LE</span>
-                    </span>
-                    <hr>
-                    <ul class="list-unstyled product_info mtb_20">
-                        <li>
-                            <label>Brand:</label>
-                            <span> <a href="#">{{ $product->manufacturer->name ?? 'null' }}</a></span>
-                        </li>
-                        <li>
-                            <label>Product Code:</label>
-                            <span> product 20</span>
-                        </li>
-                        <li>
-                            <label>Availability:</label>
-                            <span> In Stock</span>
-                        </li>
-                    </ul>
-                    <hr>
-                    <p class="product-desc mtb_30">
-                        {{ $product->content }}
-                    </p>
-                    <div id="product">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="Sort-by col-md-6">
-                                    <label>Size</label>
-                                    <select name="product_size" id="select-by-size" class="selectpicker form-control">
-                                        <option>Small</option>
-                                        <option>Medium</option>
-                                        <option>Large</option>
-                                    </select>
-                                </div>
-                                <div class="Color col-md-6">
-                                    <label>Color</label>
-                                    <select name="product_color" id="select-by-color" class="selectpicker form-control">
-                                        <option>{{ $product->color->name ?? '' }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="qty mt_30 form-group2">
-                            <label>Qty</label>
-                            <input name="product_quantity" min="1" value="1" type="number">
-                        </div>
-                        <div class="button-group mt_30">
-                            <form action="{{ route('cart.store', $product->id) }}" method="POST">
-                                @csrf
-                                <div class="add-to-cart">
-                                    <button type="submit"></button>
-                                </div>
-                            </form>
-                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Reviews --}}
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="exTab5" class="mtb_30">
-                        <ul class="nav nav-tabs">
-                            <li class="active"> <a href="#1c" data-toggle="tab">Overview</a> </li>
-                            <li><a href="#2c" data-toggle="tab">Reviews (1)</a> </li>
-                            <li><a href="#3c" data-toggle="tab">Solution</a> </li>
-                        </ul>
-                        <div class="tab-content ">
-                            <div class="tab-pane active pt_20" id="1c">
-                                <p>
-                                    CLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis malesuada mi id
-                                    tristique. Sed ipsum nisi, dapibus at faucibus non, dictum a diam. Nunc vitae interdum
-                                    diam. Sed finibus, justo vel maximus facilisis, sapien turpis euismod tellus, vulputate
-                                    semper diam ipsum vel tellus.
-                                </p>
-                            </div>
-                            <div class="tab-pane" id="2c">
-                                <form class="form-horizontal">
-                                    <div id="review"></div>
-                                    <h4 class="mt_20 mb_30">Write a review</h4>
-                                    <div class="form-group required">
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="input-name">Your Name</label>
-                                            <input name="name" value="" id="input-name" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group required">
-                                        <div class="col-sm-12">
-                                            <label class="control-label" for="input-review">Your Review</label>
-                                            <textarea name="text" rows="5" id="input-review"
-                                                class="form-control"></textarea>
-                                            <div class="help-block"><span class="text-danger">Note:</span> HTML is not
-                                                translated!</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group required">
-                                        <div class="col-md-6">
-                                            <label class="control-label">Rating</label>
-                                            <div class="rates"><span>Bad</span>
-                                                <input name="rating" value="1" type="radio">
-                                                <input name="rating" value="2" type="radio">
-                                                <input name="rating" value="3" type="radio">
-                                                <input name="rating" value="4" type="radio">
-                                                <input name="rating" value="5" type="radio">
-                                                <span>Good</span></div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="buttons pull-right">
-                                                <button type="submit" class="btn btn-md btn-link">Continue</button>
-                                            </div>
-                                        </div>
+                            </td>
+                            <td class="text-left">
+                                <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                            </td>
+                            <td class="text-left">
+                                <form action="{{ route('cart.update', $row->rowId) }}" method="post">
+                                    <div style="max-width: 200px;" class="input-group btn-block">
+                                        @csrf
+                                        @method('put')
+                                        <input type="number" class="form-control quantity" value="{{ $row->qty }}" name="quantity">
+                                        <span class="input-group-btn">
+                                            <button class="btn" title="" data-toggle="tooltip" type="submit" name="update" data-original-title="Update">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                            <button class="btn btn-danger" title="" data-toggle="tooltip" type="submit" name="delete" data-original-title="Remove">
+                                                <i class="fa fa-times-circle"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="tab-pane pt_20" id="3c">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis malesuada mi id
-                                    tristique. Sed ipsum nisi, dapibus at faucibus non, dictum a diam. Nunc vitae interdum
-                                    diam. Sed finibus, justo vel maximus facilisis, sapien turpis euismod tellus, vulputate
-                                    semper diam ipsum vel tellus.applied clearfix to the tab-content to rid of the gap
-                                    between the tab and the content</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                            <td class="text-right">{{ $row->price }} LE</td>
+                            <td class="text-right">{{ $row->subtotal() }} LE</td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
             </div>
 
-            {{-- Related Products --}}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="heading-part text-center mb_10">
-                        <h2 class="main_title mt_50">Related Products</h2>
+            <h3 class="mtb_10">What would you like to do next?</h3>
+            <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			<div class="panel-group mt_20" id="accordion">
+                <div class="panel panel-default pull-left">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+								Use Coupon Code <i class="fa fa-caret-down"></i>
+							</a>
+						</h4>
                     </div>
-                    <div class="related_pro box">
-                        <div class="product-layout  product-grid related-pro  owl-carousel mb_50 ">
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product7.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product7-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product8.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product8-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
+                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <label for="input-coupon" class="col-sm-4 control-label">Enter your coupon here</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="input-coupon" placeholder="Enter your coupon here" value="" name="coupon">
+                                <span class="input-group-btn">
+                                    <input type="button" class="btn" data-loading-text="Loading..." id="button-coupon" value="Apply Coupon">
+								</span>
+							</div>
+                        </div>
+                    </div>
+				</div>
+				
+                <div class="panel panel-default pull-left">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+								Use Gift Voucher <i class="fa fa-caret-down"></i>
+							</a>
+						</h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <label for="input-voucher" class="col-sm-4 control-label">Enter your gift voucher code here</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="input-voucher" placeholder="Enter your gift voucher code here" value="" name="voucher">
+                                <span class="input-group-btn">
+                                    <input type="button" class="btn" data-loading-text="Loading..." id="button-voucher" value="Apply Voucher">
+								</span>
+							</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default pull-left">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="" aria-expanded="true">
+								Estimate Shipping &amp; Taxes <i class="fa fa-caret-down"></i>
+							</a>
+						</h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse in" aria-expanded="true" style="">
+                        <div class="panel-body">
+                            <p>Enter your destination to get a shipping estimate.</p>
+                            <form class="form-horizontal">
+                                <div class="form-group required">
+                                    <label for="input-country" class="col-sm-2 control-label">Country</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="input-country" name="country_id">
+                                            <option value=""> --- Please Select --- </option>
+                                            <option value="244">Aaland Islands</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product9.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product9-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
+                                <div class="form-group required">
+                                    <label for="input-zone" class="col-sm-2 control-label">Region / State</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="input-zone" name="zone_id">
+                                            <option value=""> --- Please Select --- </option>                                            
+                                            <option value="3612">Wrexham</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product10.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product10-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
+                                <div class="form-group required">
+                                    <label for="input-postcode" class="col-sm-2 control-label">Post Code</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="input-postcode" placeholder="Post Code" value="" name="postcode">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product1.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product1-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-thumb">
-                                    <div class="image product-imageblock"> <a href="product_detail_page.html"> <img
-                                                data-name="product_image" src="images/product/product2.jpg"
-                                                alt="iPod Classic" title="iPod Classic" class="img-responsive"> <img
-                                                src="images/product/product2-1.jpg" alt="iPod Classic" title="iPod Classic"
-                                                class="img-responsive"> </a>
-                                        <div class="button-group text-center">
-                                            <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                            <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                            <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                            <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="caption product-detail text-center">
-                                        <h6 data-name="product_name" class="product-name mt_20"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video
-                                                Recording</a></h6>
-                                        <div class="rating">
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i
-                                                    class="fa fa-star fa-stack-x"></i></span>
-                                        </div>
-                                        <span class="price"><span class="amount"><span
-                                                    class="currencySymbol">$</span>70.00</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                                <input type="button" class="btn pull-right" data-loading-text="Loading..." id="button-quote" value="Get Quotes">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-8">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Sub-Total:</strong></td>
+                                <td class="text-right">{{ Cart::subtotal() }} LE</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>VAT (14%):</strong></td>
+                                <td class="text-right">{{ Cart::tax() }} LE</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Total:</strong></td>
+                                <td class="text-right">{{ Cart::total() }} LE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <form action="index.html">
+                <input class="btn pull-left mt_30" type="submit" value="Continue Shopping">
+            </form>
+            <form action="checkout.html">
+                <input class="btn pull-right mt_30" type="submit" value="Checkout">
+            </form>
         </div>
 
     </div>
