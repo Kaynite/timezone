@@ -11,9 +11,28 @@
                 </div>
                 <div class="col-xs-12 col-sm-8">
                     <ul class="header-top-right text-right">
-                        <li class="account">
-                            <a href="login.html">My Account</a>
+
+
+                        @auth
+                        <li class="language dropdown">
+                            <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                Welcome, {{ Auth::user()->username }} <span class="caret"></span>
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="{{ route('profile') }}">Profile</a></li>
+                                <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </ul>
                         </li>
+                        @else
+                        <li class="account">
+                            <a href="{{ route('login') }}">Login</a>
+                        </li>
+                        @endauth
+
+
                         <li class="language dropdown">
                             <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
                                 Language <span class="caret"></span>
@@ -24,16 +43,7 @@
                                 <li><a href="#">German</a></li>
                             </ul>
                         </li>
-                        <li class="currency dropdown">
-                            <span class="dropdown-toggle" id="dropdownMenu12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                Currency <span class="caret"></span>
-                            </span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu12">
-                                <li><a href="#">€ Euro</a></li>
-                                <li><a href="#">£ Pound Sterling</a></li>
-                                <li><a href="#">$ US Dollar</a></li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -61,77 +71,72 @@
                     <div id="cart" class="btn-group btn-block mtb_40">
                         <button type="button" class="btn" data-target="#cart-dropdown" data-toggle="collapse" aria-expanded="true">
                             <span id="shippingcart">Shopping cart</span>
-                            <span id="cart-total">items (0)</span>
+                            <span id="cart-total">items ({{ Cart::count() }})</span>
                         </button>
                     </div>
 
                     <div id="cart-dropdown" class="cart-menu collapse">
                         <ul>
+                            @if (Cart::count() > 0)
+                                <li style="max-height: 300px; overflow-y: scroll">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            @foreach (Cart::content() as $row)
+                                            <tr>
+                                                <td class="text-center">
+                                                    <a href="{{ route('product.show', $row->model->id) }}">
+                                                        <img src="{{ Storage::url($row->model->mainImage->path ?? '') }}" alt="{{ $row->name }}" title="{{ $row->name }}">
+                                                    </a>
+                                                </td>
+                                                <td class="text-left product-name">
+                                                    <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                                                    <span class="text-left price"> {{ $row->price }} LE</span>
+                                                    <input class="cart-qty" name="product_quantity" min="1" value="{{ $row->qty }}" type="number">
+                                                </td>
+                                                <td class="text-center">
+                                                    <form action="{{ route('cart.update', $row->rowId) }}" method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <button type="submit" name="delete" style="border:none;background:none;padding:0;text-align:left; ">
+                                                            <i class="fa fa-times-circle"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li style="margin-top: 1rem">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-right"><strong>Sub-Total</strong></td>
+                                                <td class="text-right">{{ Cart::subtotal() }} LE</td>
+                                            </tr>
+                                            {{--
+                                            <tr>
+                                                <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
+                                                <td class="text-right">$2.00</td>
+                                            </tr>
+                                            --}}
+                                            <tr>
+                                                <td class="text-right"><strong>VAT (14%)</strong></td>
+                                                <td class="text-right">{{ Cart::tax() }} LE</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Total</strong></td>
+                                                <td class="text-right">{{ Cart::total() }} LE</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            @else
+                                <li class="text-center mb_10">Your Cart is empty!</li>
+                            @endif
                             <li>
-                                <table class="table table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">
-                                                <a href="#">
-                                                    <img src="images/product/70x84.jpg" alt="iPod Classic" title="iPod Classic">
-                                                </a>
-                                            </td>
-                                            <td class="text-left product-name">
-                                                <a href="#">MacBook Pro</a>
-                                                <span class="text-left price">$20.00</span>
-                                                <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
-                                            </td>
-                                            <td class="text-center">
-                                                <a class="close-cart"><i class="fa fa-times-circle"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">
-                                                <a href="#">
-                                                    <img src="images/product/70x84.jpg" alt="iPod Classic" title="iPod Classic">
-                                                </a>
-                                            </td>
-                                            <td class="text-left product-name">
-                                                <a href="#">MacBook Pro</a>
-                                                <span class="text-left price">$20.00</span>
-                                                <input class="cart-qty" name="product_quantity" min="1" value="1" type="number">
-                                            </td>
-                                            <td class="text-center">
-                                                <a class="close-cart"><i class="fa fa-times-circle"></i></a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                            <li>
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-right"><strong>Sub-Total</strong></td>
-                                            <td class="text-right">$2,100.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                                            <td class="text-right">$2.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>VAT (20%)</strong></td>
-                                            <td class="text-right">$20.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>Total</strong></td>
-                                            <td class="text-right">$2,122.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                            <li>
-                                <form action="cart_page.html">
-                                    <input class="btn pull-left mt_10" value="View cart" type="submit">
-                                </form>
-                                <form action="checkout_page.html">
-                                    <input class="btn pull-right mt_10" value="Checkout" type="submit">
-                                </form>
+                                <a href="{{ route('cart.index') }}" class="btn pull-left mt_10" style="margin-right: 1rem">View Cart</a>
+                                <a href="{{ route('checkout') }}" class="btn pull-right mt_10">Checkout</a>
                             </li>
                         </ul>
                     </div>
@@ -216,7 +221,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li> <a href="category_page.html">Shop</a></li>
+                        <li> <a href="{{ route('shop') }}">Shop</a></li>
                         <li> <a href="blog_page.html">Blog</a></li>
                         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages
                             </a>

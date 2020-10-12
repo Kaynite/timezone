@@ -29,7 +29,7 @@ class ProductsDatatable extends DataTable
 
     public function query(Request $request, Product $model)
     {
-        return $model->with(['category' => function($q) { $q->locale(); }])->locale()->newQuery();
+        return $model->with(['category' => function($q) { $q->locale(); }])->locale()->latest()->newQuery();
     }
 
     /**

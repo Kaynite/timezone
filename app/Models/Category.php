@@ -22,9 +22,10 @@ class Category extends Model
 
     public function scopeTreeJson($q)
     {
+        $lang = siteLang();
         return $q->select(
             'id',
-            'name_' . LaravelLocalization::getCurrentLocale() . ' as text',
+            "name_$lang as text",
             'icon',
             'parent_id as parent'
         );

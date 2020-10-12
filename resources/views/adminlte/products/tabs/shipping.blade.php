@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-lg-4">
+            <div class="form-group col-lg-3">
                 <label for="color_id">Color</label>
                 <select class="form-control" name="color_id" id="color_id">
                     <option value=""></option>
@@ -56,7 +56,7 @@
                 @enderror
             </div>
 
-            <div class="form-group col-lg-4">
+            <div class="form-group col-lg-3">
                 <label for="manufacturer_id">Manufacturer</label>
                 <select class="form-control" name="manufacturer_id" id="manufacturer_id">
                     <option value=""></option>
@@ -69,7 +69,20 @@
                 @enderror
             </div>
 
-            <div class="form-group col-lg-4">
+            <div class="form-group col-lg-3">
+                <label for="manufacturer_id">Trademark</label>
+                <select class="form-control" name="manufacturer_id" id="manufacturer_id">
+                    <option value=""></option>
+                    @foreach ($trademarks as $trademark)
+                    <option value="{{ $trademark->id }}" {{ (old('trademark_id') ?? $product->trademark_id ?? '') == $trademark->id ? 'selected' : null }}>{{ $trademark->name }}</option>
+                    @endforeach
+                </select>
+                @error('manufacturer_id')
+                <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="form-group col-lg-3">
                 <label for="mall_id" class="d-block">Malls</label>
                 <select class="form-control select2bs4" name="malls[]" multiple>
                     @foreach ($malls as $mall)

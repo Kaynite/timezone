@@ -21,7 +21,7 @@
                             <div class="item">
                                 <div class="product-thumb">
                                     <div class="image product-imageblock">
-                                        <a href="{{ route('product.show', $product->id) }}">
+                                        <a href="{{ route('product.show', [$product->id, $product->slug]) }}">
                                             <img data-name="product_image" src="{{ isset($product->mainImage) ? Storage::url($product->mainImage->path) : null }}" alt="{{ $product->title }}" title="{{ $product->title }}" class="img-responsive">
                                         </a>
                                         <div class="button-group text-center">

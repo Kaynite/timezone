@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mall;
-use App\Models\Size;
-use App\Models\Color;
-use App\Models\Weight;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Manufacturer;
-use App\Models\ProductImage;
-use Illuminate\Http\Request;
-use App\Traits\ProductsImagesUpload;
 use App\DataTables\ProductsDatatable;
-use Illuminate\Support\Facades\Storage;
 use App\DataTables\TrashProductsDatatable;
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Color;
+use App\Models\Image;
+use App\Models\Mall;
+use App\Models\Manufacturer;
+use App\Models\Product;
+use App\Models\Size;
+use App\Models\Trademark;
+use App\Models\Weight;
+use App\Traits\ImagesUpload;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
-    use ProductsImagesUpload;
+    use ImagesUpload;
     public function index(ProductsDatatable $datatable)
     {
         return $datatable->render('adminlte.products.index');
@@ -37,6 +40,7 @@ class ProductsController extends Controller
         $categories    = Category::treeJson()->get();
         $manufacturers = Manufacturer::locale()->get();
         $malls         = Mall::locale()->get();
+        $trademarks    = Trademark::locale()->get();
         $treeJson      = [];
         foreach ($categories as $category) {
             if ($category->parent == null) {
@@ -52,52 +56,29 @@ class ProductsController extends Controller
             'colors'        => $colors,
             'manufacturers' => $manufacturers,
             'malls'         => $malls,
+            'trademarks'    => $trademarks,
         ]);
         // TODO: Change all select menus to custom menus.
     }
 
-
-
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-
-        $request->validate([
-            'title_ar'         => 'required|string',
-            'title_en'         => 'required|string',
-            'content'          => 'required',
-            'category_id'      => 'required|exists:categories,id',
-            'trademark_id'     => 'nullable|exists:trademarks,id',
-            'manufacturer_id'  => 'nullable|exists:manufacturers,id',
-            'color_id'         => 'nullable|exists:colors,id',
-            'weight'           => 'nullable|numeric',
-            'weight_id'        => 'nullable|exists:weights,id',
-            'size_id'          => 'nullable|exists:sizes,id',
-            'price'            => 'required|numeric',
-            'stock'            => 'required|integer',
-            'stock_starts_at'  => 'nullable|date',
-            'stock_ends_at'    => 'nullable|date',
-            'offer_price'      => 'nullable|numeric',
-            'offer_starts_at'  => 'nullable|date',
-            'offer_ends_at'    => 'nullable|date',
-            'status'           => 'required|in:accepted,pending,rejected',
-            'rejection_reason' => 'nullable|string',
-        ]);
-
         $product = Product::create($request->all());
         $product->malls()->sync($request->malls);
 
-        $this->upload('images', $product->id);
-        $product->image_id = $product->images()->first()->id;
-        $product->save();
+        $this->upload($product, 'images', 'products');
+        if ($request->hasFile('images')) {
+            $product->image_id = $product->images->first()->id;
+            $product->save();
+        }
 
         return redirect()->route('products.index')
             ->with('success', 'Product was created successfully!');
     }
 
-    public function show($id)
+    public function show($id, $slug)
     {
-        $product = Product::locale()->findOrFail($id);
-
+        $product = Product::locale()->where('id', $id)->where('slug', $slug)->firstOrFail();
         return view('site.products.details')->with('product', $product);
     }
 
@@ -109,6 +90,7 @@ class ProductsController extends Controller
         $categories    = Category::treeJson()->get();
         $manufacturers = Manufacturer::locale()->get();
         $malls         = Mall::locale()->get();
+        $trademarks    = Trademark::locale()->get();
         $treeJson      = [];
         foreach ($categories as $cat) {
             if ($cat->parent == null) {
@@ -134,135 +116,99 @@ class ProductsController extends Controller
             'manufacturers'  => $manufacturers,
             'malls'          => $malls,
             'product'        => $product,
+            'trademarks'     => $trademarks,
             'product_images' => $product->images()->paginate(10),
         ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
+        // Update Using Ajax
         if ($request->ajax()) {
-            $request->validate([
-                'title_ar'         => 'required|string',
-                'title_en'         => 'required|string',
-                'content'          => 'required',
-                'category_id'      => 'required|exists:categories,id',
-                'trademark_id'     => 'nullable|exists:trademarks,id',
-                'manufacturer_id'  => 'nullable|exists:manufacturers,id',
-                'color_id'         => 'nullable|exists:colors,id',
-                'weight'           => 'nullable|numeric',
-                'weight_id'        => 'nullable|exists:weights,id',
-                'size_id'          => 'nullable|exists:sizes,id',
-                'price'            => 'required|numeric',
-                'stock'            => 'required|integer',
-                'stock_starts_at'  => 'nullable|date',
-                'stock_ends_at'    => 'nullable|date',
-                'offer_price'      => 'nullable|numeric',
-                'offer_starts_at'  => 'nullable|date',
-                'offer_ends_at'    => 'nullable|date',
-                'status'           => 'required|in:accepted,pending,rejected',
-                'rejection_reason' => 'nullable|string',
-            ]);
-
-            $product->update($request->all());
-
-            return response()->json([
-                'status'  => 'success',
-                'message' => 'Product Changes were saved successfully',
-            ]);
+            return $this->ajaxUpdate($product, $request);
         }
 
-        $request->validate([
-            'title_ar'         => 'required|string',
-            'title_en'         => 'required|string',
-            'content'          => 'required',
-            'category_id'      => 'required|exists:categories,id',
-            'trademark_id'     => 'nullable|exists:trademarks,id',
-            'manufacturer_id'  => 'nullable|exists:manufacturers,id',
-            'color_id'         => 'nullable|exists:colors,id',
-            'weight'           => 'nullable|numeric',
-            'weight_id'        => 'nullable|exists:weights,id',
-            'size_id'          => 'nullable|exists:sizes,id',
-            'price'            => 'required|numeric',
-            'stock'            => 'required|integer',
-            'stock_starts_at'  => 'nullable|date',
-            'stock_ends_at'    => 'nullable|date',
-            'offer_price'      => 'nullable|numeric',
-            'offer_starts_at'  => 'nullable|date',
-            'offer_ends_at'    => 'nullable|date',
-            'status'           => 'required|in:accepted,pending,rejected',
-            'rejection_reason' => 'nullable|string',
-        ]);
+        if ($request->has('mainImage')) {
+            return $this->mainImage($request->mainImage);
+        }
+
+        if ($request->has('deleteImage')) {
+            return $this->destoryImage($request);
+        }
 
         $product->update($request->all());
 
         $product->malls()->sync($request->malls);
 
-        $this->upload('images', $product->id);
-        $product->image_id == null ? $product->image_id = $product->images()->first()->id : null;
-        $product->save();
+        $this->upload($product, 'images', 'products');
+        if ($request->hasFile('images')) {
+            $product->image_id == null ? $product->image_id = $product->images()->first()->id : null;
+            $product->save();
+        }
 
         return redirect()->route('products.index')
             ->with('success', 'Product was updated successfully!');
     }
 
-
+    public function ajaxUpdate($product, $request)
+    {
+        $product->update($request->all());
+        $this->upload($product, 'images', 'products');
+        if ($request->hasFile('images')) {
+            $product->image_id = $product->images->first()->id;
+            $product->save();
+        }
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Product Changes were saved successfully',
+        ]);
+    }
 
     public function copy($id)
     {
-        $product = Product::findOrFail($id);
-        $copy    = $product->replicate();
+        $product    = Product::findOrFail($id);
+        $copy       = $product->replicate();
+        $copy->slug = $copy->slug . '-copy';
         $copy->save();
         return redirect()->route('products.edit', $copy->id)
             ->with('success', 'Product was copied successfully!');
     }
 
-
-
-    public function mainImage($id, $image_id)
+    public function mainImage($id)
     {
-        $product = Product::findOrFail($id);
-        $image = ProductImage::findOrFail($image_id);
+        $image   = Image::findOrFail($id);
+        $product = Product::findOrFail($image->imageable_id);
 
-        if($image->product_id != $product->id) {
+        if ($image->imageable_id != $product->id) {
             return redirect()->route('products.index')
                 ->withErrors(['message' => 'The image is not attached to the product']);
         }
 
         $product->image_id = $image->id;
         $product->save();
-        return redirect()->route('products.edit', $id)
-            ->with('success', 'Product main image was changed successfully!');
+        return redirect()->route('products.edit', $product->id)
+            ->with('success', 'The Image was changed successfully!!');
     }
 
-
-
-    public function destoryProductImage(Request $request)
+    public function destoryImage($request)
     {
-        if ($request->ajax()) {
-            if($request->has('imageId')) {
-                $image = ProductImage::find($request->imageId);
-                if($image){
-                    // Find Parent Product
-                    $product = Product::find($image->product_id);
+        if ($request->has('deleteImage')) {
+            $image = Image::findOrFail($request->deleteImage);
+            // Find Parent Product
+            $product = Product::findOrFail($image->imageable_id);
 
-                    // Check if the image is the product main image
-                    if($product->image_id == $request->imageId) {
-                        // setting product main image to null
-                        $product->image_id = null;
-                        $product->save();
-                    }
-
-                    $image->delete();
-                    Storage::delete($image->path);
-                    return response()->json(['status' => 'success', 'message' => 'Image was deleted successfully!']);
-                } else {
-                    return response()->json(['status' => 'error', 'message' => 'Image was not found!'], 404);
-                }
+            // Check if the image is the product main image
+            if ($product->image_id == $request->deleteImage) {
+                // setting product main image to null
+                $product->image_id = null;
+                $product->save();
             }
+
+            $image->delete();
+            Storage::delete($image->path);
+            return redirect()->back()->with(['success' => 'Image was deleted successfully!']);
         }
     }
-
-
 
     public function destroy(Product $product)
     {
@@ -296,11 +242,45 @@ class ProductsController extends Controller
         if (!$request->has('products')) {
             return back()->withErrors(['message' => __('admin.products.form.no selection')]);
         }
-
         Product::destroy($request->products);
-
         return redirect()->route('products.index')
             ->with('success', __('admin.products.form.success multiple delete'));
+    }
+
+    public function makeSlug(Request $request)
+    {
+        if ($request->ajax() && $request->has('slug')) {
+            $slug  = Str::slug($request->title);
+            $times = Product::where('slug', 'LIKE', "%$slug%")->count();
+            if ($times > 0) {
+                $slug = $slug . '-' . strval($times + 1);
+            }
+            if ($slug != '') {
+                return response()->json([
+                    'slug'   => $slug,
+                    'status' => 'success',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Please enter a valid title',
+                    'status'  => 'error',
+                ]);
+            }
+
+        }
+    }
+
+    public function shop(Request $request)
+    {
+        if ($request->ajax()) {
+            $products = Product::locale()->latest()->paginate(request('perPage'));
+            return response()->json([
+                'html'             => view('site.products.ajax.products')->with(['products' => $products])->render(),
+                'pagination_links' => $products->links('vendor.pagination.custom')->render(),
+            ]);
+        }
+        $products = Product::locale()->latest()->paginate();
+        return view('site.products.shop')->with('products', $products);
     }
 
 }

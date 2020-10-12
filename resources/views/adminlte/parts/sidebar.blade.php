@@ -41,6 +41,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('orders.index') }}" class="nav-link {{ Route::currentRouteNamed('orders.index', 'orders.create', 'orders.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>{{ __('admin.sidebar.orders') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('manufacturers.index') }}" class="nav-link {{ Route::currentRouteNamed('manufacturers.index', 'manufacturers.create', 'manufacturers.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>{{ __('admin.sidebar.manufacturers') }}</p>

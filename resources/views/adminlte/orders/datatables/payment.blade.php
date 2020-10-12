@@ -1,0 +1,1 @@
+{{ $payment_method == 'cod' ? 'Cash on Delivery' : 'Card' }}

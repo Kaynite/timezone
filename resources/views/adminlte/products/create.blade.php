@@ -38,7 +38,7 @@
                         
                         <li class="nav-item">
                             <a class="nav-link" id="more-info-tab" data-toggle="pill" href="#more-info" role="tab" aria-controls="more-info" aria-selected="false">
-                                <i class="fas fa-truck mr-2"></i>More Info.
+                                <i class="fas fa-file-alt mr-2"></i>More Info.
                             </a>
                         </li>
                     </ul>
@@ -54,7 +54,6 @@
                             @include('adminlte.products.tabs.media')
                             @include('adminlte.products.tabs.shipping')
                             @include('adminlte.products.tabs.more')
-
                         </div>
                     </div>
                     <div class="card-footer text-center">
@@ -82,6 +81,7 @@
     <script src="{{ asset('adminlte/jstree/dist/jstree.min.js') }}"></script>
     <script src="{{ asset('adminlte/dropzone/dropzone.min.js') }}"></script>
     <script src="{{ asset('adminlte/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('adminlte/js/custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
     <script>
         $('#jstree').on('changed.jstree', function (e, data) {
@@ -108,6 +108,46 @@
                 theme: 'bootstrap4'
             })
         });
+
+        $(function () {
+            bsCustomFileInput.init();
+        });
+
+        $('#slug').on('focus', function() {
+            var title = $('#title_en').val();
+            if (title == "") {
+                $('#slug').addClass('is-invalid');
+                $('#slug-error').text('The Product title in English field is empty')
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('products.makeslug') }}",
+                    data: {
+                        slug: 'slug',
+                        title: title,
+                    },
+                    cache: false,
+                    context: this,
+                    success: function(data){
+                        if(data.status == 'success') {
+                            $('#slug').val(data.slug)
+                            $('#slug').removeClass('is-invalid');
+                            $('#slug').addClass('is-valid');
+                            $('#slug-error').text('')
+                        } else {
+                            $('#slug').addClass('is-invalid');
+                            $('#slug-error').text(data.message)
+                        }
+                    },
+                    error: function (error) {
+                        toastr.error(error.responseJSON.message);
+                    }
+                });
+            }
+
+
+        });
+
     </script>
 
 @endsection

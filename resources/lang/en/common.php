@@ -23,4 +23,5 @@ return [
     'public'      => 'Public',
     'private'     => 'Private',
     'category'    => 'Category',
+    'order'       => 'Order',
 ];

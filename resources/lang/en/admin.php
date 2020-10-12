@@ -12,25 +12,26 @@ return [
     ],
 
     'sidebar'       => [
-        'categories'    => 'Categories',
-        'admins'        => 'Admins',
-        'users'         => 'Users',
-        'users types'   => 'Users Types',
-        'countries'     => 'Countries',
-        'cities'        => 'Cities',
-        'states'        => 'States',
-        'trademarks'    => 'Trademarks',
-        'manufacturers' => 'Manufacturers',
-        'shipping'      => 'Shipping',
-        'malls'         => 'Malls',
-        'colors'        => 'Colors',
-        'sizes'         => 'Sizes',
-        'weight'        => 'Weight',
-        'products'      => 'Products',
-        'products_approved'      => 'Approved',
-        'products_pending'      => 'Pending',
-        'products_rejected'      => 'Rejected',
-        'products_trash'      => 'Trash',
+        'categories'        => 'Categories',
+        'admins'            => 'Admins',
+        'users'             => 'Users',
+        'users types'       => 'Users Types',
+        'countries'         => 'Countries',
+        'cities'            => 'Cities',
+        'states'            => 'States',
+        'trademarks'        => 'Trademarks',
+        'manufacturers'     => 'Manufacturers',
+        'shipping'          => 'Shipping',
+        'malls'             => 'Malls',
+        'colors'            => 'Colors',
+        'sizes'             => 'Sizes',
+        'weight'            => 'Weight',
+        'products'          => 'Products',
+        'products_approved' => 'Approved',
+        'products_pending'  => 'Pending',
+        'products_rejected' => 'Rejected',
+        'products_trash'    => 'Trash',
+        'orders'            => 'Orders',
     ],
 
     'admins'        => [
@@ -539,18 +540,18 @@ return [
         ],
     ],
 
-    'products'        => [
+    'products'      => [
         'index title'  => 'Products',
         'create title' => 'Add new product',
         'edit title'   => 'Edit product',
         'delete'       => 'Delete product',
 
         'form'         => [
-            'title_ar'                 => 'Product in Arabic',
-            'title_en'                 => 'Product in English',
+            'title_ar'                => 'Product in Arabic',
+            'title_en'                => 'Product in English',
 
-            'title_ar placeholder'     => 'Enter product in Arabic',
-            'title_en placeholder'     => 'Enter product in English',
+            'title_ar placeholder'    => 'Enter product in Arabic',
+            'title_en placeholder'    => 'Enter product in English',
 
             'success add'             => 'Product was added successfully!',
             'success update'          => 'Product information was updated successfully!',
@@ -560,6 +561,43 @@ return [
         ],
 
         'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected weight units?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete color',
+        ],
+    ],
+
+    'orders'        => [
+        'index title' => 'Orders',
+        'show title'  => 'Order #:id',
+        'edit title'  => 'Edit order',
+        'delete'      => 'Delete order',
+
+        'form'        => [
+            'first_name'              => 'First name',
+            'last_name'               => 'Last name',
+            'payment_method'          => 'Payment method',
+            'total'                   => 'Total cost',
+            'date'                    => 'Date',
+            'address_1'               => 'Address 1',
+            'address_2'               => 'Address 2',
+            'subtotal'                => 'Subtotal',
+            'discount'                => 'Discount',
+            'discount_code'           => 'Discount code',
+            'tax'                     => 'Tax',
+            'state'                   => 'State',
+            'status'                  => 'Status',
+
+            'success add'             => 'Weight unit was added successfully!',
+            'success update'          => 'Order information was updated successfully!',
+            'success delete'          => 'Order was deleted successfully!',
+            'success multiple delete' => 'Selected Orders were deleted successfully!',
+            'no selection'            => 'You didn\'t select any Orders!',
+        ],
+
+        'modal'       => [
             'delete'         => 'Delete',
             'close'          => 'Close',
             'body'           => 'Are you sure you want to delete selected weight units?',

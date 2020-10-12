@@ -17,12 +17,16 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('user_type_id');
             $table->string('password');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('state')->nullable();
+            $table->string('address_1')->nullable();
+            $table->string('address_2')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('cascade');
         });
     }
 

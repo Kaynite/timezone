@@ -65,6 +65,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('weight', 'WeightController');
             Route::post('weight/multipledelete', 'WeightController@multipleDelete')->name('weight.multipleDelete');
 
+            Route::resource('orders', 'OrdersController');
+            Route::post('orders/multipledelete', 'OrdersController@multipleDelete')->name('orders.multipleDelete');
+
             Route::get('products/trash', 'ProductsController@trash')->name('products.trash');
             Route::resource('products', 'ProductsController');
             Route::post('products/multipledelete', 'ProductsController@multipleDelete')->name('products.multipleDelete');

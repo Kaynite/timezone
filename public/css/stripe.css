@@ -1,0 +1,15 @@
+.StripeElement {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px;
+    color: #888;
+    border: 1px solid #e5e5e5;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}

@@ -25,7 +25,7 @@ class CreateMallsTable extends Migration
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->foreignId('country_id')->nullable();
-            $table->foreign('country_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
         });
     }

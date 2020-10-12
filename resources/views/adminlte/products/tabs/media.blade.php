@@ -19,9 +19,31 @@
                     <td>{{ $image->size/1000 }} KB</td>
                     <td class="text-center">
                         @if ($image->id != $product->image_id)
-                        <button type="button" onclick="window.location.href='{{ route('products.mainImage', [$product->id, $image->id]) }}'" class="btn btn-success btn-sm"><i class="fa fa-arrow-up"></i></button>
+                        <button type="submit" name="mainImage" value="{{ $image->id }}" class="btn btn-success btn-sm"><i class="fa fa-arrow-up"></i></button>
                         @endif
-                        <button type="button" class="btn btn-danger btn-sm image-delete-btn" data-id="{{ $image->id }}"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ 'image_' . $image->id }}">
+                           <i class="fas fa-trash"></i>
+                        </button>
+                        <div class="modal fade" id="{{ 'image_' . $image->id }}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete Image</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are You Sure You Want To Delete image {{ $image->original_name }} ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger" name="deleteImage" value="{{ $image->id }}">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                 </tr>
                 @endforeach

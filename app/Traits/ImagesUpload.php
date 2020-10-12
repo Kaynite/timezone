@@ -2,11 +2,11 @@
 
 namespace App\Traits;
 
-use App\Models\ProductImage;
+use App\Models\Image;
 
-trait ProductsImagesUpload
+trait ImagesUpload
 {
-    public function upload($form, $id)
+    public function upload($model, $form, $folder)
     {
         if (request()->hasFile($form)) {
 
@@ -14,17 +14,18 @@ trait ProductsImagesUpload
                 $originalName = $image->getClientOriginalName();
                 $mime         = $image->getClientMimeType();
                 $size         = $image->getSize();
-                $path         = $image->store("products/$id");
+                $path         = $image->store("$folder/$model->id");
 
-                ProductImage::create([
+                Image::create([
+                    'imageable_id'  => $model->id,
+                    'imageable_type'  => get_class($model),
                     'original_name' => $originalName,
                     'path'          => $path,
                     'mime_type'     => $mime,
                     'size'          => $size,
-                    'product_id'    => $id,
                 ]);
             }
-            
+
         }
     }
 }

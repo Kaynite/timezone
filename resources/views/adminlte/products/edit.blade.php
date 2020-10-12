@@ -63,9 +63,9 @@
                     <button type="submit" class="btn btn-success" onclick="event.preventDefault(); document.getElementById('product-form').submit();"><i class="fa fa-save mr-2"></i>Save</button>
                     <button type="button" class="btn btn-info" id="save-continue"><i class="fa fa-save mr-2"></i>Save & Continue</button>
                     {{-- Copy Form --}}
-                    <form action="{{ route('products.copy', $product->id) }}" method="post" id="copy-form" class="d-inline">
+                    <form action="{{ route('products.copy', $product->id) }}" method="post" class="d-inline">
                         @csrf
-                        <button class="btn btn-primary" type="button" onclick="event.preventDefault(); document.getElementById('copy-form').submit();"><i class="fa fa-copy mr-2"></i>Copy</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-copy mr-2"></i>Copy</button>
                     </form>
                     {{-- Delete Form --}}
                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
@@ -82,7 +82,7 @@
 @endsection
 
 @section('title')
-{{ __('admin.products.create title') }}
+{{ __('admin.products.edit title') }}
 @endsection
 
 @section('styles')
@@ -137,50 +137,21 @@
             })
         });
 
-
-        /*
-            let deleteButtons = document.querySelectorAll('.image-delete-btn');
-
-            console.log(deleteButtons);
-            deleteButtons.onclick = function() {
-            }
-        */
-
-        $('.image-delete-btn').on('click', function() {
-
-            $.ajax({
-                type: "POST",
-                url: "{{ route('products.destoryProductImage') }}",
-                data: {
-                    imageId: this.getAttribute('data-id'),
-                    _token: '{{ csrf_token() }}'
-                },
-                cache: false,
-                context: this,
-                success: function(data){
-                    if(data.status == 'success') {
-                        toastr.success(data.message);
-                        $(this).closest('tr').remove();
-                    }
-                },
-                error: function (error) {
-                    toastr.error(error.responseJSON.message);
-                }
-            });
-
-        });
-
         var savec = document.getElementById('save-continue');
+        
         savec.addEventListener('click', function() {
+            var formData = new FormData(document.getElementById('product-form'));
             $.ajax({
-                type: "POST",
                 url: "{{ route('products.update', $product->id) }}",
-                data: $('#product-form').serialize(),
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
                 cache: false,
                 success: function(data){
                     if(data.status == 'success') {
                         toastr.success(data.message);
-                        var formData = new FormData(document.getElementById('product-form'));
+                        
                         for(var pair of formData.entries()) {
                             $('#' + pair[0]).removeClass('is-invalid');
                             $('#' + pair[0] + '_help').text('');

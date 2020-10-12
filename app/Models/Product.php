@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,8 +13,10 @@ class Product extends Model
     protected $fillable = [
         'title_ar',
         'title_en',
+        'slug',
+        'description',
+        'overview',
         'image_id',
-        'content',
         'category_id',
         'trademark_id',
         'manufacturer_id',
@@ -28,9 +31,6 @@ class Product extends Model
         'offer_price',
         'offer_starts_at',
         'offer_ends_at',
-        'other_data',
-        'status',
-        'rejection_reason',
         'price',
     ];
 
@@ -40,8 +40,10 @@ class Product extends Model
         return $q->select(
             'id',
             "title_$lang as title",
+            'slug',
+            'description',
+            'overview',
             'image_id',
-            'content',
             'category_id',
             'trademark_id',
             'manufacturer_id',
@@ -56,9 +58,6 @@ class Product extends Model
             'offer_price',
             'offer_starts_at',
             'offer_ends_at',
-            'other_data',
-            'status',
-            'rejection_reason',
             'price',
         );
     }
@@ -70,12 +69,12 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function mainImage()
     {
-        return $this->belongsTo(ProductImage::class, 'image_id', 'id');
+        return $this->belongsTo(Image::class, 'image_id', 'id');
     }
 
     public function malls()
@@ -91,6 +90,11 @@ class Product extends Model
     public function color()
     {
         return $this->belongsTo(Color::class)->locale();
+    }
+
+    public function trademark()
+    {
+        return $this->belongsTo(Trademark::class)->locale();
     }
 
 }
