@@ -24,12 +24,13 @@ class ProductsDatatable extends DataTable
             ->eloquent($query)
             ->addColumn('action', 'adminlte.products.datatables.action')
             ->addColumn('checkbox', 'adminlte.products.datatables.checkbox')
-            ->rawColumns(['action', 'checkbox']);
+            ->addColumn('stock', 'adminlte.products.datatables.stock')
+            ->rawColumns(['action', 'checkbox', 'stock']);
     }
 
     public function query(Request $request, Product $model)
     {
-        return $model->with(['category' => function($q) { $q->locale(); }])->locale()->latest()->newQuery();
+        return $model->with(['category' => function($q) { $q->locale(); }])->locale()->newQuery();
     }
 
     /**
@@ -45,7 +46,7 @@ class ProductsDatatable extends DataTable
             ->minifiedAjax()
             ->dom('Blfrtip')
             ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All Records']])
-            ->orderBy(1, 'asc')
+            ->orderBy(1, 'desc')
             ->language(self::lang()) // From Static Function lang()
             ->buttons(
                 Button::make('create')
@@ -86,6 +87,8 @@ class ProductsDatatable extends DataTable
                 ->title(__('common.title')),
             Column::make('category.name', 'category.name_'.siteLang())
                 ->title(__('common.category')),
+            Column::computed('stock')
+                ->title(__('admin.admins.table.stock')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)

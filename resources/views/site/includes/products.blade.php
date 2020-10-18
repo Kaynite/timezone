@@ -34,36 +34,18 @@
                                             <div class="compare">
                                                 <a href="#"><span>Compare</span></a>
                                             </div>
-                                            <div class="add-to-cart">
-                                                <a href="#"><span>Add to cart</span></a>
-                                            </div>
+                                            <div class="add-to-cart" onclick="event.preventDefault(); document.getElementById('cart-form-{{ $product->id }}').submit();"><a href="#"><span>Add to cart</span></a></div>
+                                            <form id="cart-form-{{ $product->id }}" action="{{ route('cart.store', $product->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </div>
                                     </div>
 
                                     <div class="caption product-detail text-center">
                                         <div class="rating">
-                                            <span class="fa fa-stack">
-                                                <i class="fa fa-star-o fa-stack-1x"></i>
-                                                <i class="fa fa-star fa-stack-1x"></i>
-                                            </span>
-                                            <span class="fa fa-stack">
-                                                <i class="fa fa-star-o fa-stack-1x"></i>
-                                                <i class="fa fa-star fa-stack-1x"></i>
-                                            </span>
-                                            <span class="fa fa-stack">
-                                                <i class="fa fa-star-o fa-stack-1x"></i>
-                                                <i class="fa fa-star fa-stack-1x"></i>
-                                            </span>
-                                            <span class="fa fa-stack">
-                                                <i class="fa fa-star-o fa-stack-1x"></i>
-                                                <i class="fa fa-star fa-stack-1x"></i>
-                                            </span>
-                                            <span class="fa fa-stack">
-                                                <i class="fa fa-star-o fa-stack-1x"></i>
-                                                <i class="fa fa-star fa-stack-x"></i>
-                                            </span>
-                                        </div>
-                                        <h6 data-name="product_name" class="product-name">
+                                            {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> ', $product->score->stars) !!}
+                                            {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> ', 5 - $product->score->stars) !!}
+                                        </div>                                        <h6 data-name="product_name" class="product-name">
                                             <a href="#" title="Casual Shirt With Ruffle Hem">{{ $product->title }}</a>
                                         </h6>
                                         <span class="price">

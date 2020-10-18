@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
+use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,6 +67,7 @@ class CategoriesController extends Controller
             'name_en'   => 'required|max:225',
             'parent_id' => 'numeric|nullable',
             'image'     => 'image|nullable',
+            'slug'      => 'required|unique:categories,slug|string'
         ]);
 
         if ($request->hasFile('image')) {
@@ -81,6 +85,7 @@ class CategoriesController extends Controller
             'icon'           => $request->icon,
             'image'          => $path ?? '',
             'parent_id'      => $request->parent_id,
+            'slug'           => $request->slug
         ]);
 
         return redirect()->route('categories.index')
@@ -94,11 +99,44 @@ class CategoriesController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id, $slug)
     {
-        $category = Category::findOrFail($id);
+        if ($request->ajax()) {
+            $category = Category::with(['products' => function($q) use($request) {
+                if ($request->has('amount')) {    
+                    if($request->has('amount_min')) {
+                        $q->where('price', '>=', $request->amount_min);
+                    }
+    
+                    if($request->has('amount_max')) {
+                        $q->where('price', '<=', $request->amount_max);
+                    }
+    
+                    if($request->has('colors')) {
+                        foreach($request->colors as $color) {
+                            $q->where('color_id', $color);
+                        }
+                    }
+                }
+            }])->findOrFail($id);
+            return response()->json([
+                'html'             => view('site.products.ajax.products')->with(['products' => $category->products])->render(),
+                'pagination_links' => $category->products()->paginate()->links('vendor.pagination.custom')->render(),
+                'count'            => $category->products->count(),
+            ]);
+        }
+        $category = Category::where('id', $id)->where('slug', $slug)->firstOrFail();
         $products = $category->products()->paginate(20);
-        return view('site.category.category')->with(['category' => $category, 'products' => $products]);
+        $colors   = Color::locale()->withCount('products')->get();
+        $max      = Product::orderBy('price', 'desc')->first()->price;
+        $min      = Product::orderBy('price', 'asc')->first()->price;
+        return view('site.category.category')->with([
+            'category' => $category,
+            'products' => $products,
+            'colors'   => $colors,
+            'maxPrice' => ceil($max),
+            'minPrice' => ceil($min),
+        ]);
     }
 
     /**
@@ -146,6 +184,7 @@ class CategoriesController extends Controller
             'name_en'   => 'required|max:225',
             'parent_id' => 'numeric|nullable',
             'image'     => 'image',
+            'slug'      => 'required|unique:categories,slug|string'
         ]);
 
         if ($request->hasFile('image')) {
@@ -173,6 +212,7 @@ class CategoriesController extends Controller
             'icon'           => $request->icon,
             'image'          => $path ?? $category->image,
             'parent_id'      => $parent_id,
+            'slug'           => $request->slug
         ]);
 
         return redirect()->route('categories.index')
@@ -191,5 +231,28 @@ class CategoriesController extends Controller
 
         return redirect()->route('categories.index')
             ->with('success', __('admin.categories.form.success delete'));
+    }
+
+    public function makeSlug(Request $request)
+    {
+        if ($request->ajax() && $request->has('slug')) {
+            $slug  = Str::slug($request->title);
+            $times = Category::where('slug', 'LIKE', "%$slug%")->count();
+            if ($times > 0) {
+                $slug = $slug . '-' . strval($times + 1);
+            }
+            if ($slug != '') {
+                return response()->json([
+                    'slug'   => $slug,
+                    'status' => 'success',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Please enter a valid title',
+                    'status'  => 'error',
+                ]);
+            }
+
+        }
     }
 }

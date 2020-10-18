@@ -6,7 +6,7 @@
         <ul class="nav  main-navigation collapse in">
             @foreach (getCategories() as $cat)
             <li>
-                <a href="{{ route('category.show', $cat->id) }}">{{ $cat->name }} ({{ $cat->products_count }})</a>
+                <a href="{{ route('category.show', [$cat->id, $cat->slug]) }}">{{ $cat->name }} ({{ $cat->products_count }})</a>
             </li>
             @endforeach
         </ul>

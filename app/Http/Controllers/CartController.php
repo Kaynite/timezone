@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Notifications\NewOrder;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -33,10 +35,7 @@ class CartController extends Controller
     public function store(Request $request, $id)
     {
         $product = Product::locale()->findOrFail($id);
-        Cart::add($product->id, $product->title, $request->quantity, $product->price, [
-            'color' => $request->color,
-            'size'  => $request->size,
-        ])->associate('App\Models\Product');
+        Cart::add($product->id, $product->title, ($request->quantity ?? 1), $product->price)->associate('App\Models\Product');
         return redirect()->route('cart.index')->with(['success' => 'Item was added successfully!']);
     }
 
@@ -75,6 +74,7 @@ class CartController extends Controller
     {
         return view('site.checkout.index')->with([
             'countries' => Country::locale()->get(),
+            'cities'    => City::locale()->get(),
         ]);
     }
 
@@ -93,7 +93,9 @@ class CartController extends Controller
     public function charge(Request $request)
     {
         if ($request->payment_method == 'cod') {
-            $this->makeOrder($request, null);
+            
+
+            Admin::find(1)->notify(new NewOrder($this->makeOrder($request, null)));
 
             Cart::destroy();
 
@@ -177,6 +179,8 @@ class CartController extends Controller
                 'price'      => $item->price,
             ]);
         }
+
+        return $order;
 
     }
 }

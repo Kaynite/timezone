@@ -33,4 +33,15 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot(['quantity']);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class)->locale();
+    }
+
+    
+    public function city()
+    {
+        return $this->belongsTo(City::class)->locale();
+    }
 }

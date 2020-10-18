@@ -28,6 +28,14 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            <label for="slug">{{ __('admin.categories.form.slug')  }}</label>
+                            <input type="text" class="form-control" name="slug" id="slug" placeholder="{{ __('admin.categories.form.slug placeholder') }}" value="{{ old('slug') }}">
+                            @error('slug')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
                         @if ($treeJson != "[]")
                         <div class="form-group">
                             <label for="">{{ __('admin.categories.form.parent category') }}</label>
@@ -129,6 +137,39 @@
             "keep_selected_style": false
         },
         "plugins": ["wholerow"]
+    });
+
+    $('#slug').on('focus', function() {
+        var title = $('#name_en').val();
+        if (title == "") {
+            $('#slug').addClass('is-invalid');
+            $('#slug-error').text('The Product title in English field is empty')
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('categories.makeslug') }}",
+                data: {
+                    slug: 'slug',
+                    title: title,
+                },
+                cache: false,
+                context: this,
+                success: function(data){
+                    if(data.status == 'success') {
+                        $('#slug').val(data.slug)
+                        $('#slug').removeClass('is-invalid');
+                        $('#slug').addClass('is-valid');
+                        $('#slug-error').text('')
+                    } else {
+                        $('#slug').addClass('is-invalid');
+                        $('#slug-error').text(data.message)
+                    }
+                },
+                error: function (error) {
+                    toastr.error(error.responseJSON.message);
+                }
+            });
+        }
     });
 </script>
 @endsection

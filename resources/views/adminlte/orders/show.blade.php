@@ -22,9 +22,28 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">{{ __('common.email') }}</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="{{ __('admin.orders.form.email placeholder') }}" value="{{ $order->email }}" readonly>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="email">{{ __('common.email') }}</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="{{ __('admin.orders.form.email placeholder') }}" value="{{ $order->email }}" readonly>
+                        </div>
+                        
+                        <div class="form-group col-lg-6">
+                            <label for="phone">{{ __('common.phone') }}</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="{{ __('admin.orders.form.phone placeholder') }}" value="{{ $order->phone }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="country">{{ __('admin.orders.form.country') }}</label>
+                            <input type="text" class="form-control" id="country" name="country" placeholder="{{ __('admin.orders.form.country placeholder') }}" value="{{ $order->country->name ?? '' }}" readonly>
+                        </div>
+                        
+                        <div class="form-group col-lg-6">
+                            <label for="city">{{ __('admin.orders.form.city') }}</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="{{ __('admin.orders.form.city placeholder') }}" value="{{ $order->city->name ?? '' }}" readonly>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -40,6 +59,11 @@
                     <div class="form-group">
                         <label for="address_2">{{ __('admin.orders.form.address_2') }}</label>
                         <input type="text" class="form-control" id="address_2" name="address_2" placeholder="{{ __('admin.orders.form.address_2 placeholder') }}" value="{{ $order->address_2 }}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="post_code">{{ __('admin.orders.form.post_code') }}</label>
+                        <input type="text" class="form-control" id="post_code" name="post_code" placeholder="{{ __('admin.orders.form.post_code placeholder') }}" value="{{ $order->post_code }}" readonly>
                     </div>
 
                     @if ($order->discount > 0)
@@ -61,14 +85,26 @@
                         <textarea class="form-control" name="comment" id="comment" rows="3" readonly>{{ $order->comment }}</textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label>Status:</label>
-                        @if ($order->error)
-                        <span class="badge badge-danger">Failed</span>
-                        <input type="text" class="form-control" name="error" placeholder="{{ __('admin.orders.form.error placeholder') }}" value="{{ $order->error }}" readonly>
-                        @else
-                        <span class="badge badge-success">Success</span>
-                        @endif
+                    <div class="row">
+                        
+                        <div class="form-group col-lg-4">
+                            <label>Status:</label>
+                            @if ($order->error)
+                            <span class="badge badge-danger">Failed</span>
+                            <input type="text" class="form-control" name="error" placeholder="{{ __('admin.orders.form.error placeholder') }}" value="{{ $order->error }}" readonly>
+                            @else
+                            <span class="badge badge-success">Success</span>
+                            @endif
+                        </div>
+                        
+                        <div class="form-group col-lg-8 text-right">
+                            <label>Payment Method:</label>
+                            @if ($order->payment_method == 'cod')
+                            <span class="badge badge-primary px-2 py-1"><i class="fas fa-truck fa-fw"></i> Cash On Delivery</span>
+                            @else
+                            <span class="badge badge-primary px-2 py-1"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Card</span>
+                            @endif
+                        </div>
                     </div>
 
                 </div>
@@ -83,7 +119,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -98,7 +134,7 @@
                             <tr>
                                 <?php $totalQuantity +=  $product->pivot->quantity ?>
                                 <td>{{ $product->id }}</td>
-                                <td><a href="{{ route('product.show', $product->id) }}">{{ $product->{ 'title_' . siteLang() } }}</a></td>
+                                <td><a href="{{ route('product.show', [$product->id, $product->slug]) }}">{{ $product->{ 'title_' . siteLang() } }}</a></td>
                                 <td>{{ $product->pivot->quantity }}</td>
                                 <td>{{ $product->price }} LE</td>
                             </tr>

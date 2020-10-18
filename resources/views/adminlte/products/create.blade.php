@@ -144,10 +144,7 @@
                     }
                 });
             }
-
-
         });
-
     </script>
 
 @endsection

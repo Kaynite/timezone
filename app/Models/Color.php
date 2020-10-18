@@ -20,4 +20,8 @@ class Color extends Model
         return $q->select('id', "name_$lang as name", 'color', 'created_at', 'updated_at');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class)->inStock();
+    }
 }

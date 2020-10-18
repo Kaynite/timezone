@@ -8,6 +8,7 @@ Created by: 	Armen
 /* -----  Google Font  -----*/
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 /* -----  ionicons Font  -----*/
 @import url("ionicons.min.css");
@@ -162,6 +163,12 @@ ul {
 }
 .dark {
     color: #000;
+}
+
+#logo-text {
+    font-family: 'Concert One', cursive;
+    font-size: 5rem;
+    color: #fa4251;
 }
 
 /* ----------------------------------------------

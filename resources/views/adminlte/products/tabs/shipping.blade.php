@@ -70,14 +70,14 @@
             </div>
 
             <div class="form-group col-lg-3">
-                <label for="manufacturer_id">Trademark</label>
-                <select class="form-control" name="manufacturer_id" id="manufacturer_id">
+                <label for="trademark_id">Trademark</label>
+                <select class="form-control" name="trademark_id" id="trademark_id">
                     <option value=""></option>
                     @foreach ($trademarks as $trademark)
                     <option value="{{ $trademark->id }}" {{ (old('trademark_id') ?? $product->trademark_id ?? '') == $trademark->id ? 'selected' : null }}>{{ $trademark->name }}</option>
                     @endforeach
                 </select>
-                @error('manufacturer_id')
+                @error('trademark_id')
                 <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
             </div>

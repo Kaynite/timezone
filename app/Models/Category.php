@@ -10,6 +10,7 @@ class Category extends Model
     protected $fillable = [
         'name_ar',
         'name_en',
+        'slug',
         'description_ar',
         'description_en',
         'keywords',
@@ -34,11 +35,11 @@ class Category extends Model
     public function scopeLocale($q)
     {
         $lang = siteLang();
-        return $q->select('id', "name_$lang as name", "description_$lang as description", 'keywords', 'icon', 'image', 'parent_id', 'created_at', 'updated_at');
+        return $q->select('id', "name_$lang as name", "description_$lang as description", 'slug', 'keywords', 'icon', 'image', 'parent_id', 'created_at', 'updated_at');
     }
 
     public function products()
     {
-        return $this->hasMany(Product::class)->locale();
+        return $this->hasMany(Product::class)->inStock()->locale();
     }
 }

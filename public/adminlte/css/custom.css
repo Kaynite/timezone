@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
 body {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
 }
 
 .ltr {
@@ -213,20 +213,20 @@ ul {
 }
 
 
+.breadcrumb {
+    float: left !important;
+}
+
 #navbar-controls {
     margin-right: auto !important;
     margin-left: 0 !important;    
 }
 
-.breadcrumb {
-    float: left !important;
-}
-
-#admindatatable-table_length {
+.dataTables_length {
     float: right;
 }
 
-#admindatatable-table_filter {
+.dataTables_filter {
     float: left;
 }
 

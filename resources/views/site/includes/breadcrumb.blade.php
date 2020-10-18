@@ -7,7 +7,7 @@
                 <a href="{{ route('home') }}">Home</a>
             </li>
             <li>
-                <a href="{{ route('category.show', $product->category->id) }}">{{ $product->category->{'name_'.siteLang()} }}</a>
+                <a href="{{ route('category.show', [$product->category->id, $product->category->slug]) }}">{{ $product->category->{'name_'.siteLang()} }}</a>
             </li>
         </ul>
     </div>
@@ -27,5 +27,4 @@
         </ul>
     </div>
 </div>
-
 @endif

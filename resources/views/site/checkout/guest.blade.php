@@ -573,7 +573,7 @@
                                             @foreach(Cart::content() as $row)
                                             <tr>
                                                 <td class="text-left">
-                                                    <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                                                    <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">{{ $row->name }}</a>
                                                 </td>
                                                 <td class="text-right">{{ $row->qty }}</td>
                                                 <td class="text-right">{{ $row->price }} LE</td>

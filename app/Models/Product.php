@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Image;
+use App\Scopes\InStockScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,34 +33,13 @@ class Product extends Model
         'offer_starts_at',
         'offer_ends_at',
         'price',
+        'views'
     ];
 
     public function scopeLocale($q)
     {
         $lang = siteLang();
-        return $q->select(
-            'id',
-            "title_$lang as title",
-            'slug',
-            'description',
-            'overview',
-            'image_id',
-            'category_id',
-            'trademark_id',
-            'manufacturer_id',
-            'color_id',
-            'weight',
-            'weight_id',
-            'size',
-            'size_id',
-            'stock',
-            'stock_starts_at',
-            'stock_ends_at',
-            'offer_price',
-            'offer_starts_at',
-            'offer_ends_at',
-            'price',
-        );
+        return $q->select('products.*',"title_$lang as title");
     }
 
     public function category()
@@ -97,4 +77,21 @@ class Product extends Model
         return $this->belongsTo(Trademark::class)->locale();
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class)->latest();
+    }
+
+    public function score()
+    {
+        return $this->hasOne(Review::class)
+            ->selectRaw('avg(rating) as avgRating, floor(avg(rating)) as stars')
+            ->groupBy('product_id')
+            ->withDefault(['avgRating' => 0, 'stars' => 0]);
+    }
+
+    public function scopeInStock($q)
+    {
+        return $q->where('stock', '>', '0');
+    }
 }

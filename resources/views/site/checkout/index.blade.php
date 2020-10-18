@@ -407,86 +407,52 @@
                 {{ $message }}
             </div>
             @enderror
-            <form action="" method="post" id="payment-form">
+            <form action="{{ route('checkout') }}" method="post" id="payment-form">
                 @csrf
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default ">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true">Billing & Delivery Details
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">Billing & Delivery Details
                                     <i class="fa fa-caret-down"></i>
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseThree" class="panel-collapse collapse in" aria-expanded="true">
+                        <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
                             <div class="panel-body">
                                 <div class="form-horizontal">
-                                    @if (Auth::user()->address_1)
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" checked="checked" value="existing" name="shipping_address">
-                                            I want to use an existing address
-                                        </label>
-                                    </div>
-                                    <div id="shipping-existing"  style="display: none;">
-                                        <select class="form-control" name="address_id">
-                                            <option selected="selected" value="4">adsasd, Al Hasakah, Syrian Arab Republic</option>
-                                        </select>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" value="new" name="shipping_address"> I want to use a new address
-                                        </label>
-                                    </div>
-                                    <br>
-                                    @endif
                                     <div id="shipping-new">
                                         <div class="form-group required">
-                                            <label for="input-shipping-firstname" class="col-sm-2 control-label">First Name</label>
+                                            <label for="input-first_name" class="col-sm-2 control-label">First Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-firstname" placeholder="First Name" value="" name="firstname">
+                                                <input type="text" class="form-control" id="input-first_name" placeholder="First Name" value="{{ old('first_name') }}" name="first_name" required>
+                                            </div>
+                                            @error('first_name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group required">
+                                            <label for="input-last_name" class="col-sm-2 control-label">Last Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-last_name" placeholder="Last Name" value="{{ old('last_name') }}" name="last_name" required>
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label for="input-shipping-lastname" class="col-sm-2 control-label">Last Name</label>
+                                            <label for="input-email" class="col-sm-2 control-label">E-mail Address</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-lastname" placeholder="Last Name" value="" name="lastname">
+                                                <input type="text" class="form-control" id="input-email" placeholder="E-mail Address" value="{{ old('email') }}" name="email" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="input-phone" class="col-sm-2 control-label">Phone Number</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-phone" placeholder="Company" value="{{ Auth::user()->phone }}" name="phone">
+                                                <input type="text" class="form-control" id="input-phone" placeholder="Phone Number" name="phone" value="{{ old('phone') }}" required>
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label for="input-shipping-address-1" class="col-sm-2 control-label">Address 1</label>
+                                            <label for="input-country" class="col-sm-2 control-label">Country</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-address-1" placeholder="Address 1" value="" name="address_1">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="input-shipping-address-2" class="col-sm-2 control-label">Address 2</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-address-2" placeholder="Address 2" value="" name="address_2">
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label for="input-shipping-city" class="col-sm-2 control-label">City</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-city" placeholder="City" value="" name="city">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="input-shipping-postcode" class="col-sm-2 control-label">Post Code</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="input-shipping-postcode" placeholder="Post Code" value="123456" name="postcode">
-                                            </div>
-                                        </div>
-                                        <div class="form-group required">
-                                            <label for="input-shipping-country" class="col-sm-2 control-label">Country</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" id="input-shipping-country" name="country_id">
+                                                <select class="form-control" id="input-country" name="country_id" required>
                                                     @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                     @endforeach
@@ -494,17 +460,43 @@
                                             </div>
                                         </div>
                                         <div class="form-group required">
-                                            <label for="input-shipping-zone" class="col-sm-2 control-label">Region / State</label>
+                                            <label for="input-city" class="col-sm-2 control-label">City</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="input-shipping-zone" name="zone_id">
-                                                    <option value="3121">Al Hasakah</option>
+                                                <select class="form-control" id="input-city" name="city_id" required>
+                                                    @foreach ($cities as $city)
+                                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                                    @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group required">
+                                            <label for="input-state" class="col-sm-2 control-label">Region / State</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-state" placeholder="Region / State" value="{{ old('state') }}" name="state" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group required">
+                                            <label for="input-address-1" class="col-sm-2 control-label">Address 1</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-address-1" placeholder="Address 1" value="{{ old('address_1') }}" name="address_1" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-address-2" class="col-sm-2 control-label">Address 2</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-address-2" placeholder="Address 2" value="{{ old('address_2') }}" name="address_2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-postcode" class="col-sm-2 control-label">Post Code</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-postcode" placeholder="Post Code" name="post_code" value="{{ old('post_code') }}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="buttons clearfix">
                                         <div class="pull-right">
-                                            <input type="button" class="btn" data-loading-text="Loading..." id="button-shipping-address" value="Continue" data-toggle="collapse" data-parent="#accordion" href="#collapsefour">
+                                            <input type="button" class="btn" value="Continue" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                         </div>
                                     </div>
                                 </div>
@@ -514,12 +506,12 @@
                     <div class="panel panel-default ">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsefive" class="collapsed" aria-expanded="false">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
                                     Payment Method <i class="fa fa-caret-down"></i>
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapsefive" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                             <div class="panel-body">
                                 <p>Please select the preferred payment method to use on this order.</p>
                                 <div class="radio">
@@ -537,11 +529,7 @@
                                         <label for="card-element" style="margin-bottom: 10px">
                                             Credit or debit card
                                         </label>
-                                        <div id="card-element">
-                                            <!-- A Stripe Element will be inserted here. -->
-                                        </div>
-                                    
-                                        <!-- Used to display form errors. -->
+                                        <div id="card-element"></div>
                                         <div id="card-errors" role="alert"></div>
                                     </div>
                                 </div>
@@ -552,8 +540,8 @@
 
                                 <div class="buttons">
                                     <div class="pull-right mt_20">I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a>
-                                        <input type="checkbox" value="1" name="agree"> &nbsp;
-                                        <input type="button" class="btn" data-loading-text="Loading..." id="button-payment-method" value="Continue" data-toggle="collapse" data-parent="#accordion" href="#collapsesix">
+                                        <input type="checkbox" value="1" name="agree" required> &nbsp;
+                                        <input type="button" class="btn" id="button-payment-method" value="Continue" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                                     </div>
                                 </div>
 
@@ -563,12 +551,12 @@
                     <div class="panel panel-default ">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsesix" class="collapsed" aria-expanded="false">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
                                     Confirm Order <i class="fa fa-caret-down"></i>
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapsesix" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                             <div class="panel-body">
                             @if(Cart::count() > 0)
                                 <div class="table-responsive">
@@ -585,7 +573,7 @@
                                             @foreach(Cart::content() as $row)
                                             <tr>
                                                 <td class="text-left">
-                                                    <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                                                    <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">{{ $row->name }}</a>
                                                 </td>
                                                 <td class="text-right">{{ $row->qty }}</td>
                                                 <td class="text-right">{{ $row->price }} LE</td>
@@ -603,21 +591,13 @@
                                                 <td class="text-right">{{ Cart::tax() }} LE</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right" colspan="3"><strong>Total:</strong></td>
-                                                <td class="text-right">{{ Cart::total() }} LE</td>
-                                            </tr>
-                                            {{ Cart::addCost('discount', -10) }}
-                                            @if (Cart::getCost('discount') != 0)
-                                            <tr>
                                                 <td class="text-right" colspan="3"><strong>Discount:</strong></td>
-                                                
                                                 <td class="text-right">{{ Cart::getCost('discount') }} LE</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right" colspan="3"><strong>Total After Discount:</strong></td>
+                                                <td class="text-right" colspan="3"><strong>Total:</strong></td>
                                                 <td class="text-right">{{ Cart::total() }} LE</td>
                                             </tr>
-                                            @endif
                                         </tfoot>
                                     </table>
                                 </div>

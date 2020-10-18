@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ProductsDatatable;
 use App\DataTables\TrashProductsDatatable;
+use App\Events\ProductViews;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Color;
@@ -78,7 +79,11 @@ class ProductsController extends Controller
 
     public function show($id, $slug)
     {
-        $product = Product::locale()->where('id', $id)->where('slug', $slug)->firstOrFail();
+        $product = Product::locale()
+            ->where('id', $id)
+            ->where('slug', $slug)
+            ->firstOrFail();
+        event(new ProductViews($product));
         return view('site.products.details')->with('product', $product);
     }
 
@@ -273,14 +278,51 @@ class ProductsController extends Controller
     public function shop(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::locale()->latest()->paginate(request('perPage'));
+            
+            if ($request->has('amount')) {
+                $p = Product::locale();
+
+                if($request->has('amount_min')) {
+                    $p->where('price', '>=', $request->amount_min);
+                }
+
+                if($request->has('amount_max')) {
+                    $p->where('price', '<=', $request->amount_max);
+                }
+
+                if($request->has('colors')) {
+                    foreach($request->colors as $color) {
+                        $p->where('color_id', $color);
+                    }
+                }
+
+                $products = $p->inStock()->latest()->paginate(24);
+
+                return response()->json([
+                    'html'             => view('site.products.ajax.products')->with(['products' => $products])->render(),
+                    'pagination_links' => $products->links('vendor.pagination.custom')->render(),
+                    'count'            => $products->count(),
+                ]);
+            }
+
+            $products = Product::locale()->inStock()->latest()->paginate(request('perPage'));
             return response()->json([
                 'html'             => view('site.products.ajax.products')->with(['products' => $products])->render(),
                 'pagination_links' => $products->links('vendor.pagination.custom')->render(),
             ]);
         }
-        $products = Product::locale()->latest()->paginate();
-        return view('site.products.shop')->with('products', $products);
+
+        $products = Product::locale()->inStock()->latest()->paginate();
+        $colors   = Color::locale()->withCount('products')->get();
+        $max      = Product::orderBy('price', 'desc')->inStock()->first()->price;
+        $min      = Product::orderBy('price', 'asc')->inStock()->first()->price;
+
+        return view('site.products.shop')->with([
+            'products' => $products,
+            'colors'   => $colors,
+            'maxPrice' => $max,
+            'minPrice' => $min,
+        ]);
     }
 
 }

@@ -26,7 +26,7 @@ class UsersDatatable extends DataTable
 
     public function query(User $model)
     {
-        return $model->with(['type' => function ($q) {$q->locale();}])->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -82,8 +82,6 @@ class UsersDatatable extends DataTable
                 ->title(__('common.username')),
             Column::make('email')
                 ->title(__('common.email')),
-            Column::make('type.name')
-                ->title(__('admin.users.table.type')),
             Column::computed('action')
                 ->title(__('admin.admins.table.action'))
                 ->exportable(false)

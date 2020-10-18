@@ -7,122 +7,39 @@
 
             <div class="blog-contain box">
                 <div class="blog owl-carousel ">
+                    @foreach ($posts as $post)
                     <div class="item">
                         <div class="box-holder">
                             <div class="thumb post-img">
-                                <a href="#">
-                                    <img src="images/blog/blog_img_01.jpg" alt="themini">
+                                <a href="{{ route('post.show', [$post->id, $post->slug]) }}" style="display:block; width: 100%; height: 300px;">
+                                    <img src="{{ Storage::url($post->cover->path ?? '') }}" alt="Post Cover" style="height: 100%; object-fit:cover">
                                 </a>
                                 <div class="date-time text-center">
-                                    <div class="day"> 11</div>
-                                    <div class="month">Aug</div>
+                                    <div class="day">{{ date('d', strtotime($post->created_at)) }}</div>
+                                    <div class="month">{{ date('M', strtotime($post->created_at)) }}</div>
                                 </div>
-                                <div class="post-image-hover"> </div>
-                                <div class="post-info">
+                                <div class="post-image-hover"></div>
+
+                                <div class="post-info" style="display:block; width: 100%">
                                     <h6 class="mb_10 text-uppercase">
-                                        <a href="single_blog.html">Fashions fade, style is eternal</a>
+                                        <a href="{{ route('post.show', [$post->id, $post->slug]) }}">{{ $post->title }}</a>
                                     </h6>
-                                    <p>Aliquam egestas pellentesque est. Etiam a orci Nulla id enim feugiat ligula ullamcorper scelerisque. Morbi eu luctus nisl.</p>
+
+                                    <p>{{ strlen(strip_tags($post->content)) > 100 ? substr(strip_tags($post->content), 0, 100) . ' ...' : strip_tags($post->content) }}</p>
+
                                     <div class="view-blog">
                                         <div class="write-comment pull-left">
-                                            <a href="single_blog.html">0 Comments</a>
+                                            <a href="{{ route('post.show', [$post->id, $post->slug]) }}">0 Comments</a>
                                         </div>
-                                        <div class="read-more pull-right"> <a href="single_blog.html">
-                                            <i class="fa fa-link"></i> read more</a>
+                                        <div class="read-more pull-right"> <a href="{{ route('post.show', [$post->id, $post->slug]) }}">
+                                            <i class="fa fa-link"></i> Read More</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="item">
-                        <div class="box-holder">
-                            <div class="thumb post-img">
-                                <a href="#">
-                                    <img src="images/blog/blog_img_01.jpg" alt="themini">
-                                </a>
-                                <div class="date-time text-center">
-                                    <div class="day"> 11</div>
-                                    <div class="month">Aug</div>
-                                </div>
-                                <div class="post-image-hover"> </div>
-                                <div class="post-info">
-                                    <h6 class="mb_10 text-uppercase">
-                                        <a href="single_blog.html">Fashions fade, style is eternal</a>
-                                    </h6>
-                                    <p>Aliquam egestas pellentesque est. Etiam a orci Nulla id enim feugiat ligula ullamcorper scelerisque. Morbi eu luctus nisl.</p>
-                                    <div class="view-blog">
-                                        <div class="write-comment pull-left">
-                                            <a href="single_blog.html">0 Comments</a>
-                                        </div>
-                                        <div class="read-more pull-right"> <a href="single_blog.html">
-                                            <i class="fa fa-link"></i> read more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="box-holder">
-                            <div class="thumb post-img">
-                                <a href="#">
-                                    <img src="images/blog/blog_img_01.jpg" alt="themini">
-                                </a>
-                                <div class="date-time text-center">
-                                    <div class="day"> 11</div>
-                                    <div class="month">Aug</div>
-                                </div>
-                                <div class="post-image-hover"> </div>
-                                <div class="post-info">
-                                    <h6 class="mb_10 text-uppercase">
-                                        <a href="single_blog.html">Fashions fade, style is eternal</a>
-                                    </h6>
-                                    <p>Aliquam egestas pellentesque est. Etiam a orci Nulla id enim feugiat ligula ullamcorper scelerisque. Morbi eu luctus nisl.</p>
-                                    <div class="view-blog">
-                                        <div class="write-comment pull-left">
-                                            <a href="single_blog.html">0 Comments</a>
-                                        </div>
-                                        <div class="read-more pull-right"> <a href="single_blog.html">
-                                            <i class="fa fa-link"></i> read more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="box-holder">
-                            <div class="thumb post-img">
-                                <a href="#">
-                                    <img src="images/blog/blog_img_01.jpg" alt="themini">
-                                </a>
-                                <div class="date-time text-center">
-                                    <div class="day"> 11</div>
-                                    <div class="month">Aug</div>
-                                </div>
-                                <div class="post-image-hover"> </div>
-                                <div class="post-info">
-                                    <h6 class="mb_10 text-uppercase">
-                                        <a href="single_blog.html">Fashions fade, style is eternal</a>
-                                    </h6>
-                                    <p>Aliquam egestas pellentesque est. Etiam a orci Nulla id enim feugiat ligula ullamcorper scelerisque. Morbi eu luctus nisl.</p>
-                                    <div class="view-blog">
-                                        <div class="write-comment pull-left">
-                                            <a href="single_blog.html">0 Comments</a>
-                                        </div>
-                                        <div class="read-more pull-right"> <a href="single_blog.html">
-                                            <i class="fa fa-link"></i> read more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>

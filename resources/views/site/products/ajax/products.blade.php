@@ -3,7 +3,7 @@
     <div class="item">
         <div class="product-thumb clearfix mb_30">
             <div class="image product-imageblock">
-                <a href="{{ route('product.show', $product->id) }}">
+                <a href="{{ route('product.show', [$product->id, $product->slug]) }}">
                     <img data-name="product_image" src="{{ Storage::url($product->mainImage->path) }}" alt="iPod Classic" title="iPod Classic" class="img-responsive" />
                 </a>
                 <div class="button-group text-center">
@@ -19,7 +19,7 @@
             
             <div class="caption product-detail text-center">
                 <h6 data-name="product_name" class="product-name mt_20">
-                    <a href="{{ route('product.show', $product->id) }}">{{ $product->title }}</a>
+                    <a href="{{ route('product.show',  [$product->id, $product->slug]) }}">{{ $product->title }}</a>
                 </h6>
                 <div class="rating">
                     <span class="fa fa-stack">

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ siteLang() }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     
@@ -56,6 +57,7 @@
                         </div>
                     @enderror
                     @yield('content')
+                    
                 </div>
             </div>
         </div>
@@ -65,6 +67,25 @@
     <script src="{{ asset('adminlte/js/jquery.min.js') }}"></script>
     <script src="{{ asset('adminlte/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        Echo.channel('notification')
+            .listen('Notify', (e) => {
+                var el = document.getElementById('notification-count'),
+                count = el.getAttribute('data-count');
+                let no = parseInt(count) + 1;
+                el.setAttribute('data-count', no)
+                el.textContent = no;
+
+                $(document).Toasts('create', {
+                    class: 'bg-success m-2',
+                    title: 'New Order',
+                    position: 'bottomRight',
+                    body: `A new order was placed See it form <a href="${e.data}" style="color: white; text-decoration: underline">here</a>`
+                })
+
+            });
+    </script> --}}
     @yield('scripts')
     @stack('vScripts')
 </body>

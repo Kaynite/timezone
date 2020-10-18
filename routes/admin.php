@@ -23,7 +23,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         Route::group(['middleware' => 'admin:admin'], function () {
 
-            Route::view('/', 'adminlte.page')->name('admin.home');
+            Route::get('/', 'HomeController@dashboard')->name('admin.home');
 
             Route::resource('admins', 'AdminController');
             Route::post('admins/multipledelete', 'AdminController@multipleDelete')->name('admins.multipleDelete');
@@ -68,15 +68,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::resource('orders', 'OrdersController');
             Route::post('orders/multipledelete', 'OrdersController@multipleDelete')->name('orders.multipleDelete');
 
+            Route::post('posts/uploadImages', 'PostsController@imagesUpload')->name('posts.uploadImages');
+            Route::resource('posts', 'postsController');
+            Route::post('posts/multipledelete', 'PostsController@multipleDelete')->name('posts.multipleDelete');
+
             Route::get('products/trash', 'ProductsController@trash')->name('products.trash');
             Route::resource('products', 'ProductsController');
             Route::post('products/multipledelete', 'ProductsController@multipleDelete')->name('products.multipleDelete');
             Route::post('products/{id}/copy', 'ProductsController@copy')->name('products.copy');
             Route::post('products/{id}/restore', 'ProductsController@restore')->name('products.restore');
             Route::post('products/{id}/force-delete', 'ProductsController@forceDelete')->name('products.forceDelete');
-            Route::get('products/{id}/main-image/{image_id}', 'ProductsController@mainImage')->name('products.mainImage');
-            Route::post('products-images/destory', 'ProductsController@destoryProductImage')->name('products.destoryProductImage');
-            
+
             /*
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/', 'ProductsController@approved')->name('products.index');
@@ -86,8 +88,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
                 Route::get('{id}/edit', 'ProductsController@edit')->name('products.edit');
             });
             */
-
-            Route::resource('userstypes', 'UsersTypesController');
+            // Route::resource('userstypes', 'UsersTypesController');
 
             // Settings Routes
             Route::get('settings', 'SettingsController@settings')->name('admin.settings');

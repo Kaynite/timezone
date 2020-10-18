@@ -439,12 +439,12 @@
                         @foreach(Cart::content() as $row)
                         <tr>
                             <td class="text-center">
-                                <a href="{{ route('product.show', $row->model->id) }}">
+                                <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">
                                     <img src="{{ Storage::url($row->model->mainImage->path ?? '') }}" alt="{{ $row->model->{'title_' . sitelang()} }}" style="max-width: 150px;">
                                 </a>
                             </td>
                             <td class="text-left">
-                                <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                                <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">{{ $row->name }}</a>
                             </td>
                             <td class="text-left">
                                 <form action="{{ route('cart.update', $row->rowId) }}" method="post">

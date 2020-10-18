@@ -41,9 +41,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('orders.index') }}" class="nav-link {{ Route::currentRouteNamed('orders.index', 'orders.create', 'orders.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-file-alt"></i>
+                    <a href="{{ route('orders.index') }}" class="nav-link {{ Route::currentRouteNamed('orders.index', 'orders.create', 'orders.edit', 'orders.show') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-receipt"></i>
                         <p>{{ __('admin.sidebar.orders') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>{{ __('admin.sidebar.categories') }}</p>
                     </a>
                 </li>
 
@@ -51,13 +58,6 @@
                     <a href="{{ route('manufacturers.index') }}" class="nav-link {{ Route::currentRouteNamed('manufacturers.index', 'manufacturers.create', 'manufacturers.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>{{ __('admin.sidebar.manufacturers') }}</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('shipping.index') }}" class="nav-link {{ Route::currentRouteNamed('shipping.index', 'shipping.create', 'shipping.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-truck"></i>
-                        <p>{{ __('admin.sidebar.shipping') }}</p>
                     </a>
                 </li>
 
@@ -86,13 +86,6 @@
                     <a href="{{ route('weight.index') }}" class="nav-link {{ Route::currentRouteNamed('weight.index', 'weight.create', 'weight.edit') ? 'active' : null }}">
                         <i class="nav-icon fas fa-weight"></i>
                         <p>{{ __('admin.sidebar.weight') }}</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('categories.index') }}" class="nav-link {{ Route::currentRouteNamed('categories.index', 'categories.create', 'categories.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>{{ __('admin.sidebar.categories') }}</p>
                     </a>
                 </li>
 
@@ -135,30 +128,18 @@
                     </ul>
                 </li>
 
-                <li class="nav-item {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'menu-open' : null }}">
-                    <a href="#" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit', 'userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            {{ __('admin.sidebar.users') }}
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                <li class="nav-item">
+                    <a href="{{ route('posts.index') }}" class="nav-link {{ Route::currentRouteNamed('posts.index', 'posts.create', 'posts.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>{{ __('admin.sidebar.posts') }}</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit') ? 'active' : null }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>{{ __('admin.sidebar.users') }}</p>
-                            </a>
-                        </li>
+                </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('userstypes.index') }}" class="nav-link {{ Route::currentRouteNamed('userstypes.index', 'userstypes.create', 'userstypes.edit') ? 'active' : null }}">
-                                <i class="nav-icon fas fa-user-shield"></i>
-                                <p>{{ __('admin.sidebar.users types') }}</p>
-                            </a>
-                        </li>
-
-                    </ul>
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link {{ Route::currentRouteNamed('users.index', 'users.create', 'users.edit') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>{{ __('admin.sidebar.users') }}</p>
+                    </a>
                 </li>
 
                 <li class="nav-item">

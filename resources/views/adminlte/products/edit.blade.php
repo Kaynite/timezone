@@ -172,6 +172,42 @@
         $(function () {
             bsCustomFileInput.init();
         });
+
+        $('#slug').on('focus', function() {
+            var title = $('#title_en').val();
+            if (title == "") {
+                $('#slug').addClass('is-invalid');
+                $('#slug-error').text('The Product title in English field is empty')
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('products.makeslug') }}",
+                    data: {
+                        slug: 'slug',
+                        title: title,
+                    },
+                    cache: false,
+                    context: this,
+                    success: function(data){
+                        if(data.status == 'success') {
+                            $('#slug').val(data.slug)
+                            $('#slug').removeClass('is-invalid');
+                            $('#slug').addClass('is-valid');
+                            $('#slug-error').text('')
+                        } else {
+                            $('#slug').addClass('is-invalid');
+                            $('#slug-error').text(data.message)
+                        }
+                    },
+                    error: function (error) {
+                        toastr.error(error.responseJSON.message);
+                    }
+                });
+            }
+
+
+        });
+
     </script>
 
 @endsection

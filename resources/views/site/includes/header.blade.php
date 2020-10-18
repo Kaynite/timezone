@@ -84,12 +84,12 @@
                                             @foreach (Cart::content() as $row)
                                             <tr>
                                                 <td class="text-center">
-                                                    <a href="{{ route('product.show', $row->model->id) }}">
+                                                    <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">
                                                         <img src="{{ Storage::url($row->model->mainImage->path ?? '') }}" alt="{{ $row->name }}" title="{{ $row->name }}">
                                                     </a>
                                                 </td>
                                                 <td class="text-left product-name">
-                                                    <a href="{{ route('product.show', $row->model->id) }}">{{ $row->name }}</a>
+                                                    <a href="{{ route('product.show', [$row->model->id, $row->model->slug]) }}">{{ $row->name }}</a>
                                                     <span class="text-left price"> {{ $row->price }} LE</span>
                                                     <input class="cart-qty" name="product_quantity" min="1" value="{{ $row->qty }}" type="number">
                                                 </td>
@@ -222,16 +222,7 @@
                             </ul>
                         </li>
                         <li> <a href="{{ route('shop') }}">Shop</a></li>
-                        <li> <a href="blog_page.html">Blog</a></li>
-                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li> <a href="cart_page.html">Cart</a></li>
-                                <li> <a href="checkout_page.html">Checkout</a></li>
-                                <li> <a href="product_detail_page.html">Product Detail Page</a></li>
-                                <li> <a href="single_blog.html">Single Post</a></li>
-                            </ul>
-                        </li>
+                        <li> <a href="{{ route('blog') }}">Blog</a></li>
                         <li> <a href="about.html">About us</a></li>
                         <li> <a href="contact_us.html">Contact us</a></li>
                     </ul>

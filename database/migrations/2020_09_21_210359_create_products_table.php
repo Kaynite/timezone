@@ -45,6 +45,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('size_id')->nullable();
             $table->foreign('size_id')->references('id')->on('sizes')->onUpdate('cascade')->onDelete('set null');
 
+            $table->decimal('price')->default(0);
             $table->integer('stock')->default(0);
             $table->date('stock_starts_at')->nullable();
             $table->date('stock_ends_at')->nullable();
@@ -53,7 +54,7 @@ class CreateProductsTable extends Migration
             $table->date('offer_starts_at')->nullable();
             $table->date('offer_ends_at')->nullable();
 
-            $table->decimal('price')->default(0);
+            $table->bigInteger('views')->default(0);
             
             $table->softDeletes();
 
