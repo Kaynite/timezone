@@ -29,7 +29,7 @@
 
                                     <div class="view-blog">
                                         <div class="write-comment pull-left">
-                                            <a href="{{ route('post.show', [$post->id, $post->slug]) }}">0 Comments</a>
+                                            <a href="{{ route('post.show', [$post->id, $post->slug]) }}">{{ $post->comments_count }} Comments</a>
                                         </div>
                                         <div class="read-more pull-right"> <a href="{{ route('post.show', [$post->id, $post->slug]) }}">
                                             <i class="fa fa-link"></i> Read More</a>

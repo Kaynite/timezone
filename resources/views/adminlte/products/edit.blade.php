@@ -173,11 +173,12 @@
             bsCustomFileInput.init();
         });
 
-        $('#slug').on('focus', function() {
-            var title = $('#title_en').val();
+        $('.make-slug').on('click', function() {
+            var lang = $(this).val();
+            var title = $(`#title_${lang}`).val();
             if (title == "") {
                 $('#slug').addClass('is-invalid');
-                $('#slug-error').text('The Product title in English field is empty')
+                $('#slug-error').text('The Product title field is empty')
             } else {
                 $.ajax({
                     type: "GET",
@@ -185,6 +186,7 @@
                     data: {
                         slug: 'slug',
                         title: title,
+                        lang: lang
                     },
                     cache: false,
                     context: this,
@@ -204,8 +206,6 @@
                     }
                 });
             }
-
-
         });
 
     </script>

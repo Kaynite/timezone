@@ -80,11 +80,11 @@ class WeightDatatable extends DataTable
                 ->addClass('text-center'),
             Column::make('id')
                 ->width(50)
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::make('unit', 'unit_'.siteLang())
                 ->title(__('common.title')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

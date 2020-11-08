@@ -14,13 +14,17 @@ class Manufacturer extends Model
         'phone',
         'facebook',
         'twitter',
-        'logo',
         'created_at',
         'updated_at',
     ];
 
     public function scopeLocale($q)
     {
-        return $q->select('id', 'name_' . siteLang() . ' as name', 'website', 'email', 'phone', 'facebook', 'twitter', 'logo', 'created_at', 'updated_at');
+        return $q->select('id', 'name_' . siteLang() . ' as name', 'website', 'email', 'phone', 'facebook', 'twitter', 'created_at', 'updated_at');
+    }
+
+    public function logo()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

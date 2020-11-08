@@ -1,0 +1,1 @@
+<input type="checkbox" name="comments[]" class="table-row-checkbox" value="{{ $id }}">

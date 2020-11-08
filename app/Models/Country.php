@@ -11,13 +11,17 @@ class Country extends Model
         'name_en',
         'mob',
         'code',
-        'logo',
         'created_at',
         'updated_at'
     ];
 
     public function scopeLocale($q)
     {
-        return $q->select('id', 'name_' . siteLang() . ' as name', 'mob', 'code', 'logo', 'created_at', 'updated_at');
+        return $q->select('id', 'name_' . siteLang() . ' as name', 'mob', 'code', 'created_at', 'updated_at');
+    }
+
+    public function flag()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

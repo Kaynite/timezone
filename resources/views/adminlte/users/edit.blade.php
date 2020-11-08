@@ -14,27 +14,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="username">{{ __('common.username') }}</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="{{ __('admin.admins.form.username placeholder') }}" value="{{ $user->username }}" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="{{ __('admin.forms.username placeholder') }}" value="{{ $user->username }}" required>
                             @error('username')
                             <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="email">{{ __('common.email') }}</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('admin.admins.form.email placeholder') }}" value="{{ $user->email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('admin.forms.email placeholder') }}" value="{{ $user->email }}" required>
                             @error('email')
-                            <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="user_type_id">{{ __('admin.users.form.user type') }}</label>
-                            <select name="user_type_id" class="form-control" required>
-                                @foreach ($types as $type)
-                                    <option value="{{ $type->id }}" {{ $user->type->id == $type->id ? 'selected' : null }}>{{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('user_type_id')
                             <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>

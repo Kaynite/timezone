@@ -5,8 +5,8 @@
         <div class="col-lg-12">
             <div class="card">
 
-                <div class="card-header">
-                    {{ __('admin.posts.create.title') }}
+                <div class="card-header bg-primary">
+                    {{ __('admin.posts.create title') }}
                 </div>
                 <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -54,7 +54,7 @@
 @endsection
 
 @section('title')
-{{ __('admin.posts.create.title') }}
+{{ __('admin.posts.create title') }}
 @endsection
 
 @section('styles')
@@ -68,6 +68,45 @@
         bsCustomFileInput.init();
     });
 </script>
+
+
+<script>
+
+$('#slug').on('focus', function() {
+    var title = $('#title').val();
+    if (title == "") {
+        $('#slug').addClass('is-invalid');
+        $('#slug-error').text('The Product title field is empty')
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('posts.makeslug') }}",
+            data: {
+                slug: 'slug',
+                title: title
+            },
+            cache: false,
+            context: this,
+            success: function(data){
+                if(data.status == 'success') {
+                    $('#slug').val(data.slug)
+                    $('#slug').removeClass('is-invalid');
+                    $('#slug').addClass('is-valid');
+                    $('#slug-error').text('')
+                } else {
+                    $('#slug').addClass('is-invalid');
+                    $('#slug-error').text(data.message)
+                }
+            },
+            error: function (error) {
+                toastr.error(error.responseJSON.message);
+            }
+        });
+    }
+});
+
+</script>
+
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 <script type="text/javascript">
@@ -76,4 +115,5 @@
         filebrowserUploadMethod: 'form'
     });
 </script>
+
 @endsection

@@ -49,9 +49,9 @@
 						</div>
 					</div> --}}
 					<div id="comments" class="comments-area mt_50">
-						<h3 class="comment-title">3 comments</h3>
+						<h3 class="comment-title">{{ $post->comments_count }} comments</h3>
 						<ul class="comment-list mt_30">
-							<li class="comment">
+							{{-- <li class="comment">
 								<hr>
 								<article class="comment-body mtb_20">
 									<div class="comment-avatar"> <img alt="" src="images/user2.jpg"> </div>
@@ -83,41 +83,53 @@
 										</article>
 									</li>
 								</ol>
-							</li>
+							</li> --}}
+							@foreach ($post->comments as $comment)
 							<li class="comment">
 								<hr>
 								<article class="comment-body mtb_20">
-									<div class="comment-avatar"> <img alt="" src="images/user1.jpg"> </div>
+									<div class="comment-avatar"><img alt="" src="{{ asset('images/user1.jpg') }}"></div>
 									<div class="comment-main">
-										<h5 class="author-name"> <a href="#" class="comment-name">Sradle Vivamus </a>
-											<small class="comment-date">8 days ago</small> </h5>
-										<div class="comment-reply pull-right"> <a href="#"><i class="fa fa-reply"
-													aria-hidden="true"></i> Reply</a> </div>
-										<div class="comment-content mt_10">Vivamus imperdiet ex sed lobortis luctus.
-											Aenean posuere nulla in turpis porttitor laoreet. Quisque finibus aliquet
-											purus. Ut et mi eu ante interdum dignissim pellentesque a mi.</div>
+										<h5 class="author-name">
+											<p class="comment-name">{{ $comment->name }}</p>
+											<small class="comment-date">{{ $comment->created_at->diffForHumans() }}</small>
+										</h5>
+										<div class="comment-reply pull-right">
+											{{-- <a href="#"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a> --}}
+										</div>
+										<div class="comment-content mt_10">{{ $comment->message }}</div>
 									</div>
 								</article>
 							</li>
+							@endforeach
 						</ul>
+
 						<div class="leave-form">
 							<h3 class="comment-title mt_50 mb_30" id="reply-title">Leave A Comment</h3>
 							<!-- Comment Form -->
 							<div class="form-style" id="contact_form">
 								<div id="contact_results"></div>
 								<div class="row">
-									<form id="contact_body" method="post">
+									<form id="contact_body" method="post" action="{{ route('comments.store') }}">
+										@csrf
+										<input type="hidden" name="post_id" value="{{ $post->id }}">
 										<div class="col-sm-6">
-											<input class="full-with-form" type="text" name="name" placeholder="Name"
-												data-required="true">
+											<input class="full-with-form" type="text" name="name" placeholder="Name">
+											@error('name')
+												<small class="text-danger">{{ $message }}</small>
+											@enderror
 										</div>
 										<div class="col-sm-6">
-											<input class="full-with-form" type="email" name="email"
-												placeholder="Email Address" data-required="true">
+											<input class="full-with-form" type="email" name="email" placeholder="Email Address">
+											@error('email')
+												<small class="text-danger">{{ $message }}</small>
+											@enderror
 										</div>
 										<div class="col-sm-12 mt_30">
-											<textarea class="full-with-form" name="message" placeholder="Message"
-												data-required="true"></textarea>
+											<textarea class="full-with-form" name="message" placeholder="Message"></textarea>
+											@error('message')
+												<small class="text-danger">{{ $message }}</small>
+											@enderror
 										</div>
 										<div class="col-sm-6">
 											<button class="btn mt_30" type="submit">Leave Comment</button>

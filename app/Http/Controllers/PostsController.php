@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Image;
+use Illuminate\Support\Str;
 use App\Traits\ImagesUpload;
 use Illuminate\Http\Request;
 use App\DataTables\PostsDatatable;
@@ -60,7 +61,11 @@ class PostsController extends Controller
      */
     public function show($id, $slug)
     {
-        $post = Post::where('id', $id)->where('slug', $slug)->firstOrFail();
+        $post = Post::where('id', $id)
+            ->where('slug', $slug)
+            ->with('comments')
+            ->withCount('comments')
+            ->firstOrFail();
         return view('site.blog.post')->with('post', $post);
     }
 
@@ -90,7 +95,7 @@ class PostsController extends Controller
             'title'   => 'string|required',
             'content' => 'string|required',
             'slug'    => 'string|required',
-            'image'   => 'image|required',
+            'image'   => 'image|sometimes',
         ]);
         $post->update($request->all());
 
@@ -161,6 +166,29 @@ class PostsController extends Controller
                 @header('Content-type: text/html; charset=utf-8');
                 echo $response;
             }
+        }
+    }
+
+    public function makeSlug(Request $request)
+    {
+        if ($request->ajax() && $request->has('slug')) {
+            $slug  = Str::slug($request->title);
+            $times = Post::where('slug', 'LIKE', "%$slug%")->count();
+            if ($times > 0) {
+                $slug = $slug . '-' . strval($times + 1);
+            }
+            if ($slug != '') {
+                return response()->json([
+                    'slug'   => $slug,
+                    'status' => 'success',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Please enter a valid title',
+                    'status'  => 'error',
+                ]);
+            }
+
         }
     }
 }

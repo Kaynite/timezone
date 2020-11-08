@@ -32,117 +32,53 @@ return [
         'products_rejected' => 'Rejected',
         'products_trash'    => 'Trash',
         'orders'            => 'Orders',
+        'blog'              => 'Blog',
+        'posts'             => 'Posts',
+        'comments'          => 'Comments',
+        'settings' => 'Settings'
+    ],
+
+    'forms'         => [
+        'username placeholder' => 'Enter Username',
+        'password placeholder' => 'Enter Password',
+        'email placeholder'    => 'Enter Email Address',
     ],
 
     'admins'        => [
+        'index title'             => 'Admins',
+        'create title'            => 'Add New Admin',
+        'edit title'              => 'Edit Admin Information',
 
-        'index'  => [
-            'title' => 'Admins',
-        ],
+        'success add'             => 'Admin was added successfully!',
+        'success update'          => 'Admin information was updated successfully!',
+        'success delete'          => 'Admin was deleted successfully!',
+        'success multiple delete' => 'Selected Admins were deleted successfully!',
+        'no selection'            => 'You didn\'t select any admins!',
+        'admin no delete'         => 'You can\'t delete yourself as an admin!',
 
-        'create' => [
-            'title' => 'Add New Admin',
-        ],
+        'modal title'             => 'Delete admin',
+        'modal body'              => 'Are you sure you want to delete selected admin(s) ?',
+        'modal body with name'    => 'Are you sure you want to delete :name ?',
 
-        'edit'   => [
-            'title' => 'Edit Admin Information',
-        ],
-
-        'form'   => [
-            'username placeholder'    => 'Enter Username',
-            'password placeholder'    => 'Enter Password',
-            'email placeholder'       => 'Enter Email Address',
-            'success add'             => 'Admin was added successfully!',
-            'success update'          => 'Admin information was updated successfully!',
-            'success delete'          => 'Admin was deleted successfully!',
-            'success multiple delete' => 'Selected Admins were deleted successfully!',
-            'no selection'            => 'You didn\'t select any admins!',
-            'admin no delete'         => 'You can\'t delete yourself as an admin!',
-
-        ],
-
-        'modal'  => [
-            'delete'         => 'Delete',
-            'close'          => 'Close',
-            'body'           => 'Are you sure you want to delete selected admin(s) ?',
-            'body with name' => 'Are you sure you want to delete :username ?',
-            'title'          => 'Delete admin',
-        ],
-
-        'table'  => [
-            'id'       => '#',
-            'username' => 'Username',
-            'email'    => 'Email Address',
-            'action'   => 'Actions',
-        ],
     ],
 
     'users'         => [
+        'index title'             => 'Users',
+        'create title'            => 'Add New User',
+        'edit title'              => 'Edit User',
 
-        'index title'  => 'Users',
-        'create title' => 'Add New User',
-        'edit title'   => 'Edit User',
+        'success add'             => 'User was added successfully!',
+        'success update'          => 'User information was updated successfully!',
+        'success delete'          => 'User was deleted successfully!',
+        'success multiple delete' => 'Selected Users were deleted successfully!',
+        'no selection'            => 'You didn\'t select any users!',
 
-        'form'         => [
-            'username placeholder'    => 'Enter Username',
-            'password placeholder'    => 'Enter Password',
-            'email placeholder'       => 'Enter Email Address',
-            'select placeholder'      => 'Select user type',
-            'success add'             => 'User was added successfully!',
-            'success update'          => 'User information was updated successfully!',
-            'success delete'          => 'User was deleted successfully!',
-            'success multiple delete' => 'Selected Users were deleted successfully!',
-            'no selection'            => 'You didn\'t select any users!',
-            'user type'               => 'User Type',
-        ],
-
-        'modal'        => [
-            'body'           => 'Are you sure you want to delete selected user(s) ?',
-            'body with name' => 'Are you sure you want to delete :username ?',
-            'title'          => 'Delete user',
-        ],
-
-        'table'        => [
-            'id'     => '#',
-            'action' => 'Actions',
-            'type'   => 'User Type',
-        ],
-    ],
-
-    'userstypes'    => [
-
-        'index title'  => 'Users Types',
-        'create title' => 'Add New Users Type',
-        'edit title'   => 'Edit Users Type',
-
-        'form'         => [
-            'name_en'                 => 'Name in English',
-            'name_en placeholder'     => 'Enter Name in English',
-            'name_ar'                 => 'Name in Arabic',
-            'name_ar placeholder'     => 'Enter Name in Arabic',
-            'success add'             => 'Users type was added successfully!',
-            'success update'          => 'Users type was updated successfully!',
-            'success delete'          => 'Users type was deleted successfully!',
-            'success multiple delete' => 'Selected Users Type were deleted successfully!',
-            'no selection'            => 'You didn\'t select any users!',
-        ],
-
-        'modal'        => [
-            'body'           => 'Are you sure you want to delete users type ?',
-            'body with name' => 'Are you sure you want to delete users type :type ?',
-            'body note'      => 'Deleting this users type will delete all its users',
-            'title'          => 'Delete users type',
-        ],
-
-        'table'        => [
-            'id'     => '#',
-            'action' => 'Actions',
-            'type'   => 'User Type',
-        ],
+        'modal body'              => 'Are you sure you want to delete selected user(s) ?',
+        'modal body with name'    => 'Are you sure you want to delete :name ?',
+        'modal title'             => 'Delete User',
     ],
 
     'countries'     => [
-
         'index title'  => 'Countries',
         'create title' => 'Add new country',
         'edit title'   => 'Edit Country',
@@ -541,17 +477,45 @@ return [
     ],
 
     'products'      => [
-        'index title'  => 'Products',
-        'create title' => 'Add new product',
-        'edit title'   => 'Edit product',
-        'delete'       => 'Delete product',
+        'index title'          => 'Products',
+        'create title'         => 'Add new product',
+        'edit title'           => 'Edit product',
+        'delete'               => 'Delete product',
 
-        'form'         => [
-            'title_ar'                => 'Product in Arabic',
-            'title_en'                => 'Product in English',
+        'title_ar'             => 'Product title in Arabic',
+        'title_en'             => 'Product title in English',
+        'slug'                 => 'Product slug',
+        'slug ar'              => 'Make Arabic Slug',
+        'slug en'              => 'Make English Slug',
+        'description'          => 'Description',
+        'overview'             => 'Overview',
+        'price'                => 'Price',
+        'stock'                => 'Stock',
+        'starts at'            => 'Starts at',
+        'ends at'              => 'Ends at',
+        'offer price'          => 'Offer Price',
+        'offer starts at'      => 'Offer Starts at',
+        'offer ends at'        => 'Offer Ends at',
+        'images'               => 'Product Image',
+        'color'                => 'Color',
+        'manufacturer'         => 'Manufacturer',
+        'trademark'            => 'Trademark',
+        'malls'                => 'Malls',
+        'weight'               => 'Weight',
+        'dimensions'           => 'Dimensions',
 
-            'title_ar placeholder'    => 'Enter product in Arabic',
-            'title_en placeholder'    => 'Enter product in English',
+        'title_ar placeholder' => 'Enter product title in Arabic',
+        'title_en placeholder' => 'Enter product title in English',
+        'slug placeholder'     => 'Enter slug',
+
+        'tabs title'           => 'Product Title',
+        'tabs category'        => 'Product Category',
+        'tabs info'            => 'Product Info.',
+        'tabs media'           => 'Product Media',
+        'tabs shipping'        => 'Shipping Info.',
+        'tabs more'            => 'More Info.',
+
+        'form'                 => [
 
             'success add'             => 'Product was added successfully!',
             'success update'          => 'Product information was updated successfully!',
@@ -560,12 +524,62 @@ return [
             'no selection'            => 'You didn\'t select any products!',
         ],
 
-        'modal'        => [
+        'modal'                => [
             'delete'         => 'Delete',
             'close'          => 'Close',
             'body'           => 'Are you sure you want to delete selected weight units?',
             'body with name' => 'Are you sure you want to delete :name ?',
             'title'          => 'Delete color',
+        ],
+    ],
+
+    'posts'         => [
+        'index title'  => 'Posts',
+        'create title' => 'Add new post',
+        'edit title'   => 'Edit post',
+        'delete'       => 'Delete post',
+
+        'form'         => [
+            'title'                   => 'Post Title',
+            'slug'                    => 'Slug',
+            'content'                 => 'Slug',
+            'image'                   => 'Post Cover',
+
+            'title placeholder'       => 'Enter post title',
+            'slug placeholder'        => 'Enter post slug',
+
+            'success add'             => 'Post was added successfully!',
+            'success update'          => 'Post information was updated successfully!',
+            'success delete'          => 'Post was deleted successfully!',
+            'success multiple delete' => 'Selected posts were deleted successfully!',
+            'no selection'            => 'You didn\'t select any posts!',
+        ],
+
+        'modal'        => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected posts?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete Post',
+        ],
+    ],
+
+    'comments'      => [
+        'index title' => 'Comments',
+        'delete'      => 'Delete comment',
+
+        'form'        => [
+            'success delete'          => 'Comment was deleted successfully!',
+            'success multiple delete' => 'Selected comments were deleted successfully!',
+            'no selection'            => 'You didn\'t select any comments!',
+        ],
+
+        'modal'       => [
+            'delete'         => 'Delete',
+            'close'          => 'Close',
+            'body'           => 'Are you sure you want to delete selected comments?',
+            'body with name' => 'Are you sure you want to delete :name ?',
+            'title'          => 'Delete Comment',
         ],
     ],
 

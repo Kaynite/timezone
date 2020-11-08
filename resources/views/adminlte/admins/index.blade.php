@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Admins Control</h3>
+                    <h3 class="card-title">{{ __('admin.admins.index title') }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -29,18 +29,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ __('admin.admins.modal.body') }}
+                    {{ __('admin.admins.modal body') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin.admins.modal.close') }}</button>
-                    <button type="button" onclick="multipleDeleteSubmit()" class="btn btn-danger">{{ __('admin.admins.modal.delete') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('common.close') }}</button>
+                    <button type="button" onclick="multipleDeleteSubmit()" class="btn btn-danger">{{ __('common.delete') }}</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-@section('title', 'Admins')
+@section('title')
+{{ __('admin.admins.index title') }}
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('adminlte/css/dataTables.bootstrap4.min.css') }}">
@@ -53,7 +55,6 @@
 @endsection
 
 @section('scripts')
-
     <script>
         function checkAll() {
             $('.table-row-checkbox').each(function() {

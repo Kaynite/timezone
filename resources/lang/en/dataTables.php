@@ -40,6 +40,8 @@ return [
         'create size'         => 'Add New Size',
         'create weight'       => 'Add New Weight Unit',
         'create product'      => 'Add New Product',
+        'create post'         => 'Add New Post',
+        'create comment'      => 'Add New Comment',
         'print'               => 'Print',
         'excel'               => 'Export as Excel',
         'reset'               => 'Reset',

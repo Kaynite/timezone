@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Admins Control</h3>
+                    <h3 class="card-title">{{ __('admin.users.index title') }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -23,17 +23,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalTitle">{{ __('admin.admins.modal.title') }}</h5>
+                    <h5 class="modal-title" id="exampleModalTitle">{{ __('admin.users.modal title') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ __('admin.admins.modal.body') }}
+                    {{ __('admin.users.modal body') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin.admins.modal.close') }}</button>
-                    <button type="button" onclick="multipleDeleteSubmit()" class="btn btn-danger">{{ __('admin.admins.modal.delete') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('common.close') }}</button>
+                    <button type="button" onclick="multipleDeleteSubmit()" class="btn btn-danger">{{ __('common.delete') }}</button>
                 </div>
             </div>
         </div>

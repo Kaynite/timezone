@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="shipping-info" role="tabpanel" aria-labelledby="shipping-info-tab">
         <div class="form-group">
-            <label for="size">Weight</label>
+            <label for="size">{{ __('admin.products.weight') }}</label>
             <div class="form-group row">
                 <div class="col-lg-6">
                     <input type="text" class="form-control @error('weight') is-invalid @enderror" name="weight" id="weight" placeholder="" value="{{ old('weight') ?? $product->weight ?? '' }}">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-group">
-            <label for="size">Dimensions</label>
+            <label for="size">{{ __('admin.products.dimensions') }}</label>
             <div class="form-group row">
                 <div class="col-lg-6">
                     <input type="text" class="form-control" name="size" id="size" placeholder="" value="{{ old('size') ?? $product->size ?? '' }}">
@@ -44,7 +44,7 @@
         </div>
         <div class="row">
             <div class="form-group col-lg-3">
-                <label for="color_id">Color</label>
+                <label for="color_id">{{ __('admin.products.color') }}</label>
                 <select class="form-control" name="color_id" id="color_id">
                     <option value=""></option>
                     @foreach ($colors as $color)
@@ -57,7 +57,7 @@
             </div>
 
             <div class="form-group col-lg-3">
-                <label for="manufacturer_id">Manufacturer</label>
+                <label for="manufacturer_id">{{ __('admin.products.manufacturer') }}</label>
                 <select class="form-control" name="manufacturer_id" id="manufacturer_id">
                     <option value=""></option>
                     @foreach ($manufacturers as $manufacturer)
@@ -70,7 +70,7 @@
             </div>
 
             <div class="form-group col-lg-3">
-                <label for="trademark_id">Trademark</label>
+                <label for="trademark_id">{{ __('admin.products.trademark') }}</label>
                 <select class="form-control" name="trademark_id" id="trademark_id">
                     <option value=""></option>
                     @foreach ($trademarks as $trademark)
@@ -83,7 +83,7 @@
             </div>
 
             <div class="form-group col-lg-3">
-                <label for="mall_id" class="d-block">Malls</label>
+                <label for="mall_id" class="d-block">{{ __('admin.products.malls') }}</label>
                 <select class="form-control select2bs4" name="malls[]" multiple>
                     @foreach ($malls as $mall)
                     <option value="{{ $mall->id }}" {{ (old('mall_id') ?? (isset($product) ? in_array($mall->id, $product->malls()->pluck('mall_id')->toArray()) : null) ?? '') == $mall->id ? 'selected' : null }}>{{ $mall->name }}</option>

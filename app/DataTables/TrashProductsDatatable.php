@@ -34,7 +34,7 @@ class TrashProductsDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('productsdatatable-table')
+            ->setTableId('trashproductsdatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
@@ -75,13 +75,13 @@ class TrashProductsDatatable extends DataTable
                 ->addClass('text-center'),
             Column::make('id')
                 ->width(50)
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::make('title', 'title_'.siteLang())
                 ->title(__('common.title')),
             Column::make('category.name', 'category.name_'.siteLang())
-                ->title(__('common.title')),
+                ->title(__('common.category')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

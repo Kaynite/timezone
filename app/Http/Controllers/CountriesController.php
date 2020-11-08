@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\DataTables\CountriesDatatable;
+use App\Traits\ImagesUpload;
 use Illuminate\Support\Facades\Storage;
 
 class CountriesController extends Controller
 {
+    use ImagesUpload;
+
     // TODO: Add Currencies
     /**
      * Display a listing of the resource.
@@ -52,19 +55,15 @@ class CountriesController extends Controller
             'logo'    => __('admin.countries.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'country_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            $path = $request->file('logo')->storeAs('countries', "$name.$ext");
-        }
-
-        Country::create([
+        $country = Country::create([
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
             'mob'     => $request->mob,
             'code'    => $request->code,
-            'logo'    => $path ?? null,
         ]);
+
+        $this->uploadImages($country, 'logo', 'logo', 'manufacturer');
+
         return redirect()->route('countries.index')->with('success', 'admin.countries.form.success add');
     }
 
@@ -81,7 +80,7 @@ class CountriesController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::findOrFail($id);
+        $country = Country::with('flag')->findOrFail($id);
 
         return view('adminlte.countries.edit')->with('country', $country);
     }
@@ -110,21 +109,15 @@ class CountriesController extends Controller
             'logo'    => __('admin.countries.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'country_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            Storage::delete($country->logo);
-            $path = $request->file('logo')->storeAs('countries', "$name.$ext");
-            $country->logo = $path;
-            $country->save();
-        }
-
         $country->update([
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
             'mob'     => $request->mob,
             'code'    => $request->code,
         ]);
+
+        $this->syncImages($country, 'flag', 'logo', 'manufacturer');
+
         return redirect()->route('countries.index')
             ->with('success', __('admin.countries.form.success update'));
     }

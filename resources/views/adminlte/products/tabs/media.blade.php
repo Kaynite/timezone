@@ -57,7 +57,7 @@
     @endif
 
     <div class="form-group">
-        <label for="site-icon">{{ __('admin.products.form.image') }}</label> 
+        <label for="site-icon">{{ __('admin.products.images') }}</label> 
         <div class="custom-file">
             <input type="file" class="custom-file-input" name="images[]" id="images" accept="image/*" multiple="multiple">
             <label class="custom-file-label" for="site-icon">Choose file</label>

@@ -19,7 +19,7 @@ class CreateCountriesTable extends Migration
             $table->string('name_en');
             $table->string('mob');
             $table->string('code');
-            $table->string('logo')->nullable();
+            // $table->string('logo')->nullable();  // Deleted From DB
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
                     <h5 class="card-title">{{ __('admin.categories.create title') }}
                     </h5>
                 </div>
-                <form action="{{ route('categories.store') }}" method="post">
+                <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">                                        
                         <div class="form-group">

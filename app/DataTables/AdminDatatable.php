@@ -78,13 +78,13 @@ class AdminDatatable extends DataTable
                 ->width(25)
                 ->addClass('text-center'),
             Column::make('id')
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::make('username')
-                ->title(__('admin.admins.table.username')),
+                ->title(__('common.username')),
             Column::make('email')
-                ->title(__('admin.admins.table.email')),
+                ->title(__('common.email')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

@@ -64,7 +64,7 @@
                 </div>
                 <div class="navbar-header col-xs-6 col-sm-4">
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        <img alt="themini" src="images/logo.png">
+                        <img alt="themini" src="{{ asset('images/logo.png') }}">
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-4 shopcart">

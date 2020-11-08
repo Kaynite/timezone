@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\DataTables\MallsDatatable;
 use App\Models\Country;
 use App\Models\Mall;
+use App\Traits\ImagesUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class MallsController extends Controller
 {
+    use ImagesUpload;
+
     /**
      * Display a listing of the resource.
      *
@@ -63,13 +66,7 @@ class MallsController extends Controller
             'logo'       => __('admin.malls.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'malls_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            $path = $request->file('logo')->storeAs('malls', "$name.$ext");
-        }
-
-        Mall::create([
+        $mall = Mall::create([
             'name_ar'    => $request->name_ar,
             'name_en'    => $request->name_en,
             'website'    => $request->website,
@@ -78,9 +75,11 @@ class MallsController extends Controller
             'facebook'   => $request->facebook,
             'twitter'    => $request->twitter,
             'country_id' => $request->country_id,
-            'address'    => $request->address,
-            'logo'       => $path ?? null,
+            'address'    => $request->address,            
         ]);
+
+        $this->uploadImages($mall, 'logo', 'logo', 'malls');
+
         return redirect()->route('malls.index')->with('success', 'admin.malls.form.success add');
     }
 
@@ -129,13 +128,6 @@ class MallsController extends Controller
             'logo'       => __('admin.malls.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'malls_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            Storage::delete($mall->logo);
-            $path = $request->file('logo')->storeAs('malls', "$name.$ext");
-        }
-
         $mall->update([
             'name_ar'    => $request->name_ar,
             'name_en'    => $request->name_en,
@@ -148,6 +140,8 @@ class MallsController extends Controller
             'address'    => $request->address,
             'logo'       => $path ?? $mall->logo,
         ]);
+
+        $this->syncImages($mall, 'logo', 'logo', 'malls');
 
         return redirect()->route('malls.index')
             ->with('success', __('admin.malls.form.success update'));

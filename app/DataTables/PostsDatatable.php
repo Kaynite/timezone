@@ -48,7 +48,7 @@ class PostsDatatable extends DataTable
             ->buttons(
                 Button::make('create')
                     ->className('btn btn-primary text-white mx-1')
-                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create admin')),
+                    ->text('<i class="fa fa-plus"></i> ' . __('dataTables.buttons.create post')),
                 Button::make('print')
                     ->className('btn btn-success text-white mx-1')
                     ->text('<i class="fa fa-print"></i> '. __('dataTables.buttons.print')),
@@ -78,11 +78,11 @@ class PostsDatatable extends DataTable
                 ->width(25)
                 ->addClass('text-center'),
             Column::make('id')
-                ->title(__('admin.posts.table.id')),
+                ->title(__('common.hashid')),
             Column::make('title')
-                ->title(__('admin.posts.table.username')),
+                ->title(__('common.title')),
             Column::computed('action')
-                ->title(__('admin.posts.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

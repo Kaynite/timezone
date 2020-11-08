@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <img src="{{ Storage::url($manufacturer->logo) }}" alt="Logo" style="max-width: 100%;">
+                                    <img src="{{ Storage::url($manufacturer->logo->path ?? '') }}" alt="Logo" style="max-width: 100%;">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="logo">{{ __('admin.manufacturers.form.logo') }}</label> 

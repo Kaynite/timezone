@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="container">
     <div class="row">
 
@@ -55,11 +54,10 @@
                     <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                 </div>
             </div>
-
             
             <div class="row" id="products-box">
 				@foreach ($products as $product)
-				<div class="product-layout product-grid col-md-4 col-xs-6 ">
+				<div class="product-layout product-grid col-md-4 col-xs-6 clearfix">
                     <div class="item">
                         <div class="product-thumb clearfix mb_30">
                             <div class="image product-imageblock">
@@ -85,16 +83,29 @@
                                     {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> ', $product->score->stars) !!}
                                     {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> ', 5 - $product->score->stars) !!}
                                 </div>
-                                <span class="price">
-									<span class="amount">{{ $product->price }}<span class="currencySymbol"> LE</span></span>
+                                @if($product->offer_price && $product->offer_ends_at > now() && $product->offer_starts_at < now())
+                                <span class="price" style="display: block">
+                                    <span class="amount text-muted" style="text-decoration: line-through">{{ $product->price }} <span class="currencySymbol">LE</span></span>
                                 </span>
+                                <span class="price">
+                                    <span class="amount">{{ $product->offer_price }} <span class="currencySymbol">LE</span></span>
+                                    <div class="label label-success">
+                                        {{ number_format(($product->offer_price - $product->price) / $product->price * 100, 2) }}%
+                                    </div>
+                                </span>
+                                @else
+                                <span class="price" >
+                                    <span class="amount">{{ $product->price }} <span class="currencySymbol">LE</span></span>
+                                </span>
+                                @endif
                                 <p class="product-desc mt_20 mb_60">
 									{{ $product->content }}
 								</p>
                             </div>
                         </div>
                     </div>
-				</div>
+                </div>
+                
 				@endforeach
             </div>   
             <div id="pagination-box">

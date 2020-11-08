@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">posts Control</h3>
+                    <h3 class="card-title">{{ __('admin.posts.index title') }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -40,7 +40,9 @@
     </div>
 @endsection
 
-@section('title', 'Posts')
+@section('title')
+{{ __('admin.posts.index title') }}
+@endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('adminlte/css/dataTables.bootstrap4.min.css') }}">

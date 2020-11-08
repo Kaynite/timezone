@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriesRequest;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
+use App\Traits\ImagesUpload;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
 {
+    Use ImagesUpload;
     /**
      * Display a listing of the resource.
      *
@@ -60,37 +63,23 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        $request->validate([
-            'name_ar'   => 'required|max:225',
-            'name_en'   => 'required|max:225',
-            'parent_id' => 'numeric|nullable',
-            'image'     => 'image|nullable',
-            'slug'      => 'required|unique:categories,slug|string'
-        ]);
-
-        if ($request->hasFile('image')) {
-            $name = 'categories_' . time();
-            $ext  = $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('categories', "$name.$ext");
-        }
-
-        Category::create([
+        $category = Category::create([
             'name_ar'        => $request->name_ar,
             'name_en'        => $request->name_en,
             'description_ar' => $request->description_ar,
             'description_en' => $request->description_en,
             'keywords'       => $request->keywords,
             'icon'           => $request->icon,
-            'image'          => $path ?? '',
             'parent_id'      => $request->parent_id,
             'slug'           => $request->slug
         ]);
 
+        $this->uploadImages($category, 'image', 'image', 'categories');
+
         return redirect()->route('categories.index')
             ->with('success', __('admin.categories.form.success add'));
-
     }
 
     /**
@@ -177,22 +166,9 @@ class CategoriesController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoriesRequest $request, Category $category)
     {
-        $request->validate([
-            'name_ar'   => 'required|max:225',
-            'name_en'   => 'required|max:225',
-            'parent_id' => 'numeric|nullable',
-            'image'     => 'image',
-            'slug'      => 'required|unique:categories,slug|string'
-        ]);
 
-        if ($request->hasFile('image')) {
-            $name = 'categories_' . time();
-            $ext  = $request->file('image')->getClientOriginalExtension();
-            Storage::delete($category->image);
-            $path = $request->file('image')->storeAs('categories', "$name.$ext");
-        }
 
         if ($request->parent_id == $category->id) {
             return back()->withErrors(['parent_id' => __('admin.categories.forms.same parent child')]);
@@ -202,7 +178,6 @@ class CategoriesController extends Controller
         if ($request->has('makeMain')) {
             $parent_id = null;
         }
-
         $category->update([
             'name_ar'        => $request->name_ar,
             'name_en'        => $request->name_en,
@@ -210,10 +185,11 @@ class CategoriesController extends Controller
             'description_en' => $request->description_en,
             'keywords'       => $request->keywords,
             'icon'           => $request->icon,
-            'image'          => $path ?? $category->image,
             'parent_id'      => $parent_id,
             'slug'           => $request->slug
         ]);
+
+        $this->syncImages($category, 'image', 'image', 'categories');
 
         return redirect()->route('categories.index')
             ->with('success', __('admin.categories.form.success update'));

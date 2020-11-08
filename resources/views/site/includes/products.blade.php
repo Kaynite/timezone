@@ -45,12 +45,25 @@
                                         <div class="rating">
                                             {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> ', $product->score->stars) !!}
                                             {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> ', 5 - $product->score->stars) !!}
-                                        </div>                                        <h6 data-name="product_name" class="product-name">
-                                            <a href="#" title="Casual Shirt With Ruffle Hem">{{ $product->title }}</a>
+                                        </div>
+                                        <h6 data-name="product_name" class="product-name">
+                                            <a href="#" title="{{ $product->title }}">{{ $product->title }}</a>
                                         </h6>
-                                        <span class="price">
-                                            <span class="amount">{{ $product->price }}<span class="currencySymbol"> LE</span></span>
+                                        @if($product->offer_price && $product->offer_ends_at > now() && $product->offer_starts_at < now())
+                                        <span class="price" style="display: block">
+                                            <span class="amount text-muted" style="text-decoration: line-through">{{ $product->price }} <span class="currencySymbol">LE</span></span>
                                         </span>
+                                        <span class="price">
+                                            <span class="amount">{{ $product->offer_price }} <span class="currencySymbol">LE</span></span>
+                                            <div class="label label-success">
+                                                {{ number_format(($product->offer_price - $product->price) / $product->price * 100, 2) }}%
+                                            </div>
+                                        </span>
+                                        @else
+                                        <span class="price" >
+                                            <span class="amount">{{ $product->price }} <span class="currencySymbol">LE</span></span>
+                                        </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

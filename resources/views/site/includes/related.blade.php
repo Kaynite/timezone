@@ -30,7 +30,7 @@
                                 {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> ', $product->score->stars) !!}
                                 {!! str_repeat('<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> ', 5 - $product->score->stars) !!}
                             </div>
-                            @if($product->offer_price && $product->offer_ends_at > now())
+                            @if($product->offer_price && $product->offer_ends_at > now() && $product->offer_starts_at < now())
                             <span class="price" style="display: block">
                                 <span class="amount text-muted" style="text-decoration: line-through">{{ $product->price }} <span class="currencySymbol">LE</span></span>
                             </span>

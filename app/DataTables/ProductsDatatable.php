@@ -82,15 +82,15 @@ class ProductsDatatable extends DataTable
                 ->addClass('text-center'),
             Column::make('id')
                 ->width(50)
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::make('title', 'title_'.siteLang())
                 ->title(__('common.title')),
             Column::make('category.name', 'category.name_'.siteLang())
                 ->title(__('common.category')),
             Column::computed('stock')
-                ->title(__('admin.admins.table.stock')),
+                ->title(__('admin.products.stock')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

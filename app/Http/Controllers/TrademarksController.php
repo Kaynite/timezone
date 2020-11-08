@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\DataTables\TrademarksDatatable;
 use App\Models\Trademark;
+use App\Traits\ImagesUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TrademarksController extends Controller
 {
+    use ImagesUpload;
     /**
      * Display a listing of the resource.
      *
@@ -47,17 +49,13 @@ class TrademarksController extends Controller
             'image'   => __('admin.trademarks.form.image'),
         ]);
 
-        if ($request->hasFile('image')) {
-            $name = 'trademark_' . time();
-            $ext  = $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('trademarks', "$name.$ext");
-        }
-
-        Trademark::create([
+        $trademark = Trademark::create([
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
-            'image'   => $path ?? null,
+            // 'image'   => $path ?? null,
         ]);
+
+        $this->uploadImages($trademark, 'image', 'image', 'trademarks');
 
         return redirect()->route('trademarks.index')->with('success', 'admin.trademarks.form.success add');
     }
@@ -75,8 +73,7 @@ class TrademarksController extends Controller
      */
     public function edit($id)
     {
-        $trademark = Trademark::findOrFail($id);
-
+        $trademark = Trademark::with('image')->findOrFail($id);
         return view('adminlte.trademarks.edit')->with('trademark', $trademark);
     }
 
@@ -100,19 +97,10 @@ class TrademarksController extends Controller
             'image'   => __('admin.trademarks.form.image'),
         ]);
 
-        if ($request->hasFile('image')) {
-            $name = 'trademark_' . time();
-            $ext  = $request->file('image')->getClientOriginalExtension();
-            Storage::delete($trademark->image);
-            $path = $request->file('image')->storeAs('trademarks', "$name.$ext");
-            $trademark->image = $path;
-            $trademark->save();
-        }
+        $trademark->update($request->all());
 
-        $trademark->update([
-            'name_ar' => $request->name_ar,
-            'name_en' => $request->name_en,
-        ]);
+        $this->syncImages($trademark, 'image', 'image', 'categories');
+
         return redirect()->route('trademarks.index')
             ->with('success', __('admin.trademarks.form.success update'));
     }

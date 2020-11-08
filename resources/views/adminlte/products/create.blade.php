@@ -8,37 +8,37 @@
                     <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                         <!-- TODO: Set Icons Margin -->
                         <li class="pt-2 px-3">
-                            <h3 class="card-title">Card Title</h3>
+                            
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" id="title-tab-tab" data-toggle="pill" href="#title-tab" role="tab" aria-controls="title-tab" aria-selected="true">
-                                <i class="fas fa-align-center mr-2"></i>Product Title
+                                <i class="fas fa-align-center mr-2"></i>{{ __('admin.products.tabs title') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="product-category-tab" data-toggle="pill" href="#product-category" role="tab" aria-controls="product-category" aria-selected="false">
-                                <i class="fas fa-list mr-2"></i>Category
+                                <i class="fas fa-list mr-2"></i>{{ __('admin.products.tabs category') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">
-                                <i class="fas fa-info mr-2"></i>Product Info
+                                <i class="fas fa-info mr-2"></i>{{ __('admin.products.tabs info') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="product-media-tab" data-toggle="pill" href="#product-media" role="tab" aria-controls="product-media" aria-selected="false">
-                                <i class="fas fa-image mr-2"></i>Media
+                                <i class="fas fa-image mr-2"></i>{{ __('admin.products.tabs media') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="shipping-info-tab" data-toggle="pill" href="#shipping-info" role="tab" aria-controls="shipping-info" aria-selected="false">
-                                <i class="fas fa-truck mr-2"></i>Shipping Info.
+                                <i class="fas fa-truck mr-2"></i>{{ __('admin.products.tabs shipping') }}
                             </a>
                         </li>
                         
                         <li class="nav-item">
                             <a class="nav-link" id="more-info-tab" data-toggle="pill" href="#more-info" role="tab" aria-controls="more-info" aria-selected="false">
-                                <i class="fas fa-file-alt mr-2"></i>More Info.
+                                <i class="fas fa-file-alt mr-2"></i>{{ __('admin.products.tabs more') }}
                             </a>
                         </li>
                     </ul>
@@ -113,11 +113,12 @@
             bsCustomFileInput.init();
         });
 
-        $('#slug').on('focus', function() {
-            var title = $('#title_en').val();
+        $('.make-slug').on('click', function() {
+            var lang = $(this).val();
+            var title = $(`#title_${lang}`).val();
             if (title == "") {
                 $('#slug').addClass('is-invalid');
-                $('#slug-error').text('The Product title in English field is empty')
+                $('#slug-error').text('The Product title field is empty')
             } else {
                 $.ajax({
                     type: "GET",
@@ -125,6 +126,7 @@
                     data: {
                         slug: 'slug',
                         title: title,
+                        lang: lang
                     },
                     cache: false,
                     context: this,

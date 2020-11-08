@@ -20,9 +20,8 @@ class UsersController extends Controller
 
     public function create()
     {
-
-        $types = UserType::locale()->get();
-        return view('adminlte.users.create')->with('types', $types);
+        // $types = UserType::locale()->get();
+        return view('adminlte.users.create');
     }
 
     /**
@@ -37,17 +36,15 @@ class UsersController extends Controller
             'username'     => 'required|max:255',
             'email'        => 'required|email|unique:admins|max:255',
             'password'     => 'required|min:6',
-            'user_type_id' => ['required', new InTypes],
+            // 'user_type_id' => ['required', new InTypes],
         ], [], [
             'username'     => __('common.username'),
             'email'        => __('common.email'),
             'password'     => __('common.password'),
-            'user_type_id' => __('admin.users.form.user type'),
+            // 'user_type_id' => __('admin.users.form.user type'),
         ]);
-
         $request['password'] = Hash::make($request->password);
         User::create($request->all());
-
         return redirect()->route('users.index')->with('success', 'admin.users.form.success add');
     }
 
@@ -71,9 +68,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $types = UserType::locale()->get();
-
-        return view('adminlte.users.edit')->with(['user' => $user, 'types' => $types]);
+        return view('adminlte.users.edit')->with(['user' => $user]);
     }
 
     /**
@@ -89,11 +84,11 @@ class UsersController extends Controller
         $request->validate([
             'username'     => 'required|max:255',
             'email'        => 'required|email|unique:admins|max:255',
-            'user_type_id' => ['required', new InTypes],
+            // 'user_type_id' => ['required',],
         ], [], [
             'username'     => __('common.username'),
             'email'        => __('common.email'),
-            'user_type_id' => __('admin.users.form.user type'),
+            // 'user_type_id' => __('admin.users.form.user type'),
         ]);
 
         $user->update($request->all());

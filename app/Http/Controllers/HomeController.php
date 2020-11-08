@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function home()
     {
         $newProducts = Product::latest()->locale()->inStock()->limit(6)->get();
-        $posts       = Post::latest()->limit(4)->get();
+        $posts       = Post::withCount('comments')->latest()->limit(4)->get();
         return view('site.main')->with([
             'newProducts' => $newProducts,
             'posts'       => $posts,

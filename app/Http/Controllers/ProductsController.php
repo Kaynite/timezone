@@ -67,9 +67,9 @@ class ProductsController extends Controller
         $product = Product::create($request->all());
         $product->malls()->sync($request->malls);
 
-        $this->upload($product, 'images', 'products');
+        $this->uploadImages($product, 'images', 'images', 'products');
         if ($request->hasFile('images')) {
-            $product->image_id = $product->images->first()->id;
+            $product->image_id == null ? $product->image_id = $product->images()->first()->id : null;
             $product->save();
         }
 
@@ -145,7 +145,7 @@ class ProductsController extends Controller
 
         $product->malls()->sync($request->malls);
 
-        $this->upload($product, 'images', 'products');
+        $this->uploadImages($product, 'images', 'images', 'products');
         if ($request->hasFile('images')) {
             $product->image_id == null ? $product->image_id = $product->images()->first()->id : null;
             $product->save();
@@ -158,7 +158,7 @@ class ProductsController extends Controller
     public function ajaxUpdate($product, $request)
     {
         $product->update($request->all());
-        $this->upload($product, 'images', 'products');
+        $this->uploadImages($product, 'images', 'images', 'products');
         if ($request->hasFile('images')) {
             $product->image_id = $product->images->first()->id;
             $product->save();

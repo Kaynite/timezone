@@ -14,7 +14,6 @@
             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 
-
                 <li class="nav-item {{ Route::currentRouteNamed('products.index', 'products.create', 'products.edit', 'products.trash') ? 'menu-open' : null }}">
                     <a href="#" class="nav-link {{ Route::currentRouteNamed('products.index', 'products.create', 'products.edit', 'products.trash') ? 'active' : null }}">
                         <i class="nav-icon fas fa-box"></i>
@@ -119,20 +118,32 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('states.index') }}" class="nav-link {{ Route::currentRouteNamed('states.index', 'states.create', 'states.edit') ? 'active' : null }}">
-                                <i class="nav-icon fas fa-city"></i>
-                                <p>{{ __('admin.sidebar.states') }}</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('posts.index') }}" class="nav-link {{ Route::currentRouteNamed('posts.index', 'posts.create', 'posts.edit') ? 'active' : null }}">
-                        <i class="nav-icon fas fa-file-alt"></i>
-                        <p>{{ __('admin.sidebar.posts') }}</p>
+                <li class="nav-item {{ Route::currentRouteNamed('posts.index', 'posts.create', 'posts.edit', 'comments.index') ? 'menu-open' : null }}">
+                    <a href="#" class="nav-link {{ Route::currentRouteNamed('posts.index', 'posts.create', 'posts.edit', 'comments.index') ? 'active' : null }}">
+                        <i class="nav-icon fas fa-globe-europe"></i>
+                        <p>
+                            {{ __('admin.sidebar.blog') }}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('posts.index') }}" class="nav-link {{ Route::currentRouteNamed('posts.index', 'posts.create', 'posts.edit') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>{{ __('admin.sidebar.posts') }}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('comments.index') }}" class="nav-link {{ Route::currentRouteNamed('comments.index') ? 'active' : null }}">
+                                <i class="nav-icon fas fa-comment"></i>
+                                <p>{{ __('admin.sidebar.comments') }}</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
@@ -153,7 +164,7 @@
                     <a href="{{ route('admin.settings') }}" class="nav-link {{ Route::currentRouteNamed('admin.settings') ? 'active' : null }}">
                         <i class="nav-icon fas fa-cogs"></i>
                         
-                        <p>{{ __('admin.settings.title') }}</p>
+                        <p>{{ __('admin.sidebar.settings') }}</p>
                     </a>
                 </li>
             </ul>

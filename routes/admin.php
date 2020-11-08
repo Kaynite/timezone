@@ -79,6 +79,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::post('products/{id}/restore', 'ProductsController@restore')->name('products.restore');
             Route::post('products/{id}/force-delete', 'ProductsController@forceDelete')->name('products.forceDelete');
 
+            Route::resource('comments', 'CommentsController')->only(['index', 'destroy']);
+            Route::post('comments/multipledelete', 'CommentsController@multipleDelete')->name('comments.multipleDelete');
+
             /*
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/', 'ProductsController@approved')->name('products.index');

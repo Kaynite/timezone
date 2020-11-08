@@ -83,7 +83,7 @@ class OrdersDatatable extends DataTable
                 ->width(25)
                 ->addClass('text-center'),
             Column::make('id')
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::computed('name')
                 ->title(__('common.name')),
             Column::make('email')
@@ -99,7 +99,7 @@ class OrdersDatatable extends DataTable
             Column::computed('datetime')
                 ->title(__('admin.orders.form.date')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

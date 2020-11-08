@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ManufacturersDatatable;
 use App\Models\Manufacturer;
+use App\Traits\ImagesUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ManufacturersController extends Controller
 {
+    use ImagesUpload;
     /**
      * Display a listing of the resource.
      *
@@ -61,13 +63,7 @@ class ManufacturersController extends Controller
             'logo'    => __('admin.manufacturers.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'manufacturer_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            $path = $request->file('logo')->storeAs('manufacturers', "$name.$ext");
-        }
-
-        Manufacturer::create([
+        $manufacturer = Manufacturer::create([
             'name_ar'  => $request->name_ar,
             'name_en'  => $request->name_en,
             'website'  => $request->website,
@@ -77,9 +73,12 @@ class ManufacturersController extends Controller
             'twitter'  => $request->twitter,
             'lat'      => $request->lat,
             'lng'      => $request->lng,
-            'logo'    => $path ?? null,
         ]);
-        return redirect()->route('manufacturers.index')->with('success', 'admin.manufacturers.form.success add');
+
+        $this->uploadImages($manufacturer, 'logo', 'logo', 'manufacturer');
+
+        return redirect()->route('manufacturers.index')
+            ->with('success', __('admin.manufacturers.form.success add'));
     }
 
     public function show($id)
@@ -87,8 +86,9 @@ class ManufacturersController extends Controller
         //
     }
 
-    public function edit(Manufacturer $manufacturer)
+    public function edit($id)
     {
+        $manufacturer = Manufacturer::with('logo')->findOrFail($id);
         return view('adminlte.manufacturers.edit')->with('manufacturer', $manufacturer);
     }
 
@@ -125,13 +125,6 @@ class ManufacturersController extends Controller
             'logo'    => __('admin.manufacturers.form.logo'),
         ]);
 
-        if ($request->hasFile('logo')) {
-            $name = 'manufacturer_' . time();
-            $ext  = $request->file('logo')->getClientOriginalExtension();
-            Storage::delete($manufacturer->logo);
-            $path = $request->file('logo')->storeAs('manufacturers', "$name.$ext");
-        }
-
         $manufacturer->update([
             'name_ar'  => $request->name_ar,
             'name_en'  => $request->name_en,
@@ -142,8 +135,9 @@ class ManufacturersController extends Controller
             'twitter'  => $request->twitter,
             'lat'      => $request->lat,
             'lng'      => $request->lng,
-            'logo'    => $path ?? $manufacturer->logo,
         ]);
+
+        $this->syncImages($manufacturer, 'logo', 'logo', 'manufacturer');
 
         return redirect()->route('manufacturers.index')
             ->with('success', __('admin.manufacturers.form.success update'));

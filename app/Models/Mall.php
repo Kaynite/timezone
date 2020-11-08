@@ -14,7 +14,6 @@ class Mall extends Model
         'phone',
         'facebook',
         'twitter',
-        'logo',
         'country_id',
         'address',
         'created_at',
@@ -23,7 +22,7 @@ class Mall extends Model
 
     public function scopeLocale($q)
     {
-        return $q->select('id', 'name_' . siteLang() . ' as name', 'website', 'email', 'phone', 'facebook', 'twitter', 'logo', 'country_id', 'address', 'created_at', 'updated_at');
+        return $q->select('id', 'name_' . siteLang() . ' as name', 'website', 'email', 'phone', 'facebook', 'twitter', 'country_id', 'address', 'created_at', 'updated_at');
     }
 
     public function country()
@@ -34,5 +33,10 @@ class Mall extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_mall');
+    }
+
+    public function logo()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

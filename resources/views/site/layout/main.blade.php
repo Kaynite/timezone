@@ -39,7 +39,6 @@
     <div class="wrapper">
         @include('site.includes.header')
         @yield('content')
-
     </div>
 
     @include('site.includes.scrollup')

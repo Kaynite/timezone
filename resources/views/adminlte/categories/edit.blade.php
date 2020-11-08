@@ -87,7 +87,7 @@
                             <label for="image">{{ __('admin.categories.form.image')  }}</label>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <img src="{{ Storage::url($category->image) }}" alt="" style="max-width: 100%;">
+                                    <img src="{{ Storage::url($category->image->path ?? '') }}" alt="" style="max-width: 100%;">
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="custom-file">

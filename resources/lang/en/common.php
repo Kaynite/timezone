@@ -24,4 +24,9 @@ return [
     'private'     => 'Private',
     'category'    => 'Category',
     'order'       => 'Order',
+    'slug'        => 'Slug',
+    'content'     => 'Content',
+    'message'     => 'Message',
+    'post'        => 'Post',
+    
 ];

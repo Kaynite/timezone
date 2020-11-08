@@ -79,13 +79,13 @@ class StatesDatatable extends DataTable
                 ->addClass('text-center'),
             Column::make('id')
                 ->width(50)
-                ->title(__('admin.admins.table.id')),
+                ->title(__('common.hashid')),
             Column::make('name')
                 ->title(__('common.name')),
             Column::make('city.name')
                 ->title(__('common.city')),
             Column::computed('action')
-                ->title(__('admin.admins.table.action'))
+                ->title(__('common.actions'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

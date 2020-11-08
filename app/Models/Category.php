@@ -15,7 +15,6 @@ class Category extends Model
         'description_en',
         'keywords',
         'icon',
-        'image',
         'parent_id',
         'created_at',
         'updated_at'
@@ -35,11 +34,16 @@ class Category extends Model
     public function scopeLocale($q)
     {
         $lang = siteLang();
-        return $q->select('id', "name_$lang as name", "description_$lang as description", 'slug', 'keywords', 'icon', 'image', 'parent_id', 'created_at', 'updated_at');
+        return $q->select('id', "name_$lang as name", "description_$lang as description", 'slug', 'keywords', 'icon', 'parent_id', 'created_at', 'updated_at');
     }
 
     public function products()
     {
         return $this->hasMany(Product::class)->inStock()->locale();
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

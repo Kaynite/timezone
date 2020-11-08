@@ -31,12 +31,13 @@
 						<h3 class="mb_10">
 							<a href="{{ route('post.show', [$post->id, $post->slug]) }}">{{ $post->title }}</a>
 						</h3>
-						<p>{{ strlen(strip_tags($post->content)) > 100 ? substr(strip_tags($post->content), 0, 100) . ' ...' : strip_tags($post->content) }}</p>						<div class="details mtb_20">
+						<p>{{ strlen(strip_tags($post->content)) > 100 ? substr(strip_tags($post->content), 0, 100) . ' ...' : strip_tags($post->content) }}</p>
+						<div class="details mtb_20">
 							<div class="date pull-left">
 								<i class="fa fa-calendar" aria-hidden="true"></i>{{ date('d M Y', strtotime($post->created_at)) }}
 							</div>
 							<div class="more pull-right">
-								<a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+								<a href="{{ route('post.show', [$post->id, $post->slug]) }}">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
